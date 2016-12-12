@@ -1,0 +1,152 @@
+<!doctype html>
+<link href="http://cdn.bootcss.com/bootstrap/4.0.0-alpha.5/css/bootstrap-flex.css" rel="stylesheet">
+<html>
+    <head>
+        <title>Featured Game</title>
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta http-equiv="Expires" content="0">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div class="page-header">
+                        <h1>
+                            League of Legend Game Helper
+                            <small>My game</small>
+                        </h1>
+                    </div>
+                    <ul class="nav nav-tabs">
+                        <li>
+                            <a href="#/main" onclick="stopTime()">Featured Games</a>
+                        </li>
+                        <li class="active">
+                            <a href="#/mygame" onclick="stopTime()">My Game</a>
+                        </li>
+                        <li>
+                            <a href="#/record" onclick="stopTime()">My Game History</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <br>
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">Summoner Name:</label>
+                        <div class="col-sm-7">
+                            <input class="form-control" ng-model="SummonerName"/>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" ng-click="request()" class="btn btn-block">Search Live Game</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div class="row clearfix">
+                        <div class="col-md-6 column">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Champion
+                                        </th>
+                                        <th>
+                                            Summoner
+                                        </th>
+                                        <th>
+                                            Spells
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="n in [0,1,2,3,4]" class="warning">
+                                        <td ng-model="Cnames">
+                                            <img class="Simg" src="http://ddragon.leagueoflegends.com/cdn/6.23.1/img/champion/{{Cnames[n]}}.png">
+                                            {{Cnames[n]}}
+                                        </td>
+                                        <td ng-model="player">
+                                            {{player[n][2]}}
+                                        </td>
+                                        <td ng-model="player">
+                                            <img class="Cimg" src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/Summoner{{player[n][0]}}.png">
+                                            <img class="Cimg" src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/Summoner{{player[n][1]}}.png">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6 column">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Champion
+                                        </th>
+                                        <th>
+                                            Summoner
+                                        </th>
+                                        <th>
+                                            Spells
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="info" ng-repeat="n in [5,6,7,8,9]">
+                                        <td ng-model="Cnames">
+                                            <img class="Simg" src="http://ddragon.leagueoflegends.com/cdn/6.23.1/img/champion/{{Cnames[n]}}.png">
+                                            {{Cnames[n]}}
+                                        </td>
+                                        <td ng-model="player">
+                                            {{player[n][2]}}
+                                        </td>
+                                        <td ng-model="player">
+                                            <img class="Cimg" src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/Summoner{{player[n][0]}}.png">
+                                            <img class="Cimg" src="http://ddragon.leagueoflegends.com/cdn/6.24.1/img/spell/Summoner{{player[n][1]}}.png">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-8 column">
+                    <dl>
+                        <dt>
+                            {{messages[0]}}
+                        </dt>
+                        <dd>
+                            <div id="htmer_time"></div>
+                        </dd>
+                        <dt>
+                            {{messages[1]}}
+                        </dt>
+                        <dd>
+                            <div class="divcss5">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </dd>
+                        <dt>
+                            {{messages[2]}}
+                        </dt>
+                        <dt>
+                            {{messages[3]}}
+                        </dt>
+                    </dl>
+                </div>
+                <div class="col-md-4 column">
+                    <div class="progress">
+                        <div id="progressmygame" class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 10%;">
+                            <span class="sr-only">progress</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

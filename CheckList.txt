@@ -1,0 +1,33 @@
+Check List of Best part of Group95's Work!
+
+- Angular one-page App
+-- app.js line 1-19
+
+- Bootstrap
+-- Every HTML file
+
+- Our own CSS code
+-- Styles.css
+
+- Riot API
+-- app.js 34-90, 101-144, 168-244
+
+- Chart JS
+-- analysis.js 1-89
+
+- Analysis of Game
+-- analysis.js 3-15, 34-51
+
+- Analysis of champion
+-- preference.js
+
+- Running Game Time Clock
+-- timer.js
+
+- Angular Bound with messages
+-- app.js 31, 165 Every HTML file
+
+- Combine Ajax and Angular
+-- app.js 69-73, 125-127, 198-200
+
+Thanks for your patient
