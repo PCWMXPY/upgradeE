@@ -1,0 +1,25 @@
+.divcss5 {
+    width: 450px;
+    height: 450px;
+}
+
+.Cimg {
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+}
+
+.Simg {
+    width: 26px;
+    height: 26px;
+}
+
+.btn .btn-default, .btn-default:hover, .btn-default:focus {
+    color: #333;
+    box-shadow: inset 0 0 100px rgba(255, 218, 185, .77);
+}
+
+.page-header {
+    color: solid black;
+    text-shadow: 0 1px 3px rgba(40, 40, 40, .5);
+}
