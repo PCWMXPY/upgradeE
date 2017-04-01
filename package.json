@@ -1,5 +1,25 @@
 {
-    "name": "upgradee",
-    "version": "0.1.0",
-    "main": "./app.js"
+  "name": "upgradee",
+  "version": "0.0.1",
+  "description": "Strong like tiger if upgradeE",
+  "main": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PCWMXPY/upgradeE.git"
+  },
+  "keywords": [
+    "League",
+    "of",
+    "Legends",
+    "electron"
+  ],
+  "author": "WMXPY",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PCWMXPY/upgradeE/issues"
+  },
+  "homepage": "https://github.com/PCWMXPY/upgradeE#readme"
 }
