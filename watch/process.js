@@ -51,4 +51,4 @@ setInterval(function () {
         }
         console.log(process.memoryUsage());
     });
-}, 100);
+}, 1000);
