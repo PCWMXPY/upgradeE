@@ -31,9 +31,9 @@ const nodefunctions = {
     }
 }
 
-// nodefunctions.getSummonerId('ponponpatapon', data => {
-//     console.log(data);
-//     nodefunctions.getGame(data.id, data2 => {
-//         console.log(data2);
-//     })
-// })
+nodefunctions.getSummonerId('ezlife13', data => {
+    console.log(data);
+    nodefunctions.getGame(data.id, data2 => {
+        console.log(data2);
+    })
+})
