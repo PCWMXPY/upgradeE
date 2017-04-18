@@ -1,7 +1,7 @@
 var preference = {
     terminal: array => {
         for (let i = 0; i < array.length; i++) {
-            console.log('---------------');
+            console.log('---------------------');
             for (let j = 0; j < array[i].length; j++) {
                 switch (j) {
                     case 0:
@@ -22,7 +22,6 @@ var preference = {
                 }
             }
         }
-        console.log('---------------');
     },
     getChampDeatil: function (Id) {
         switch (Id) {

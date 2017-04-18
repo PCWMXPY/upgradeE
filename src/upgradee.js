@@ -22,8 +22,7 @@ var playstat = (function () {
             data = JSON.parse(data);
             this.near = data;
             fun(data);
-        }
-        else {
+        } else {
             console.log(response.statusCode);
         }
     };
@@ -43,9 +42,18 @@ var playstat = (function () {
     };
     playstat.prototype.analysisNear = function () {
         //mid,bot,top,sup,jungle
-        var people = [[], []];
-        var ids = [[], []];
-        var result = [[], []];
+        var people = [
+            [],
+            []
+        ];
+        var ids = [
+            [],
+            []
+        ];
+        var result = [
+            [],
+            []
+        ];
         var participants = this.near['participants'];
         for (var i = 0; i < participants.length; i++) {
             var champid = participants[i]['championId'];
@@ -58,8 +66,7 @@ var playstat = (function () {
                 people[0].push(lane);
                 ids[0].push(champid);
                 // console.log(champid);
-            }
-            else {
+            } else {
                 people[1].push(lane);
                 ids[1].push(champid);
             }
@@ -98,14 +105,13 @@ var nodefunctions = {
                 data = JSON.parse(data);
                 _this.near = data;
                 fun(data);
-            }
-            else {
+            } else {
                 console.log(response.statusCode);
             }
         });
     }
 };
-nodefunctions.getSummonerId('aniviakid', function (data) {
+nodefunctions.getSummonerId('deviljerryw', function (data) {
     var miao = new playstat(data.id);
     miao.getCurrent(function (data) {
         perference.terminal(miao.analysisNear());
