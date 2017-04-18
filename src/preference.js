@@ -817,6 +817,62 @@ var preference = {
                 return Id;
         }
     },
+    weightspell: function (spell, lane) {
+        //mid,bot,top,sup,jungle
+        switch (spell) {
+            case 21:
+                lane[0] -= 0.3;
+                lane[4] += 1;
+                break;
+            case 2:
+                lane[0] -= 0.1;
+                lane[1] -= 0.3;
+                lane[4] += 1;
+                break;
+            case 13:
+                lane[0] -= 0.4;
+                lane[3] -= 0.4;
+                break;
+            case 1:
+                lane[0] -= 0.3;
+                lane[2] -= 0.5;
+                break;
+            case 3:
+                lane[0] -= 0.2;
+                lane[3] -= 1;
+                lane[2] -= 0.1;
+                break;
+            case 4:
+                //return "Flash";
+                break;
+            case 17:
+                //return "Garrison";
+                break;
+            case 6:
+                lane[0] -= 0.3;
+                lane[2] -= 0.5;
+                break;
+            case 7:
+                //mid,bot,top,sup,jungle
+                lane[0] -= 0.2;
+                lane[1] -= 0.5;
+                break;
+            case 14:
+                break;
+                // return "Dot";
+            case 11:
+                lane[4] -= 3;
+                // return "Smite";
+            case 12:
+                lane[0] -= 0.2;
+                lane[2] -= 0.6;
+                break;
+            case 32:
+                break;
+                // return "Snowball";
+        }
+        return lane;
+    },
     getSpellName: function (id) {
         switch (id) {
             case 21:
