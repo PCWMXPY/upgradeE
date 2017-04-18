@@ -74,6 +74,7 @@ class playstat {
                     ar.push(people[i][k][j]);
                 }
                 result[i].push(perference.getChampName(ids[i][nodefunctions.smallest(ar)]));
+                people[i][nodefunctions.smallest(ar)] = [6, 6, 6, 6, 2.5];
             }
         }
         return result;
@@ -90,6 +91,29 @@ const nodefunctions = {
             }
         }
         return pointer;
+    },
+    terminal: (array) => {
+        for (let i = 0; i < array.length; i++) {
+            for (let j = 0; j < array[i].length; j++) {
+                switch (j) {
+                    case 0:
+                        console.log('Mid:' + array[i][j]);
+                        break;
+                    case 1:
+                        console.log('Bot:' + array[i][j]);
+                        break;
+                    case 2:
+                        console.log('Top:' + array[i][j]);
+                        break;
+                    case 3:
+                        console.log('Sup:' + array[i][j]);
+                        break;
+                    case 4:
+                        console.log('Jungle:' + array[i][j]);
+                        break;
+                }
+            }
+        }
     },
     getSummonerId: (id: string, fun: Function) => {
         const url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
@@ -115,7 +139,7 @@ const nodefunctions = {
 // })
 var miao = new playstat(123);
 miao.setNear(testjson);
-console.log(miao.analysisNear());
+nodefunctions.terminal(miao.analysisNear());
 // miao.getCurrent((data) => {
 //     console.log(data);
 // })

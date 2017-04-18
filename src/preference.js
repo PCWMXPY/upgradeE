@@ -819,32 +819,32 @@ var preference = {
     },
     weightspell: function (spell, lane) {
         for (let i = 0; i < lane.length; i++) {
-            let ran = ((Math.random() * 100) % 10) * 0.01;
-            lane[i] += ran;
+            let ran = ((Math.random() * 100) % 10) * 0.03;
+            lane[i] -= ran;
         }
         //mid,bot,top,sup,jungle
         switch (spell) {
             case 21:
-                lane[0] -= 0.3;
+                lane[0] -= 0.7;
                 lane[4] += 1;
                 break;
             case 2:
-                lane[0] -= 0.1;
-                lane[1] -= 0.3;
+                lane[0] -= 0.4;
+                lane[1] -= 0.8;
                 lane[4] += 1;
                 break;
             case 13:
-                lane[0] -= 0.4;
-                lane[3] -= 0.4;
+                lane[0] -= 0.6;
+                lane[3] -= 0.7;
                 break;
             case 1:
-                lane[0] -= 0.3;
+                lane[0] -= 0.4;
                 lane[2] -= 0.5;
                 break;
             case 3:
-                lane[0] -= 0.2;
+                lane[0] -= 0.6;
                 lane[3] -= 1;
-                lane[2] -= 0.1;
+                lane[2] -= 0.4;
                 break;
             case 4:
                 //return "Flash";
@@ -853,13 +853,13 @@ var preference = {
                 //return "Garrison";
                 break;
             case 6:
-                lane[0] -= 0.3;
-                lane[2] -= 0.5;
+                lane[0] -= 0.6;
+                lane[2] -= 0.7;
                 break;
             case 7:
                 //mid,bot,top,sup,jungle
-                lane[0] -= 0.2;
-                lane[1] -= 0.5;
+                lane[0] -= 0.6;
+                lane[1] -= 0.7;
                 break;
             case 14:
                 break;
@@ -868,8 +868,8 @@ var preference = {
                 lane[4] -= 3;
                 // return "Smite";
             case 12:
-                lane[0] -= 0.2;
-                lane[2] -= 0.6;
+                lane[0] -= 0.6;
+                lane[2] -= 0.8;
                 break;
             case 32:
                 break;
