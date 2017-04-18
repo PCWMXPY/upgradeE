@@ -23,12 +23,14 @@
 </body>
 <script src="../../src/preference.js"></script>
 <script src="../../lib/vue.js"></script>
+<script src="../../lib/caper.js"></script>
 <script>
     let now = 0;
     let nownow = 5;
     let nownownow = 1;
     let re = [0, 0, 0, 0, 0];
     let rere = 'switch(id){';
+    let rerere = 'switch(id){';
     let main = new Vue({
         el: '#main',
         data: {
@@ -45,30 +47,43 @@
         methods: {
             mint: id => {
                 if (nownow == 5) {
-                    if (now != 0) rere += '<br>case ' + now + ':<br>return[' + re + '];';
-                    if (now > 500) {
-                        rere += '<br>default:<br> return id;<br>}'
-                        document.getElementById('display').innerHTML = rere;
-                    } else {
+                    if (now != 0) {
+                        rerere += 'case ' + now + ':return[' + re + '];';
+                        rere += '<br>case ' + now + ':<br>return[' + re + '];';
+                    }
+                    now++;
+                    nownow = 0;
+                    nownownow = 1;
+                    main.disable.one = false;
+                    main.disable.two = false;
+                    main.disable.three = false;
+                    main.disable.four = false;
+                    main.disable.five = false;
+                    re = [0, 0, 0, 0, 0];
+                    let c = preference.getChampName(now);
+                    while (c == now && now < 500) {
                         now++;
-                        nownow = 0;
-                        nownownow = 1;
-                        main.disable.one = false;
-                        main.disable.two = false;
-                        main.disable.three = false;
-                        main.disable.four = false;
-                        main.disable.five = false;
-                        re = [0, 0, 0, 0, 0];
-                        let c = preference.getChampName(now);
-                        while (c == now && now < 500) {
-                            now++;
-                            c = preference.getChampName(now);
-                        }
-                        if (now > 498) {
-                            rere += '<br>default:<br> return id;<br>}'
-                            document.getElementById('display').innerHTML = rere;
-                            return;
-                        }
+                        c = preference.getChampName(now);
+                    }
+                    if (now > 498) {
+                        rere += '<br>default:<br> return id;<br>}';
+                        rerere += 'default: return id;}';
+                        document.getElementById('display').innerHTML = rere;
+                        main.disable.one = true;
+                        main.disable.two = true;
+                        main.disable.three = true;
+                        main.disable.four = true;
+                        main.disable.five = true;
+                        console.log('this');
+                        document.getElementById('main').innerHTML = '没有更多英雄了';
+                        Ca$.post({
+                            url: './test.php',
+                            data: {
+                                p: rerere
+                            }
+                        })
+                        return;
+                    } else {
                         main.champ = c;
                         main.id = now;
                     }
