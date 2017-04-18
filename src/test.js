@@ -11,7 +11,7 @@ var test = {
     },
     "participants": [{
             "profileIconId": 983,
-            "championId": 432,
+            "championId": 3,
             "summonerName": "I will not gank",
             "runes": [{
                     "count": 9,
@@ -79,7 +79,7 @@ var test = {
         },
         {
             "profileIconId": 1627,
-            "championId": 41,
+            "championId": 62,
             "summonerName": "tkdaj",
             "runes": [{
                     "count": 9,
@@ -147,7 +147,7 @@ var test = {
         },
         {
             "profileIconId": 1627,
-            "championId": 18,
+            "championId": 83,
             "summonerName": "BenjiQ",
             "runes": [{
                     "count": 9,

@@ -105,17 +105,17 @@ const nodefunctions = {
     }
 }
 
-nodefunctions.getSummonerId('shiphtur', (data) => {
-    var miao = new playstat(data.id);
-    miao.getCurrent(data => {
-        console.log(data);
-        console.log(miao.analysisNear());
-    })
-    // console.log(data.id);
-})
-
-// miao.setNear(testjson);
-
+// nodefunctions.getSummonerId('apollo', (data) => {
+//     var miao = new playstat(data.id);
+//     miao.getCurrent(data => {
+//         console.log(data);
+//         console.log(miao.analysisNear());
+//     })
+//     // console.log(data.id);
+// })
+var miao = new playstat(123);
+miao.setNear(testjson);
+console.log(miao.analysisNear());
 // miao.getCurrent((data) => {
 //     console.log(data);
 // })

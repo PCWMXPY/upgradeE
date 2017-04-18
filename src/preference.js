@@ -818,6 +818,10 @@ var preference = {
         }
     },
     weightspell: function (spell, lane) {
+        for (let i = 0; i < lane.length; i++) {
+            let ran = ((Math.random() * 100) % 10) * 0.01;
+            lane[i] += ran;
+        }
         //mid,bot,top,sup,jungle
         switch (spell) {
             case 21:
