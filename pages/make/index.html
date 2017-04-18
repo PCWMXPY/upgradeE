@@ -9,12 +9,12 @@
 
 <body>
     <div id="main">
-        英雄名: <strong>{{champ}}</strong><br>英雄id: <strong>{{id}}</strong><br>
-        <button v-on:click="mint(0)" v-bind:disabled="disable.one">中单</button>
-        <button v-on:click="mint(1)" v-bind:disabled="disable.two">射手</button>
-        <button v-on:click="mint(2)" v-bind:disabled="disable.three">上单</button>
-        <button v-on:click="mint(3)" v-bind:disabled="disable.four">辅助</button>
-        <button v-on:click="mint(4)" v-bind:disabled="disable.five">打野</button>
+        <span>使用方法，从可能性高到可能性低，依次点击该英雄可能出现的位置！点错了就将错就错，不能撤销点击</span><br> 英雄名: <strong>{{champ}}</strong><br>英雄id: <strong>{{id}}</strong><br>
+        <button v-on:click="mint(0)" style="width: 80px;height:80px;" v-bind:disabled="disable.one">中单</button>
+        <button v-on:click="mint(1)" style="width: 80px;height:80px;" v-bind:disabled="disable.two">射手</button>
+        <button v-on:click="mint(2)" style="width: 80px;height:80px;" v-bind:disabled="disable.three">上单</button>
+        <button v-on:click="mint(3)" style="width: 80px;height:80px;" v-bind:disabled="disable.four">辅助</button>
+        <button v-on:click="mint(4)" style="width: 80px;height:80px;" v-bind:disabled="disable.five">打野</button>
     </div>
     <span>这里显示输出的结果<br></span>
     <div id="display">
