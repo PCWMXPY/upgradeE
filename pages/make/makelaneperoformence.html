@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div id="main">
+        英雄名: <strong>{{champ}}</strong><br>英雄id: <strong>{{id}}</strong><br>
+        <button v-on:click="mint(0)" v-bind:disabled="disable.one">中单</button>
+        <button v-on:click="mint(1)" v-bind:disabled="disable.two">射手</button>
+        <button v-on:click="mint(2)" v-bind:disabled="disable.three">上单</button>
+        <button v-on:click="mint(3)" v-bind:disabled="disable.four">辅助</button>
+        <button v-on:click="mint(4)" v-bind:disabled="disable.five">打野</button>
+    </div>
+    <span>这里显示输出的结果<br></span>
+    <div id="display">
+        switch(id){
+    </div>
+</body>
+<script src="../../src/preference.js"></script>
+<script src="../../lib/vue.js"></script>
+<script>
+    let now = 0;
+    let nownow = 5;
+    let nownownow = 1;
+    let re = [0, 0, 0, 0, 0];
+    let rere = 'switch(id){';
+    let main = new Vue({
+        el: '#main',
+        data: {
+            champ: '',
+            id: 0,
+            disable: {
+                one: false,
+                two: false,
+                three: false,
+                four: false,
+                five: false
+            }
+        },
+        methods: {
+            mint: id => {
+                if (nownow == 5) {
+                    if (now != 0) rere += '<br>case ' + now + ':<br>return[' + re + '];';
+                    if (now > 500) {
+                        rere += '<br>default:<br> return id;<br>}'
+                        document.getElementById('display').innerHTML = rere;
+                    } else {
+                        now++;
+                        nownow = 0;
+                        nownownow = 1;
+                        main.disable.one = false;
+                        main.disable.two = false;
+                        main.disable.three = false;
+                        main.disable.four = false;
+                        main.disable.five = false;
+                        re = [0, 0, 0, 0, 0];
+                        let c = preference.getChampName(now);
+                        while (c == now && now < 500) {
+                            now++;
+                            c = preference.getChampName(now);
+                        }
+                        if (now > 498) {
+                            rere += '<br>default:<br> return id;<br>}'
+                            document.getElementById('display').innerHTML = rere;
+                            return;
+                        }
+                        main.champ = c;
+                        main.id = now;
+                    }
+                } else {
+                    re[id] = nownownow++;
+                    nownow++;
+                    switch (id) {
+                        case 0:
+                            main.disable.one = true;
+                            break;
+                        case 1:
+                            main.disable.two = true;
+                            break;
+                        case 2:
+                            main.disable.three = true;
+                            break;
+                        case 3:
+                            main.disable.four = true;
+                            break;
+                        case 4:
+                            main.disable.five = true;
+                            break;
+                    }
+                    if (nownow == 5) {
+                        main.mint(10);
+                    }
+                    document.getElementById('display').innerHTML = rere;
+                }
+            }
+        }
+    });
+    main.mint(0);
+</script>
+
+</html>
