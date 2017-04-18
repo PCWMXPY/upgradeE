@@ -92,29 +92,6 @@ const nodefunctions = {
         }
         return pointer;
     },
-    terminal: (array) => {
-        for (let i = 0; i < array.length; i++) {
-            for (let j = 0; j < array[i].length; j++) {
-                switch (j) {
-                    case 0:
-                        console.log('Mid:' + array[i][j]);
-                        break;
-                    case 1:
-                        console.log('Bot:' + array[i][j]);
-                        break;
-                    case 2:
-                        console.log('Top:' + array[i][j]);
-                        break;
-                    case 3:
-                        console.log('Sup:' + array[i][j]);
-                        break;
-                    case 4:
-                        console.log('Jungle:' + array[i][j]);
-                        break;
-                }
-            }
-        }
-    },
     getSummonerId: (id: string, fun: Function) => {
         const url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
         request(url, (error, response, data: string) => {
@@ -129,17 +106,16 @@ const nodefunctions = {
     }
 }
 
-// nodefunctions.getSummonerId('apollo', (data) => {
-//     var miao = new playstat(data.id);
-//     miao.getCurrent(data => {
-//         console.log(data);
-//         console.log(miao.analysisNear());
-//     })
-//     // console.log(data.id);
-// })
-var miao = new playstat(123);
-miao.setNear(testjson);
-nodefunctions.terminal(miao.analysisNear());
+nodefunctions.getSummonerId('aniviakid', (data) => {
+    var miao = new playstat(data.id);
+    miao.getCurrent(data => {
+        perference.terminal(miao.analysisNear());
+    })
+    // console.log(data.id);
+})
+// var miao = new playstat(123);
+// miao.setNear(testjson);
+// nodefunctions.terminal(miao.analysisNear());
 // miao.getCurrent((data) => {
 //     console.log(data);
 // })

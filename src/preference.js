@@ -1,4 +1,29 @@
 var preference = {
+    terminal: array => {
+        for (let i = 0; i < array.length; i++) {
+            console.log('---------------');
+            for (let j = 0; j < array[i].length; j++) {
+                switch (j) {
+                    case 0:
+                        console.log('Mid: ' + array[i][j]);
+                        break;
+                    case 1:
+                        console.log('Bot: ' + array[i][j]);
+                        break;
+                    case 2:
+                        console.log('Top: ' + array[i][j]);
+                        break;
+                    case 3:
+                        console.log('Sup: ' + array[i][j]);
+                        break;
+                    case 4:
+                        console.log('Jgl: ' + array[i][j]);
+                        break;
+                }
+            }
+        }
+        console.log('---------------');
+    },
     getChampDeatil: function (Id) {
         switch (Id) {
             //bf, tuan zhan, kongzhi, he li xing
@@ -514,7 +539,7 @@ var preference = {
             case 223:
                 return [4, 5, 2, 1, 3];
             case 236:
-                return [2, 5, 1, 4, 3];
+                return [2, 1, 3, 5, 4];
             case 238:
                 return [1, 5, 2, 3, 4];
             case 240:
@@ -784,7 +809,7 @@ var preference = {
             case 203:
                 return "Kindred";
             case 236:
-                return "Shen";
+                return "Lucian";
             case 238:
                 return "Zed";
             case 268:
@@ -865,6 +890,9 @@ var preference = {
                 break;
                 // return "Dot";
             case 11:
+                lane[0] += 2;
+                lane[1] += 2;
+                lane[3] += 2;
                 lane[4] -= 3;
                 // return "Smite";
             case 12:
