@@ -1,6 +1,6 @@
 {
   "name": "upgradee",
-  "version": "0.0.1",
+  "version": "0.2.1",
   "description": "Strong like tiger if upgradeE",
   "main": "main.js",
   "scripts": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/PCWMXPY/upgradeE#readme",
   "dependencies": {
-    "caperjs": "^0.3.15"
+    "caperjs": "^0.3.15",
+    "request": "2.81.0"
   }
 }

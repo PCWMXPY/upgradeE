@@ -14,24 +14,24 @@ class playstat {
     constructor(id: number) {
         this.id = id + '';
     }
+    returnJson(error, response, data, fun: Function) {
+        if (!error && response.statusCode == 200) {
+            data = JSON.parse(data);
+            fun(data);
+        } else {
+            console.log(response.statusCode);
+        }
+    }
     getCurrent(fun: Function) {
         const url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + this.id + '?api_key=' + api_key;
         request(url, (error, response, data: string) => {
-            if (!error && response.statusCode == 200) {
-                data = JSON.parse(data);
-                fun(data);
-            }
+            this.returnJson(error, response, data, fun);
         })
     }
     getRecent(fun: Function) {
         const url = 'https://na.api.riotgames.com/api/lol/NA/v1.3/game/by-summoner/' + this.id + '/recent?api_key=' + api_key;
         request(url, (error, response, data: string) => {
-            if (!error && response.statusCode == 200) {
-                data = JSON.parse(data);
-                fun(data);
-            } else {
-                console.log(response.statusCode);
-            }
+            this.returnJson(error, response, data, fun);
         })
     }
 }
@@ -39,10 +39,7 @@ const nodefunctions = {
     getSummonerId: (id: string, fun: Function) => {
         const url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
         request(url, (error, response, data: string) => {
-            if (!error && response.statusCode == 200) {
-                data = JSON.parse(data);
-                fun(data);
-            }
+            this.returnJson(error, response, data, fun);
         })
     }
 }
