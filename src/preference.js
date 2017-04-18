@@ -274,275 +274,275 @@ var preference = {
     },
     getlane: id => {
         //mid,bot,top,sup,jungle
-        switch (Id) {
+        switch (id) {
             case 1:
-                return [1, 5, 3, 2, 4];
+                return [1, 3, 4, 2, 5];
             case 2:
-                return [4, 5, 1, 3, 2];
+                return [4, 5, 2, 3, 1];
             case 3:
-                return [1, 5, 3, 2, 4];
+                return [3, 5, 1, 4, 2];
             case 4:
-                return "TwistedFate";
+                return [1, 3, 2, 5, 4];
             case 5:
-                return "XinZhao";
+                return [2, 5, 3, 4, 1];
             case 6:
-                return "Urgot";
+                return [3, 1, 2, 5, 4];
             case 7:
-                return "Leblanc";
+                return [1, 4, 2, 3, 5];
             case 8:
-                return "Vladimir";
+                return [2, 5, 1, 3, 4];
             case 9:
-                return "FiddleSticks";
+                return [2, 5, 4, 3, 1];
             case 10:
-                return "Kayle";
+                return [3, 4, 1, 5, 2];
             case 11:
-                return "MasterYi";
+                return [3, 4, 2, 5, 1];
             case 12:
-                return "Alistar";
+                return [4, 5, 2, 1, 3];
             case 13:
-                return "Ryze";
+                return [2, 5, 1, 4, 3];
             case 14:
-                return "Sion";
+                return [5, 4, 1, 2, 3];
             case 15:
-                return "Sivir";
+                return [2, 1, 3, 5, 4];
             case 16:
-                return "Soraka";
+                return [3, 5, 2, 1, 4];
             case 17:
-                return "Teemo";
+                return [2, 4, 1, 5, 3];
             case 18:
-                return "Tristana";
+                return [2, 1, 3, 5, 4];
             case 19:
-                return "Warwick";
+                return [5, 4, 2, 3, 1];
             case 20:
-                return "Nunu";
+                return [5, 4, 2, 3, 1];
             case 21:
-                return "MissFortune";
+                return [3, 1, 4, 2, 5];
             case 22:
-                return "Ashe";
+                return [4, 1, 3, 2, 5];
             case 23:
-                return "Tryndamere";
+                return [3, 5, 1, 4, 2];
             case 24:
-                return "Jax";
+                return [3, 4, 1, 5, 2];
             case 25:
-                return "Morgana";
+                return [2, 5, 3, 1, 4];
             case 26:
-                return "Zilean";
+                return [1, 4, 3, 2, 5];
             case 27:
-                return "Singed";
+                return [3, 4, 1, 5, 2];
             case 28:
-                return "Evelynn";
+                return [3, 5, 2, 4, 1];
             case 29:
-                return "Twitch";
+                return [4, 1, 3, 5, 2];
             case 30:
-                return "Karthus";
+                return [1, 4, 2, 3, 5];
             case 31:
-                return "Chogath";
+                return [1, 5, 2, 4, 3];
             case 32:
-                return "Amumu";
+                return [3, 5, 2, 4, 1];
             case 33:
-                return "Rammus";
+                return [4, 5, 2, 3, 1];
             case 34:
-                return "Anivia";
+                return [1, 5, 2, 3, 4];
             case 35:
-                return "Shaco";
+                return [3, 5, 2, 4, 1];
             case 36:
-                return "DrMundo";
+                return [5, 4, 1, 3, 2];
             case 37:
-                return "Sona";
+                return [2, 3, 4, 1, 5];
             case 38:
-                return "Kassadin";
+                return [1, 5, 2, 4, 3];
             case 39:
-                return "Irelia";
+                return [2, 5, 1, 4, 3];
             case 40:
-                return "Janna";
+                return [3, 4, 2, 1, 5];
             case 41:
-                return "Gangplank";
+                return [2, 3, 1, 4, 5];
             case 42:
-                return "Corki";
+                return [1, 2, 3, 4, 5];
             case 43:
-                return "Karma";
+                return [2, 5, 3, 1, 4];
             case 44:
-                return "Taric";
+                return [4, 5, 2, 1, 3];
             case 45:
-                return "Veigar";
+                return [1, 5, 2, 3, 4];
             case 48:
-                return "Trundle";
+                return [4, 5, 1, 3, 2];
             case 50:
-                return "Swain";
+                return [2, 5, 1, 3, 4];
             case 51:
-                return "Caitlyn";
+                return [2, 1, 3, 4, 5];
             case 53:
-                return "Blitzcrank";
+                return [2, 5, 3, 1, 4];
             case 54:
-                return "Malphite";
+                return [2, 5, 1, 4, 3];
             case 55:
-                return "Katarina";
+                return [1, 5, 2, 3, 4];
             case 56:
-                return "Nocturne";
+                return [2, 5, 3, 4, 1];
             case 57:
-                return "Maokai";
+                return [5, 4, 1, 3, 2];
             case 58:
-                return "Renekton";
+                return [2, 5, 1, 4, 3];
             case 59:
-                return "JarvanIV";
+                return [3, 5, 2, 4, 1];
             case 60:
-                return "Elise";
+                return [2, 5, 3, 4, 1];
             case 61:
-                return "Orianna";
+                return [1, 5, 3, 2, 4];
             case 62:
-                return "MonkeyKing";
+                return [3, 5, 1, 4, 2];
             case 63:
-                return "Brand";
+                return [1, 5, 3, 2, 4];
             case 64:
-                return "LeeSin";
+                return [3, 5, 2, 4, 1];
             case 67:
-                return "Vayne";
+                return [4, 1, 2, 5, 3];
             case 68:
-                return "Rumble";
+                return [2, 5, 1, 4, 3];
             case 69:
-                return "Cassiopeia";
+                return [1, 4, 2, 3, 5];
             case 72:
-                return "Skarner";
+                return [4, 5, 2, 3, 1];
             case 74:
-                return "Heimerdinger";
+                return [5, 4, 2, 3, 1];
             case 75:
-                return "Nasus";
+                return [2, 5, 1, 3, 4];
             case 76:
-                return "Nidalee";
+                return [2, 4, 3, 5, 1];
             case 77:
-                return "Udyr";
+                return [3, 5, 2, 4, 1];
             case 78:
-                return "Poppy";
+                return [4, 5, 1, 3, 2];
             case 79:
-                return "Gragas";
+                return [3, 4, 2, 5, 1];
             case 80:
-                return "Pantheon";
+                return [4, 5, 1, 3, 2];
             case 81:
-                return "Ezreal";
+                return [2, 1, 3, 5, 4];
             case 82:
-                return "Mordekaiser";
+                return [3, 1, 2, 5, 4];
             case 83:
-                return "Yorick";
+                return [3, 5, 1, 4, 2];
             case 84:
-                return "Akali";
+                return [1, 5, 2, 4, 3];
             case 85:
-                return "Kennen";
+                return [2, 5, 1, 4, 3];
             case 86:
-                return "Garen";
+                return [5, 4, 1, 3, 2];
             case 89:
-                return "Leona";
+                return [4, 5, 2, 1, 3];
             case 90:
-                return "Malzahar";
+                return [1, 5, 3, 4, 2];
             case 91:
-                return "Talon";
+                return [3, 4, 1, 5, 2];
             case 92:
-                return "Riven";
+                return [2, 5, 1, 4, 3];
             case 96:
-                return "KogMaw";
+                return [2, 1, 5, 4, 3];
             case 98:
-                return "Shen";
+                return [4, 5, 1, 2, 3];
             case 99:
-                return "Lux";
+                return [1, 4, 3, 2, 5];
             case 101:
-                return "Xerath";
+                return [1, 5, 3, 2, 4];
             case 102:
-                return "Shyvana";
+                return [3, 4, 2, 5, 1];
             case 103:
-                return "Ahri";
+                return [1, 5, 2, 3, 4];
             case 104:
-                return "Graves";
+                return [4, 3, 2, 5, 1];
             case 105:
-                return "Fizz";
+                return [1, 5, 2, 4, 3];
             case 106:
-                return "Volibear";
+                return [5, 4, 2, 3, 1];
             case 107:
-                return "Rengar";
+                return [3, 4, 2, 5, 1];
             case 110:
-                return "Varus";
+                return [2, 1, 3, 5, 4];
             case 111:
-                return "Nautilus";
+                return [5, 4, 1, 3, 2];
             case 112:
-                return "Viktor";
+                return [1, 5, 2, 4, 3];
             case 113:
-                return "Sejuani";
+                return [4, 3, 2, 5, 1];
             case 114:
-                return "Fiora";
+                return [2, 5, 1, 4, 3];
             case 115:
-                return "Ziggs";
+                return [1, 2, 5, 3, 4];
             case 117:
-                return "Lulu";
+                return [2, 5, 3, 1, 4];
             case 119:
-                return "Draven";
+                return [3, 1, 2, 5, 4];
             case 120:
-                return "Hecarim";
+                return [3, 4, 2, 5, 1];
             case 121:
-                return "Khazix";
+                return [3, 4, 2, 5, 1];
             case 122:
-                return "Darius";
+                return [2, 3, 1, 4, 5];
             case 126:
-                return "Jayce";
-            case 131:
-                return "Diana";
-            case 133:
-                return "Quinn";
-            case 134:
-                return "Syndra";
-            case 136:
-                return "AurelionSol";
-            case 143:
-                return "Zyra";
-            case 150:
-                return "Gnar";
-            case 154:
-                return "Zac";
-            case 161:
-                return "Velkoz";
-            case 163:
-                return "Taliyah";
-            case 427:
-                return "Ivern";
-            case 202:
-                return "Jhin";
-            case 240:
-                return "Kled";
-            case 267:
-                return "Nami";
-            case 201:
-                return "Braum";
-            case 203:
-                return "Kindred";
-            case 236:
-                return "Shen";
-            case 238:
-                return "Zed";
-            case 268:
-                return "Azir";
-            case 222:
-                return "Jinx";
-            case 420:
-                return "Illaoi";
-            case 223:
-                return "TahmKench";
-            case 432:
-                return "Bard";
-            case 412:
-                return "Thresh";
-            case 421:
-                return "RekSai";
-            case 254:
-                return "Vi";
-            case 245:
-                return "Ekko";
-            case 157:
-                return "Yasuo";
+                return [2, 3, 1, 5, 4];
             case 127:
-                return "Lissandra";
-            case 429:
-                return "Kalista";
+                return [1, 5, 2, 3, 4];
+            case 131:
+                return [2, 5, 3, 4, 1];
+            case 133:
+                return [4, 3, 1, 5, 2];
+            case 134:
+                return [1, 5, 2, 3, 4];
+            case 136:
+                return [1, 5, 4, 2, 3];
+            case 143:
+                return [2, 5, 3, 1, 4];
+            case 150:
+                return [5, 4, 1, 3, 2];
+            case 154:
+                return [3, 4, 2, 5, 1];
+            case 157:
+                return [1, 5, 2, 4, 3];
+            case 161:
+                return [1, 5, 3, 2, 4];
+            case 163:
+                return [1, 5, 2, 3, 4];
+            case 201:
+                return [4, 3, 2, 1, 5];
+            case 202:
+                return [4, 1, 2, 5, 3];
+            case 203:
+                return [3, 4, 2, 5, 1];
+            case 222:
+                return [5, 1, 2, 3, 4];
+            case 223:
+                return [4, 5, 2, 1, 3];
+            case 236:
+                return [2, 5, 1, 4, 3];
+            case 238:
+                return [1, 5, 2, 3, 4];
+            case 240:
+                return [3, 5, 1, 4, 2];
+            case 245:
+                return [2, 5, 1, 4, 3];
+            case 254:
+                return [2, 4, 3, 5, 1];
             case 266:
-                return "Aatrox";
+                return [5, 3, 1, 4, 2];
+            case 267:
+                return [2, 5, 3, 1, 4];
+            case 268:
+                return [1, 5, 2, 3, 4];
+            case 412:
+                return [2, 5, 3, 1, 4];
+            case 420:
+                return [2, 3, 1, 4, 5];
+            case 421:
+                return [3, 4, 2, 5, 1];
+            case 427:
+                return [3, 5, 2, 4, 1];
+            case 429:
+                return [5, 1, 2, 3, 4];
+            case 432:
+                return [2, 4, 3, 1, 5];
             default:
-                return Id;
+                return id;
         }
     },
     getChampName: function (Id) {
