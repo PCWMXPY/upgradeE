@@ -458,7 +458,7 @@ var preference = {
             case 90:
                 return [1, 5, 3, 4, 2];
             case 91:
-                return [3, 4, 1, 5, 2];
+                return [1, 3, 2, 6, 3];
             case 92:
                 return [2, 5, 1, 4, 3];
             case 96:
@@ -892,7 +892,7 @@ var preference = {
                 lane[0] += 2;
                 lane[1] += 2;
                 lane[3] += 2;
-                lane[4] -= 3;
+                lane[4] -= 3.8;
                 // return "Smite";
             case 12:
                 lane[0] -= 0.6;

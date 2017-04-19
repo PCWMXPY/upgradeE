@@ -136,7 +136,7 @@ export const nodefunctions = {
     }
 }
 
-nodefunctions.getSummonerId('ezlife13', (data, id) => {
+nodefunctions.getSummonerId('kikikiyomi', (data, id) => {
     var miao = new playstat(data.id, id);
     miao.getCurrent(data => {
         console.log(miao.analysisNear());

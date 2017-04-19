@@ -78,12 +78,10 @@ var playstat = (function () {
             }
         }
         var temp = [];
-        var pointer = '';
         for (var i = 0; i < participants.length; i++) {
             if (participants[i].summonerName.replace(/\s+/g, "").toLowerCase() == this.name) {
                 temp.push(participants[i]);
                 i = 10;
-                // pointer = 
             }
         }
         var ourTeamId = temp[0].teamId;
@@ -92,13 +90,11 @@ var playstat = (function () {
         var TheirResultcount = (ourTeamId == 100) ? 1 : 0;
         var theirChampName = '';
         for (var i = 0; i < result[ourResultcount].length; i++) {
-            console.log(perference.getChampName(temp[0].championId));
             if (perference.getChampName(temp[0].championId) == result[ourResultcount][i]) {
                 theirChampName = result[TheirResultcount][i];
                 i = 10;
             }
         }
-        console.log(theirChampName);
         for (var i = 0; i < participants.length; i++) {
             if (participants[i].teamId == oppoTeamId) {
                 if (perference.getChampName(participants[i].championId) == theirChampName) {
@@ -139,7 +135,7 @@ exports.nodefunctions = {
         });
     }
 };
-exports.nodefunctions.getSummonerId('ezlife13', function (data, id) {
+exports.nodefunctions.getSummonerId('kikikiyomi', function (data, id) {
     var miao = new playstat(data.id, id);
     miao.getCurrent(function (data) {
         console.log(miao.analysisNear());
