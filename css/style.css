@@ -1,4 +1,35 @@
 .ue-bg {
-    background-color: red;
-    height: 70%;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-family: Georgia, "Times New Roman", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
+}
+
+.row {
+    margin-top: 25px;
+}
+
+div .center {
+    text-align: center;
+    padding: 10px;
+}
+
+div .lower {
+    margin-top: 30px;
+}
+
+.ue-button {
+    width: 100%;
+}
+
+.backstretch {
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.div_right_bottom {
+    float: right;
+    position: fixed;
+    right: 1%;
+    top: 1%;
+    _position: absolute;
+    /* position fixed for IE6 */
 }

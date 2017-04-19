@@ -11,19 +11,14 @@
 const electron = require("electron");
 const funs = require('./upgradee.js').nodefunctions;
 const playstat = require('./upgradee.js').playstat;
-let a = new playstat(165);
-console.log(a);
+const ipcMain = require('electron').ipcMain;
 // 创建应用程序对象
 const app = electron.app;
 // 创建一个浏览器窗口，主要用来加载HTML页面
 const BrowserWindow = electron.BrowserWindow;
-
-
 // --- 窗口 ---
 // 声明一个BrowserWindow对象实例
 let mainWindow;
-
-
 //定义一个创建浏览器窗口的方法
 function createWindow() {
     // 创建一个浏览器窗口对象，并指定窗口的大小
@@ -59,4 +54,8 @@ app.on("activate", function () {
     if (mainWindow === null) {
         createWindow();
     }
+});
+
+ipcMain.once('makesummnor', (event, arg) => {
+    console.log(arg);
 });

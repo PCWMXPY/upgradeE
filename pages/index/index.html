@@ -7,21 +7,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../../css/style.css" rel="stylesheet">
     <link href="../../lib/bootstrap.min.css" rel="stylesheet">
+    <link href="../../lib/buttons.css" rel="stylesheet">
+    <link href="../../lib/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row ue-bg">
-            <div class="col-md-12">
-                <div class="">1</div>
+    <div id="main" class="container-fluid">
+        <div class="row">
+            <div class="col-sm-offset-3 col-sm-6 center ue-bg">
+                <div>
+                    <h2>{{display.input}}</h2>
+                </div>
+            </div>
+            <div class="col-sm-offset-3 col-sm-6 center lower ue-bg">
+                <div>
+                    <input placeholder="Username" class="form-username form-control" v-model="test" style="margin-bottom:10px;"></input>
+                    <!--<input class="form-password form-control" v-model="test"></input>-->
+                    <button class="button button-rounded ue-button">{{display.submit}}</button>
+                </div>
             </div>
         </div>
+        <re-wave></re-wave>
     </div>
 </body>
 <script>
     window.jQuery = window.$ = require('jquery');
+    jQuery(document).ready(function () {
+        $.backstretch("../../css/image.jpg");
+    })
 </script>
 <script src="../../lib/bootstrap.min.js"></script>
+<script src="../../lib/buttons.min.js"></script>
+<script src="../../lib/jquery.backstretch.min.js"></script>
+<script src="../../lib/vue.js"></script>
 <script src="../../lib/caper.js"></script>
+<script src="../public.js"></script>
+<script src="./index.js"></script>
+
 
 </html>
