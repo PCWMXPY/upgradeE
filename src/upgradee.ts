@@ -6,12 +6,15 @@
  * @contect wm@wmpcxpy.com
  */
 declare function require(name: string);
+declare var module: any;
 let request = require('request');
 let perference = require('./preference.js');
-var testjson = require('./test.js');
+// var exec = require('child_process').exec;
+// var cmdStr = 'curl http://www.weather.com.cn/data/sk/101010100.html';
+let testjson = require('./test.js');
+
 const api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
-// console.log(request);
-class playstat {
+export class playstat {
     private id: string;
     private near: object;
     constructor(id: number) {
@@ -60,13 +63,11 @@ class playstat {
             if (participants[i]['teamId'] == 100) {
                 people[0].push(lane);
                 ids[0].push(champid);
-                // console.log(champid);
             } else {
                 people[1].push(lane);
                 ids[1].push(champid);
             }
         }
-        //mid,bot,top,sup,jungle
         for (let i = 0; i < people.length; i++) {
             for (let j = 0; j < people[i].length; j++) {
                 let ar = [];
@@ -80,7 +81,7 @@ class playstat {
         return result;
     }
 }
-const nodefunctions = {
+export const nodefunctions = {
     smallest: (array) => {
         let smalllest = array[0];
         let pointer = 0;
@@ -106,16 +107,13 @@ const nodefunctions = {
     }
 }
 
-nodefunctions.getSummonerId('aniviakid', (data) => {
-    var miao = new playstat(data.id);
-    miao.getCurrent(data => {
-        perference.terminal(miao.analysisNear());
-    })
-    // console.log(data.id);
-})
+// nodefunctions.getSummonerId('bigfatlp', (data) => {
+//     var miao = new playstat(data.id);
+//     miao.getCurrent(data => {
+//         perference.terminal(miao.analysisNear());
+//     })
+// })
 // var miao = new playstat(123);
 // miao.setNear(testjson);
 // nodefunctions.terminal(miao.analysisNear());
-// miao.getCurrent((data) => {
-//     console.log(data);
-// })
+module.exports = { nodefunctions, playstat };

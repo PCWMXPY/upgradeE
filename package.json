@@ -2,7 +2,7 @@
   "name": "upgradee",
   "version": "0.2.1",
   "description": "Strong like tiger if upgradeE",
-  "main": "main.js",
+  "main": "./src/app.js",
   "scripts": {
     "test": "test"
   },

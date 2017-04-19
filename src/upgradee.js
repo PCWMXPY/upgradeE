@@ -1,12 +1,15 @@
+"use strict";
 var _this = this;
+exports.__esModule = true;
 (function () {
     'use strict';
 }());
 var request = require('request');
 var perference = require('./preference.js');
+// var exec = require('child_process').exec;
+// var cmdStr = 'curl http://www.weather.com.cn/data/sk/101010100.html';
 var testjson = require('./test.js');
 var api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
-// console.log(request);
 var playstat = (function () {
     function playstat(id) {
         this.id = id + '';
@@ -22,7 +25,8 @@ var playstat = (function () {
             data = JSON.parse(data);
             this.near = data;
             fun(data);
-        } else {
+        }
+        else {
             console.log(response.statusCode);
         }
     };
@@ -42,18 +46,9 @@ var playstat = (function () {
     };
     playstat.prototype.analysisNear = function () {
         //mid,bot,top,sup,jungle
-        var people = [
-            [],
-            []
-        ];
-        var ids = [
-            [],
-            []
-        ];
-        var result = [
-            [],
-            []
-        ];
+        var people = [[], []];
+        var ids = [[], []];
+        var result = [[], []];
         var participants = this.near['participants'];
         for (var i = 0; i < participants.length; i++) {
             var champid = participants[i]['championId'];
@@ -65,28 +60,28 @@ var playstat = (function () {
             if (participants[i]['teamId'] == 100) {
                 people[0].push(lane);
                 ids[0].push(champid);
-                // console.log(champid);
-            } else {
+            }
+            else {
                 people[1].push(lane);
                 ids[1].push(champid);
             }
         }
-        //mid,bot,top,sup,jungle
         for (var i = 0; i < people.length; i++) {
             for (var j = 0; j < people[i].length; j++) {
                 var ar = [];
                 for (var k = 0; k < people[i].length; k++) {
                     ar.push(people[i][k][j]);
                 }
-                result[i].push(perference.getChampName(ids[i][nodefunctions.smallest(ar)]));
-                people[i][nodefunctions.smallest(ar)] = [6, 6, 6, 6, 2.5];
+                result[i].push(perference.getChampName(ids[i][exports.nodefunctions.smallest(ar)]));
+                people[i][exports.nodefunctions.smallest(ar)] = [6, 6, 6, 6, 2.5];
             }
         }
         return result;
     };
     return playstat;
 }());
-var nodefunctions = {
+exports.playstat = playstat;
+exports.nodefunctions = {
     smallest: function (array) {
         var smalllest = array[0];
         var pointer = 0;
@@ -105,22 +100,20 @@ var nodefunctions = {
                 data = JSON.parse(data);
                 _this.near = data;
                 fun(data);
-            } else {
+            }
+            else {
                 console.log(response.statusCode);
             }
         });
     }
 };
-nodefunctions.getSummonerId('deviljerryw', function (data) {
-    var miao = new playstat(data.id);
-    miao.getCurrent(function (data) {
-        perference.terminal(miao.analysisNear());
-    });
-    // console.log(data.id);
-});
+// nodefunctions.getSummonerId('bigfatlp', (data) => {
+//     var miao = new playstat(data.id);
+//     miao.getCurrent(data => {
+//         perference.terminal(miao.analysisNear());
+//     })
+// })
 // var miao = new playstat(123);
 // miao.setNear(testjson);
 // nodefunctions.terminal(miao.analysisNear());
-// miao.getCurrent((data) => {
-//     console.log(data);
-// })
+module.exports = { nodefunctions: exports.nodefunctions, playstat: playstat };
