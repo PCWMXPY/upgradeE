@@ -28,25 +28,26 @@ export class playstat {
     setNear(near: object) {
         this.near = near;
     }
-    returnJson(error, response, data, fun: Function) {
+    returnJson(error, response, data, fun: Function, err: Function) {
         if (!error && response.statusCode == 200) {
             data = JSON.parse(data);
             this.near = data;
             fun(data);
         } else {
+            err(response.statusCode);
             console.log(response.statusCode);
         }
     }
-    getCurrent(fun: Function) {
+    getCurrent(fun: Function, err: Function) {
         const url = 'https://na.api.riotgames.com/observer-mode/rest/consumer/getSpectatorGameInfo/NA1/' + this.id + '?api_key=' + api_key;
         request(url, (error, response, data: string) => {
-            this.returnJson(error, response, data, fun);
+            this.returnJson(error, response, data, fun, err);
         })
     }
-    getRecent(fun: Function) {
+    getRecent(fun: Function, err: Function) {
         const url = 'https://na.api.riotgames.com/api/lol/NA/v1.3/game/by-summoner/' + this.id + '/recent?api_key=' + api_key;
         request(url, (error, response, data: string) => {
-            this.returnJson(error, response, data, fun);
+            this.returnJson(error, response, data, fun, err);
         })
     }
     analysisNear() {
@@ -129,6 +130,7 @@ export const nodefunctions = {
                 data = JSON.parse(data);
                 this.near = data;
                 fun(data, id);
+                console.log(id);
             } else {
                 console.log(response.statusCode);
             }
@@ -145,4 +147,4 @@ export const nodefunctions = {
 // var miao = new playstat(123);
 // miao.setNear(testjson);
 // nodefunctions.terminal(miao.analysisNear());
-// module.exports = { nodefunctions, playstat };
+module.exports = { nodefunctions, playstat };

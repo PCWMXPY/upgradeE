@@ -17,7 +17,16 @@ var main = new Vue({
     },
     methods: {
         sendSummorid: function () {
-            ipcRenderer.send('makesummnor', this.test);
+            ipcRenderer.send('make-summnor', this.test);
+        },
+        getGame: function () {
+            ipcRenderer.once('ana-near', function (event, arg) {
+                console.log(arg);
+            });
+            ipcRenderer.send('get-game');
         }
     }
+});
+ipcRenderer.on('send-error', function (event, arg) {
+    console.log(arg);
 });

@@ -21,43 +21,36 @@ var playstat = (function () {
     playstat.prototype.setNear = function (near) {
         this.near = near;
     };
-    playstat.prototype.returnJson = function (error, response, data, fun) {
+    playstat.prototype.returnJson = function (error, response, data, fun, err) {
         if (!error && response.statusCode == 200) {
             data = JSON.parse(data);
             this.near = data;
             fun(data);
-        } else {
+        }
+        else {
+            err(response.statusCode);
             console.log(response.statusCode);
         }
     };
-    playstat.prototype.getCurrent = function (fun) {
+    playstat.prototype.getCurrent = function (fun, err) {
         var _this = this;
         var url = 'https://na.api.riotgames.com/observer-mode/rest/consumer/getSpectatorGameInfo/NA1/' + this.id + '?api_key=' + api_key;
         request(url, function (error, response, data) {
-            _this.returnJson(error, response, data, fun);
+            _this.returnJson(error, response, data, fun, err);
         });
     };
-    playstat.prototype.getRecent = function (fun) {
+    playstat.prototype.getRecent = function (fun, err) {
         var _this = this;
         var url = 'https://na.api.riotgames.com/api/lol/NA/v1.3/game/by-summoner/' + this.id + '/recent?api_key=' + api_key;
         request(url, function (error, response, data) {
-            _this.returnJson(error, response, data, fun);
+            _this.returnJson(error, response, data, fun, err);
         });
     };
     playstat.prototype.analysisNear = function () {
         //mid,bot,top,sup,jungle
-        var people = [
-            [],
-            []
-        ];
-        var ids = [
-            [],
-            []
-        ];
-        var result = [
-            [],
-            []
-        ];
+        var people = [[], []];
+        var ids = [[], []];
+        var result = [[], []];
         var participants = this.near['participants'];
         for (var i = 0; i < participants.length; i++) {
             var champid = participants[i]['championId'];
@@ -69,7 +62,8 @@ var playstat = (function () {
             if (participants[i]['teamId'] == 100) {
                 people[0].push(lane);
                 ids[0].push(champid);
-            } else {
+            }
+            else {
                 people[1].push(lane);
                 ids[1].push(champid);
             }
@@ -135,19 +129,21 @@ exports.nodefunctions = {
                 data = JSON.parse(data);
                 _this.near = data;
                 fun(data, id);
-            } else {
+                console.log(id);
+            }
+            else {
                 console.log(response.statusCode);
             }
         });
     }
 };
-// exports.nodefunctions.getSummonerId('ezlife13', function (data, id) {
+// nodefunctions.getSummonerId('kikikiyomi', (data, id) => {
 //     var miao = new playstat(data.id, id);
-//     miao.getCurrent(function (data) {
+//     miao.getCurrent(data => {
 //         console.log(miao.analysisNear());
-//     });
-// });
+//     })
+// })
 // var miao = new playstat(123);
 // miao.setNear(testjson);
 // nodefunctions.terminal(miao.analysisNear());
-// module.exports = { nodefunctions, playstat };
+module.exports = { nodefunctions: exports.nodefunctions, playstat: playstat };

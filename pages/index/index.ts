@@ -23,7 +23,16 @@ let main = new Vue({
     },
     methods: {
         sendSummorid: function () {
-            ipcRenderer.send('makesummnor', this.test);
+            ipcRenderer.send('make-summnor', this.test);
+        },
+        getGame: function () {
+            ipcRenderer.once('ana-near', (event, arg) => {
+                console.log(arg);
+            })
+            ipcRenderer.send('get-game');
         }
     }
 })
+ipcRenderer.on('send-error', (event, arg) => {
+    console.log(arg);
+});

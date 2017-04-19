@@ -15,8 +15,12 @@ const {
     ipcMain
 } = require("electron");
 const path = require('path');
-const funs = require('./upgradee.js').nodefunctions;
+const nodefunctions = require('./upgradee.js').nodefunctions;
 const playstat = require('./upgradee.js').playstat;
+let currentsession = {
+    summoner: '',
+    miao: undefined
+}
 // 创建一个浏览器窗口，主要用来加载HTML页面
 // const Tray = electron.Tray;
 // const path = electron.path;
@@ -71,6 +75,21 @@ app.on("activate", function () {
     }
 });
 
-ipcMain.once('makesummnor', (event, arg) => {
-    console.log(arg);
+ipcMain.once('make-summnor', (event, arg) => {
+    currentsession.summonerid = arg;
+    nodefunctions.getSummonerId(arg, (data, id) => {
+        currentsession.miao = new playstat(data.id, id);
+        currentsession.miao.getCurrent(data => {
+            event.sender.send('ana-near', miao.analysisNear());
+        }, error => {
+            event.sender.send('send-error', error);
+        })
+    })
+    ipcMain.on('get-game', (event, arg) => {
+        currentsession.miao.getCurrent(data => {
+            event.sender.send('ana-near', miao.analysisNear());
+        }, error => {
+            event.sender.send('send-error', error);
+        })
+    })
 });
