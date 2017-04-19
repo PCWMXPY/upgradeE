@@ -26,8 +26,7 @@ var playstat = (function () {
             data = JSON.parse(data);
             this.near = data;
             fun(data);
-        }
-        else {
+        } else {
             console.log(response.statusCode);
         }
     };
@@ -47,9 +46,18 @@ var playstat = (function () {
     };
     playstat.prototype.analysisNear = function () {
         //mid,bot,top,sup,jungle
-        var people = [[], []];
-        var ids = [[], []];
-        var result = [[], []];
+        var people = [
+            [],
+            []
+        ];
+        var ids = [
+            [],
+            []
+        ];
+        var result = [
+            [],
+            []
+        ];
         var participants = this.near['participants'];
         for (var i = 0; i < participants.length; i++) {
             var champid = participants[i]['championId'];
@@ -61,8 +69,7 @@ var playstat = (function () {
             if (participants[i]['teamId'] == 100) {
                 people[0].push(lane);
                 ids[0].push(champid);
-            }
-            else {
+            } else {
                 people[1].push(lane);
                 ids[1].push(champid);
             }
@@ -128,14 +135,13 @@ exports.nodefunctions = {
                 data = JSON.parse(data);
                 _this.near = data;
                 fun(data, id);
-            }
-            else {
+            } else {
                 console.log(response.statusCode);
             }
         });
     }
 };
-exports.nodefunctions.getSummonerId('kikikiyomi', function (data, id) {
+exports.nodefunctions.getSummonerId('ezlife13', function (data, id) {
     var miao = new playstat(data.id, id);
     miao.getCurrent(function (data) {
         console.log(miao.analysisNear());
@@ -144,4 +150,4 @@ exports.nodefunctions.getSummonerId('kikikiyomi', function (data, id) {
 // var miao = new playstat(123);
 // miao.setNear(testjson);
 // nodefunctions.terminal(miao.analysisNear());
-// module.exports = { nodefunctions, playstat }; 
+// module.exports = { nodefunctions, playstat };
