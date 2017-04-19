@@ -294,6 +294,10 @@ var preference = {
                 return [5, 1, 2, 3, 4];
             case 432:
                 return [2, 4, 3, 1, 5];
+            case 497:
+                return [2, 4, 3, 1, 5];
+            case 498:
+                return [3, 1, 3, 5, 5];
             default:
                 return id;
         }
@@ -566,6 +570,10 @@ var preference = {
                 return "Lissandra";
             case 429:
                 return "Kalista";
+            case 497:
+                return "Rakan";
+            case 498:
+                return "Xayah";
             case 266:
                 return "Aatrox";
             default:

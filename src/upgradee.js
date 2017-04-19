@@ -26,8 +26,7 @@ var playstat = (function () {
             data = JSON.parse(data);
             this.near = data;
             fun(data);
-        }
-        else {
+        } else {
             err(response.statusCode);
             console.log(response.statusCode);
         }
@@ -48,9 +47,18 @@ var playstat = (function () {
     };
     playstat.prototype.analysisNear = function () {
         //mid,bot,top,sup,jungle
-        var people = [[], []];
-        var ids = [[], []];
-        var result = [[], []];
+        var people = [
+            [],
+            []
+        ];
+        var ids = [
+            [],
+            []
+        ];
+        var result = [
+            [],
+            []
+        ];
         var participants = this.near['participants'];
         for (var i = 0; i < participants.length; i++) {
             var champid = participants[i]['championId'];
@@ -62,8 +70,7 @@ var playstat = (function () {
             if (participants[i]['teamId'] == 100) {
                 people[0].push(lane);
                 ids[0].push(champid);
-            }
-            else {
+            } else {
                 people[1].push(lane);
                 ids[1].push(champid);
             }
@@ -129,9 +136,8 @@ exports.nodefunctions = {
                 data = JSON.parse(data);
                 _this.near = data;
                 fun(data, id);
-                console.log(id);
-            }
-            else {
+                console.log('from-getSummonerId:' + id);
+            } else {
                 console.log(response.statusCode);
             }
         });
@@ -146,4 +152,7 @@ exports.nodefunctions = {
 // var miao = new playstat(123);
 // miao.setNear(testjson);
 // nodefunctions.terminal(miao.analysisNear());
-module.exports = { nodefunctions: exports.nodefunctions, playstat: playstat };
+module.exports = {
+    nodefunctions: exports.nodefunctions,
+    playstat: playstat
+};

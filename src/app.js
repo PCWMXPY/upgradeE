@@ -30,7 +30,6 @@ let mainWindow;
 //定义一个创建浏览器窗口的方法
 
 var iconPath = path.resolve(__dirname, '..', 'css', 'favicon.ico');
-console.log(iconPath);
 
 function createWindow() {
     // 创建一个浏览器窗口对象，并指定窗口的大小
@@ -75,19 +74,21 @@ app.on("activate", function () {
     }
 });
 
-ipcMain.once('make-summnor', (event, arg) => {
+ipcMain.on('make-summnor', (event, arg) => {
+    console.log(arg);
     currentsession.summonerid = arg;
     nodefunctions.getSummonerId(arg, (data, id) => {
         currentsession.miao = new playstat(data.id, id);
+        console.log(currentsession.miao);
         currentsession.miao.getCurrent(data => {
-            event.sender.send('ana-near', miao.analysisNear());
+            event.sender.send('ana-near', currentsession.miao.analysisNear());
         }, error => {
             event.sender.send('send-error', error);
         })
     })
     ipcMain.on('get-game', (event, arg) => {
         currentsession.miao.getCurrent(data => {
-            event.sender.send('ana-near', miao.analysisNear());
+            event.sender.send('ana-near', currentsession.miao.analysisNear());
         }, error => {
             event.sender.send('send-error', error);
         })
