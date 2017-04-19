@@ -25,8 +25,10 @@ function createWindow() {
     // 1024×768 合理的窗口大小
     mainWindow = new BrowserWindow({
         width: 1024,
-        height: 768
+        height: 768,
+        icon: '../css/favicon.ico'
     });
+    mainWindow.setMenu(null);
 
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
     // 同时也可以简化成：mainWindow.loadURL('./index.html');

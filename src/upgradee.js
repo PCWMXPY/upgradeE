@@ -141,12 +141,12 @@ exports.nodefunctions = {
         });
     }
 };
-exports.nodefunctions.getSummonerId('ezlife13', function (data, id) {
-    var miao = new playstat(data.id, id);
-    miao.getCurrent(function (data) {
-        console.log(miao.analysisNear());
-    });
-});
+// exports.nodefunctions.getSummonerId('ezlife13', function (data, id) {
+//     var miao = new playstat(data.id, id);
+//     miao.getCurrent(function (data) {
+//         console.log(miao.analysisNear());
+//     });
+// });
 // var miao = new playstat(123);
 // miao.setNear(testjson);
 // nodefunctions.terminal(miao.analysisNear());
