@@ -1,5 +1,6 @@
 {
   "name": "upgradee",
+  "icon": "./css/favicon.ico",
   "version": "0.2.1",
   "description": "Strong like tiger if upgradeE",
   "main": "./src/app.js",
