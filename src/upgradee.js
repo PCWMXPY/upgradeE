@@ -11,8 +11,9 @@ var perference = require('./preference.js');
 var testjson = require('./test.js');
 var api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
 var playstat = (function () {
-    function playstat(id) {
+    function playstat(id, name) {
         this.id = id + '';
+        this.name = name;
     }
     playstat.prototype.getNear = function () {
         return this.near;
@@ -76,7 +77,38 @@ var playstat = (function () {
                 people[i][exports.nodefunctions.smallest(ar)] = [6, 6, 6, 6, 2.5];
             }
         }
-        return result;
+        var temp = [];
+        var pointer = '';
+        for (var i = 0; i < participants.length; i++) {
+            if (participants[i].summonerName.replace(/\s+/g, "").toLowerCase() == this.name) {
+                temp.push(participants[i]);
+                i = 10;
+                // pointer = 
+            }
+        }
+        var ourTeamId = temp[0].teamId;
+        var oppoTeamId = (ourTeamId == 100) ? 200 : 100;
+        var ourResultcount = (ourTeamId == 100) ? 0 : 1;
+        var TheirResultcount = (ourTeamId == 100) ? 1 : 0;
+        var theirChampName = '';
+        for (var i = 0; i < result[ourResultcount].length; i++) {
+            console.log(perference.getChampName(temp[0].championId));
+            if (perference.getChampName(temp[0].championId) == result[ourResultcount][i]) {
+                theirChampName = result[TheirResultcount][i];
+                i = 10;
+            }
+        }
+        console.log(theirChampName);
+        for (var i = 0; i < participants.length; i++) {
+            if (participants[i].teamId == oppoTeamId) {
+                if (perference.getChampName(participants[i].championId) == theirChampName) {
+                    temp.push(participants[i]);
+                    i = 10;
+                }
+            }
+        }
+        var real = [result, temp];
+        return real;
     };
     return playstat;
 }());
@@ -99,7 +131,7 @@ exports.nodefunctions = {
             if (!error && response.statusCode == 200) {
                 data = JSON.parse(data);
                 _this.near = data;
-                fun(data);
+                fun(data, id);
             }
             else {
                 console.log(response.statusCode);
@@ -107,13 +139,13 @@ exports.nodefunctions = {
         });
     }
 };
-// nodefunctions.getSummonerId('bigfatlp', (data) => {
-//     var miao = new playstat(data.id);
-//     miao.getCurrent(data => {
-//         perference.terminal(miao.analysisNear());
-//     })
-// })
+exports.nodefunctions.getSummonerId('ezlife13', function (data, id) {
+    var miao = new playstat(data.id, id);
+    miao.getCurrent(function (data) {
+        console.log(miao.analysisNear());
+    });
+});
 // var miao = new playstat(123);
 // miao.setNear(testjson);
 // nodefunctions.terminal(miao.analysisNear());
-module.exports = { nodefunctions: exports.nodefunctions, playstat: playstat };
+// module.exports = { nodefunctions, playstat }; 

@@ -16,9 +16,11 @@ let testjson = require('./test.js');
 const api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
 export class playstat {
     private id: string;
+    private name: string;
     private near: object;
-    constructor(id: number) {
+    constructor(id: number, name: string) {
         this.id = id + '';
+        this.name = name;
     }
     getNear() {
         return this.near;
@@ -78,7 +80,34 @@ export class playstat {
                 people[i][nodefunctions.smallest(ar)] = [6, 6, 6, 6, 2.5];
             }
         }
-        return result;
+        let temp = [];
+        for (let i = 0; i < participants.length; i++) {
+            if (participants[i].summonerName.replace(/\s+/g, "").toLowerCase() == this.name) {
+                temp.push(participants[i]);
+                i = 10;
+            }
+        }
+        const ourTeamId = temp[0].teamId;
+        const oppoTeamId = (ourTeamId == 100) ? 200 : 100;
+        const ourResultcount = (ourTeamId == 100) ? 0 : 1;
+        const TheirResultcount = (ourTeamId == 100) ? 1 : 0;
+        let theirChampName = '';
+        for (let i = 0; i < result[ourResultcount].length; i++) {
+            if (perference.getChampName(temp[0].championId) == result[ourResultcount][i]) {
+                theirChampName = result[TheirResultcount][i];
+                i = 10;
+            }
+        }
+        for (let i = 0; i < participants.length; i++) {
+            if (participants[i].teamId == oppoTeamId) {
+                if (perference.getChampName(participants[i].championId) == theirChampName) {
+                    temp.push(participants[i]);
+                    i = 10;
+                }
+            }
+        }
+        let real = [result, temp];
+        return real;
     }
 }
 export const nodefunctions = {
@@ -99,7 +128,7 @@ export const nodefunctions = {
             if (!error && response.statusCode == 200) {
                 data = JSON.parse(data);
                 this.near = data;
-                fun(data);
+                fun(data, id);
             } else {
                 console.log(response.statusCode);
             }
@@ -107,13 +136,13 @@ export const nodefunctions = {
     }
 }
 
-// nodefunctions.getSummonerId('bigfatlp', (data) => {
-//     var miao = new playstat(data.id);
-//     miao.getCurrent(data => {
-//         perference.terminal(miao.analysisNear());
-//     })
-// })
+nodefunctions.getSummonerId('ezlife13', (data, id) => {
+    var miao = new playstat(data.id, id);
+    miao.getCurrent(data => {
+        console.log(miao.analysisNear());
+    })
+})
 // var miao = new playstat(123);
 // miao.setNear(testjson);
 // nodefunctions.terminal(miao.analysisNear());
-module.exports = { nodefunctions, playstat };
+// module.exports = { nodefunctions, playstat };
