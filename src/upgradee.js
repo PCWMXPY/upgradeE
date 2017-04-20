@@ -7,9 +7,6 @@ exports.__esModule = true;
 var request = require('request');
 var storage = require('electron-json-storage');
 var perference = require('./preference.js');
-// var exec = require('child_process').exec;
-// var cmdStr = 'curl http://www.weather.com.cn/data/sk/101010100.html';
-// const testjson = require('./test.js');
 var api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
 var playstat = (function () {
     function playstat(id, name) {
@@ -48,7 +45,6 @@ var playstat = (function () {
         });
     };
     playstat.prototype.analysisNear = function () {
-        //mid,bot,top,sup,jungle
         var people = [[], []];
         var ids = [[], []];
         var result = [[], []];
@@ -138,13 +134,4 @@ exports.nodefunctions = {
         });
     }
 };
-// nodefunctions.getSummonerId('kikikiyomi', (data, id) => {
-//     var miao = new playstat(data.id, id);
-//     miao.getCurrent(data => {
-//         console.log(miao.analysisNear());
-//     })
-// })
-// var miao = new playstat(123);
-// miao.setNear(testjson);
-// nodefunctions.terminal(miao.analysisNear());
 module.exports = { nodefunctions: exports.nodefunctions, playstat: playstat };

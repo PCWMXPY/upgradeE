@@ -18,6 +18,7 @@ const {
     shell
 } = require("electron");
 const path = require('path');
+const storage = require('electron-json-storage');
 // const c = require('child_process');
 const nodefunctions = require('./upgradee.js').nodefunctions;
 const playstat = require('./upgradee.js').playstat;
@@ -31,7 +32,7 @@ global.sharedObject = {
 let template = [{
     label: 'Summoner',
     submenu: [{
-            label: 'Search Summoner',
+            label: 'Re-Announce Summoner',
             accelerator: 'CmdOrCtrl+Shift+S',
             click: (item, focusedWindow) => {
                 if (focusedWindow)
@@ -150,11 +151,14 @@ app.on("activate", function () {
 });
 
 ipcMain.once('make-summnor', (event, arg) => {
-    console.log(arg);
     currentsession.summonerid = arg;
+    storage.set('summorid', {
+        id: arg
+    }, function (error) {
+        if (error) throw error;
+    });
     nodefunctions.getSummonerId(arg, (data, id) => {
         currentsession.miao = new playstat(data.id, id);
-        console.log(currentsession.miao);
         currentsession.miao.getCurrent(data => {
             event.sender.send('ana-near', currentsession.miao.analysisNear());
         }, error => {

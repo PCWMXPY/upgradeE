@@ -28,14 +28,24 @@ Vue.component('re-credit', {
     template: '<div><p style="color:#565656"><i class="fa fa-code"></i> Review.md with <i class="fa fa-heart"></i> by WMXPY@<a href="http://mengw.io">mengw.io</a> 2016</p></div>'
 });
 const Prefsystem = {
+    preLoad: (notexist: Function, exist: Function) => {
+        storage.get('summorid', function (error, data) {
+            if (error) throw error;
+            if (data.id == null) {
+                notexist();
+            } else {
+                exist(data);
+            }
+        });
+    },
     readPref: () => {
-        storage.get('foobar', function (error, data) {
+        storage.get('summorid', function (error, data) {
             if (error) throw error;
             console.log(data);
         });
     },
-    writePref: () => {
-        storage.set('foobar', { foo: 'bar' }, function (error) {
+    writePref: (ids: string) => {
+        storage.set('summorid', { id: ids }, function (error) {
             if (error) throw error;
         });
     },
@@ -46,6 +56,11 @@ const Prefsystem = {
             for (var key of keys) {
                 console.log('There is a key called: ' + key);
             }
+        });
+    },
+    reMovePref: () => {
+        storage.clear('summorid', function (error) {
+            if (error) throw error;
         });
     },
     clearPref: () => {

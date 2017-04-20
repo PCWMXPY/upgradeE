@@ -18,9 +18,19 @@ let main = new Vue({
     el: '#main',
     data: {
         test: '',
-        display: cdisplay.cn
+        display: cdisplay.cn,
+        newuser: false
     },
     methods: {
+        preGet: function () {
+            Prefsystem.preLoad(() => {
+                //not exist
+                this.newuser = true;
+            }, (data) => {
+                //exist
+                console.log(data);
+            });
+        },
         sendSummorid: function () {
             ipcRenderer.once('ana-near', (event, arg) => {
                 console.log(arg);

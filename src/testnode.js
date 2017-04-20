@@ -1,2 +1,4 @@
-var a = require('./upgradee.js').nodefunctions;
-console.log(a);
+a = {
+    a: 1
+}
+console.log(a.a == null);
