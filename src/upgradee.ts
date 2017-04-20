@@ -7,11 +7,12 @@
  */
 declare function require(name: string);
 declare var module: any;
-let request = require('request');
-let perference = require('./preference.js');
+const request = require('request');
+const fs = require('fs');
+const perference = require('./preference.js');
 // var exec = require('child_process').exec;
 // var cmdStr = 'curl http://www.weather.com.cn/data/sk/101010100.html';
-let testjson = require('./test.js');
+// const testjson = require('./test.js');
 
 const api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
 export class playstat {
@@ -122,6 +123,15 @@ export const nodefunctions = {
             }
         }
         return pointer;
+    },
+    readPref: () => {
+
+    },
+    writePref: () => {
+
+    },
+    createPref: () => {
+
     },
     getSummonerId: (id: string, fun: Function) => {
         const url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;

@@ -24,6 +24,7 @@
   "dependencies": {
     "blur-js": "^1.0.0",
     "caperjs": "^0.3.15",
+    "electron-json-storage": "^3.0.5",
     "request": "2.81.0"
   }
 }

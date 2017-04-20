@@ -27,7 +27,27 @@ const icons = {
 }
 let template = [{
     label: 'Summoner',
-    submenu: []
+    submenu: [{
+            label: 'Search Summoner',
+            accelerator: 'CmdOrCtrl+Shift+S',
+            click: (item, focusedWindow) => {
+                if (focusedWindow)
+                    focusedWindow.reload();
+            }
+        },
+        {
+            label: 'Preferences',
+            role: 'preferences',
+            accelerator: 'CmdOrCtrl+,',
+            click: (item, focusedWindow) => {}
+        }, {
+            label: 'Quit',
+            accelerator: 'CmdOrCtrl+Q',
+            click: function () {
+                app.quit();
+            }
+        }
+    ]
 }, {
     label: 'Window',
     role: 'window',
@@ -86,6 +106,7 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 1024,
         height: 768,
+        // backgroundColor: '#fff',
         icon: icons.favicon
     });
     // let win = new BrowserWindow({
