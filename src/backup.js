@@ -25,13 +25,12 @@ const playstat = require('./upgradee.js').playstat;
 const icons = {
     favicon: path.resolve(__dirname, '..', 'css', 'favicon.ico'),
     mengwio: path.resolve(__dirname, '..', 'css', 'mengw.ico')
+}
+global.sharedObject = {
+    test: 'test'
 };
 let renders = {
     mainpage: null
-};
-global.miao = {
-    id: null,
-    miao: null
 };
 let template = [{
     label: 'Summoner',
@@ -42,6 +41,7 @@ let template = [{
                 storage.remove('summorid', function (error) {
                     if (error) throw error;
                 });
+                makesummnor();
                 renders.mainpage.sender.send('cover-message', 'RAS');
             }
         }, {
@@ -103,6 +103,10 @@ let template = [{
         }
     }]
 }];
+let currentsession = {
+    summoner: '',
+    miao: undefined
+};
 // 创建一个浏览器窗口，主要用来加载HTML页面
 // --- 窗口 ---
 // 声明一个BrowserWindow对象实例
@@ -117,6 +121,7 @@ function createWindow() {
         height: 768,
         icon: icons.favicon
     });
+    makesummnor();
     var menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
@@ -152,3 +157,29 @@ ipcMain.on('register', (event, arg) => {
     renders[arg] = event;
     console.log('From Event-Register<-app.js: ' + arg);
 });
+const makesummnor = function () {
+    ipcMain.removeAllListeners('get-game');
+    ipcMain.removeAllListeners('make-summnor');
+    ipcMain.once('make-summnor', (event, arg) => {
+        currentsession.summonerid = arg;
+        console.log('From makesummnor<-app.js: ' + arg);
+        storage.set('summorid', {
+            id: arg
+        }, function (error) {
+            if (error) throw error;
+        });
+        nodefunctions.getSummonerId(arg, (data, id) => {
+            currentsession.miao = new playstat(data.id, id);
+        }, error => {
+            event.sender.send('send-error', error);
+        })
+        ipcMain.on('get-game', (event, arg) => {
+            console.log('From Event-get-game<-app.js: ' + 'get-game');
+            currentsession.miao.getCurrent(data => {
+                event.sender.send('ana-near', currentsession.miao.analysisNear());
+            }, error => {
+                event.sender.send('send-error', error);
+            })
+        })
+    });
+}

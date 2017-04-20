@@ -10,7 +10,9 @@ declare var rewave: any;
 declare function require(name: string);
 const storage = require('electron-json-storage');
 const { remote } = require('electron');
-// remote.getGlobal('sharedObject').test = 'new value';
+const nfun = require('../../src/upgradee.js')
+    .nodefunctions;
+const playstat = require('../../src/upgradee.js').playstat;
 Vue.component('re-wave', {
     data: function () {
         return {
@@ -67,5 +69,26 @@ const Prefsystem = {
         storage.clear(function (error) {
             if (error) throw error;
         });
+    }
+}
+const riotapi = {
+    //remote.getGlobal('miao').id = 'new value';
+    make: (id: any, fun: Function) => {
+        remote.getGlobal('miao').id = 'id';
+        Prefsystem.writePref(id);
+        nfun.getSummonerId(id, (data, name) => {
+            remote.getGlobal('miao').miao = new playstat(data.id, name);
+            fun();
+        }, error => {
+            console.log(error);
+        });
+    },
+    find: (fun: Function) => {
+        remote.getGlobal('miao').miao.getCurrent(data => {
+            console.log(remote.getGlobal('miao').miao.analysisNear());
+            fun(data);
+        }, error => {
+            console.log(error);
+        })
     }
 }

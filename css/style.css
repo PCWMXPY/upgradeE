@@ -7,6 +7,11 @@
     margin-top: 25px;
 }
 
+.vs {
+    color: red;
+    font-size: 30px;
+}
+
 .large-font {
     font-size: 550%;
     white-space: none;
@@ -16,6 +21,10 @@
     font-size: 0;
     white-space: none;
     /*font*/
+}
+
+.ue-img {
+    width: 200px;
 }
 
 .no-font span {
@@ -37,10 +46,24 @@ input {
     height: 40px;
 }
 
+.top-img {
+    width: 65px;
+    border-radius: 10px;
+}
+
+.top-center {
+    text-align: center;
+    padding: 10px;
+}
+
 div .center {
     text-align: center;
     padding: 10px;
     margin-top: 23%;
+}
+
+div .counter {
+    font-size: 50px;
 }
 
 div .lower {

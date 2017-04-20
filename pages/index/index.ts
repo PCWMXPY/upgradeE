@@ -8,6 +8,7 @@
 declare var Vue: any;
 declare function require(name: string);
 const ipcRenderer = require('electron').ipcRenderer;
+const pref = require('../../src/preference.js');
 const cdisplay = {
     cn: {
         input: 'upgrad',
@@ -22,17 +23,19 @@ let main = new Vue({
         test: '',
         display: cdisplay.cn,
         button: false,
-        newuser: false
+        newuser: 1,
+        mypng: '../../css/favicon.ico',
+        oppopng: '../../css/favicon.ico'
     },
     methods: {
         preGet: function () {
             Prefsystem.preLoad(() => {
                 //not exist
-                this.newuser = true;
+                this.newuser = 0;
             }, (data) => {
                 //exist
-                this.newuser = false;
-                ipcRenderer.send('make-summnor', data);
+                this.newuser = 1;
+                riotapi.make(data, () => { });
                 console.log(data);
             });
         },
@@ -49,20 +52,18 @@ let main = new Vue({
         },
         sendSummorid: function () {
             this.button = true;
-            ipcRenderer.once('ana-near', (event, arg) => {
+            riotapi.make(this.test, () => {
                 main.preGet();
-                console.log(arg);
-            })
-            ipcRenderer.send('make-summnor', this.test);
+            });
         },
         getGame: function () {
-            ipcRenderer.once('ana-near', (event, arg) => {
-                console.log(arg);
-            })
-            ipcRenderer.send('get-game');
+            riotapi.find((data) => {
+                if (data != 404) {
+                    main.newuser = 2;
+                    main.mypng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][0].championId) + '.png';
+                    main.oppopng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][1].championId) + '.png';
+                }
+            });
         }
     }
 })
-ipcRenderer.on('send-error', (event, arg) => {
-    console.log(arg);
-});

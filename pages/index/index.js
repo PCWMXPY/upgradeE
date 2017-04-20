@@ -2,8 +2,11 @@
     'use strict';
 }());
 var ipcRenderer = require('electron').ipcRenderer;
+var pref = require('../../src/preference.js');
 var cdisplay = {
     cn: {
+        input: 'upgrad',
+        input2: 'eE',
         submit: 'SUBMIT',
         youare: 'You\'re?..'
     }
@@ -14,16 +17,18 @@ var main = new Vue({
         test: '',
         display: cdisplay.cn,
         button: false,
-        newuser: false
+        newuser: 1,
+        mypng: '../../css/favicon.ico',
+        oppopng: '../../css/favicon.ico'
     },
     methods: {
         preGet: function () {
             var _this = this;
             Prefsystem.preLoad(function () {
-                _this.newuser = true;
+                _this.newuser = 0;
             }, function (data) {
-                _this.newuser = false;
-                ipcRenderer.send('make-summnor', data);
+                _this.newuser = 1;
+                riotapi.make(data, function () { });
                 console.log(data);
             });
         },
@@ -40,20 +45,18 @@ var main = new Vue({
         },
         sendSummorid: function () {
             this.button = true;
-            ipcRenderer.once('ana-near', function (event, arg) {
+            riotapi.make(this.test, function () {
                 main.preGet();
-                console.log(arg);
             });
-            ipcRenderer.send('make-summnor', this.test);
         },
         getGame: function () {
-            ipcRenderer.once('ana-near', function (event, arg) {
-                console.log(arg);
+            riotapi.find(function (data) {
+                if (data != 404) {
+                    main.newuser = 2;
+                    main.mypng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][0].championId) + '.png';
+                    main.oppopng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][1].championId) + '.png';
+                }
             });
-            ipcRenderer.send('get-game');
         }
     }
-});
-ipcRenderer.on('send-error', function (event, arg) {
-    console.log(arg);
 });

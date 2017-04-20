@@ -3,6 +3,9 @@
 }());
 var storage = require('electron-json-storage');
 var remote = require('electron').remote;
+var nfun = require('../../src/upgradee.js')
+    .nodefunctions;
+var playstat = require('../../src/upgradee.js').playstat;
 Vue.component('re-wave', {
     data: function () {
         return {
@@ -26,8 +29,7 @@ var Prefsystem = {
                 throw error;
             if (data.id == null) {
                 notexist();
-            }
-            else {
+            } else {
                 exist(data.id);
             }
         });
@@ -40,7 +42,9 @@ var Prefsystem = {
         });
     },
     writePref: function (ids) {
-        storage.set('summorid', { id: ids }, function (error) {
+        storage.set('summorid', {
+            id: ids
+        }, function (error) {
             if (error)
                 throw error;
         });
@@ -65,6 +69,26 @@ var Prefsystem = {
         storage.clear(function (error) {
             if (error)
                 throw error;
+        });
+    }
+};
+var riotapi = {
+    make: function (id, fun) {
+        remote.getGlobal('miao').id = 'id';
+        Prefsystem.writePref(id);
+        nfun.getSummonerId(id, function (data, name) {
+            remote.getGlobal('miao').miao = new playstat(data.id, name);
+            fun();
+        }, function (error) {
+            console.log(error);
+        });
+    },
+    find: function (fun) {
+        remote.getGlobal('miao').miao.getCurrent(function (data) {
+            console.log(remote.getGlobal('miao').miao.analysisNear());
+            fun(data);
+        }, function (error) {
+            console.log(error);
         });
     }
 };
