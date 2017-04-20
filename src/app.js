@@ -31,7 +31,8 @@ let renders = {
 };
 global.miao = {
     id: null,
-    miao: null
+    miao: null,
+    near: null
 };
 let template = [{
     label: 'Summoner',
@@ -125,7 +126,6 @@ function createWindow() {
     mainWindow.openDevTools();
     // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
     mainWindow.on("closed", function () {
-        currentsession.miao = null;
         renders.mainpage = null;
         mainWindow = null;
     });

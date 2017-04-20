@@ -35,8 +35,7 @@ let main = new Vue({
             }, (data) => {
                 //exist
                 this.newuser = 1;
-                riotapi.make(data, () => { });
-                console.log(data);
+                console.log('Index.ts Preget ->: ' + data);
             });
         },
         register: function () {

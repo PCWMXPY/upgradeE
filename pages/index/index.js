@@ -28,8 +28,7 @@ var main = new Vue({
                 _this.newuser = 0;
             }, function (data) {
                 _this.newuser = 1;
-                riotapi.make(data, function () { });
-                console.log(data);
+                console.log('Index.ts Preget ->: ' + data);
             });
         },
         register: function () {

@@ -29,7 +29,8 @@ var Prefsystem = {
                 throw error;
             if (data.id == null) {
                 notexist();
-            } else {
+            }
+            else {
                 exist(data.id);
             }
         });
@@ -42,9 +43,7 @@ var Prefsystem = {
         });
     },
     writePref: function (ids) {
-        storage.set('summorid', {
-            id: ids
-        }, function (error) {
+        storage.set('summorid', { id: ids }, function (error) {
             if (error)
                 throw error;
         });
@@ -74,19 +73,20 @@ var Prefsystem = {
 };
 var riotapi = {
     make: function (id, fun) {
-        remote.getGlobal('miao').id = 'id';
+        remote.getGlobal('miao').miao = id;
         Prefsystem.writePref(id);
         nfun.getSummonerId(id, function (data, name) {
-            remote.getGlobal('miao').miao = new playstat(data.id, name);
+            remote.getGlobal('miao').id = data.id;
             fun();
         }, function (error) {
             console.log(error);
         });
     },
     find: function (fun) {
-        remote.getGlobal('miao').miao.getCurrent(function (data) {
-            console.log(remote.getGlobal('miao').miao.analysisNear());
-            fun(data);
+        nfun.getCurrent(remote.getGlobal('miao').id, function (data) {
+            remote.getGlobal('miao').near = nfun.analysisNear(data, remote.getGlobal('miao').miao);
+            fun(remote.getGlobal('miao').near);
+            console.log(remote.getGlobal('miao').near);
         }, function (error) {
             console.log(error);
         });

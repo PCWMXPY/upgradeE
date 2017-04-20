@@ -74,21 +74,23 @@ const Prefsystem = {
 const riotapi = {
     //remote.getGlobal('miao').id = 'new value';
     make: (id: any, fun: Function) => {
-        remote.getGlobal('miao').id = 'id';
+        remote.getGlobal('miao').miao = id;
         Prefsystem.writePref(id);
         nfun.getSummonerId(id, (data, name) => {
-            remote.getGlobal('miao').miao = new playstat(data.id, name);
+            remote.getGlobal('miao').id = data.id;
             fun();
         }, error => {
             console.log(error);
         });
     },
     find: (fun: Function) => {
-        remote.getGlobal('miao').miao.getCurrent(data => {
-            console.log(remote.getGlobal('miao').miao.analysisNear());
-            fun(data);
+        nfun.getCurrent(remote.getGlobal('miao').id, data => {
+            remote.getGlobal('miao').near = nfun.analysisNear(data, remote.getGlobal('miao').miao);
+            fun(remote.getGlobal('miao').near);
+            console.log(remote.getGlobal('miao').near);
         }, error => {
             console.log(error);
         })
+
     }
 }

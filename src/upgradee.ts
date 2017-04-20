@@ -29,34 +29,67 @@ export class playstat {
     setNear(near: object) {
         this.near = near;
     }
-    returnJson(error, response, data, fun: Function, err: Function) {
+    getRecent(fun: Function, err: Function) {
+        const url = 'https://na.api.riotgames.com/api/lol/NA/v1.3/game/by-summoner/' + this.id + '/recent?api_key=' + api_key;
+        request(url, (error, response, data: string) => {
+            // this.returnJson(error, response, data, fun, err);
+        })
+    }
+
+}
+export const nodefunctions = {
+    returnJson: (error, response, data, fun: Function, err: Function) => {
         if (!error && response.statusCode == 200) {
             data = JSON.parse(data);
-            this.near = data;
             fun(data);
         } else {
             err(response.statusCode);
             console.log(response.statusCode);
         }
-    }
-    getCurrent(fun: Function, err: Function) {
-        const url = 'https://na.api.riotgames.com/observer-mode/rest/consumer/getSpectatorGameInfo/NA1/' + this.id + '?api_key=' + api_key;
+    },
+    getCurrent: (id: number, fun: Function, err: Function) => {
+        const url = 'https://na.api.riotgames.com/observer-mode/rest/consumer/getSpectatorGameInfo/NA1/' + id + '?api_key=' + api_key;
         request(url, (error, response, data: string) => {
-            this.returnJson(error, response, data, fun, err);
+            if (!error && response.statusCode == 200) {
+                data = JSON.parse(data);
+                fun(data);
+            } else {
+                err(response.statusCode);
+                console.log(response.statusCode);
+            }
         })
-    }
-    getRecent(fun: Function, err: Function) {
-        const url = 'https://na.api.riotgames.com/api/lol/NA/v1.3/game/by-summoner/' + this.id + '/recent?api_key=' + api_key;
+    },
+    smallest: (array) => {
+        let smalllest = array[0];
+        let pointer = 0;
+        for (let i = 1; i < array.length; i++) {
+            if (array[i] < smalllest) {
+                smalllest = array[i];
+                pointer = i;
+            }
+        }
+        return pointer;
+    },
+    getSummonerId: (id: string, fun: Function, error: Function) => {
+        const url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
         request(url, (error, response, data: string) => {
-            this.returnJson(error, response, data, fun, err);
+            if (!error && response.statusCode == 200) {
+                data = JSON.parse(data);
+                this.near = data;
+                fun(data, id);
+                console.log('From GetSummonerId<-Upgradee.ts: ' + id);
+            } else {
+                error(response.statusCode);
+                console.log('From GetSummonerId<-Upgradee.ts: ' + response.statusCode);
+            }
         })
-    }
-    analysisNear() {
+    },
+    analysisNear: (near, miao) => {
         //mid,bot,top,sup,jungle
         let people = [[], []];
         let ids = [[], []];
         let result = [[], []];
-        let participants = this.near['participants'];
+        let participants = near['participants'];
         for (let i = 0; i < participants.length; i++) {
             let champid = participants[i]['championId'];
             let summorskill = [participants[i]['spell1Id'], participants[i]['spell2Id']];
@@ -84,7 +117,7 @@ export class playstat {
         }
         let temp = [];
         for (let i = 0; i < participants.length; i++) {
-            if (participants[i].summonerName.replace(/\s+/g, "").toLowerCase() == this.name) {
+            if (participants[i].summonerName.replace(/\s+/g, "").toLowerCase() == miao) {
                 temp.push(participants[i]);
                 i = 10;
             }
@@ -111,42 +144,6 @@ export class playstat {
         let real = [result, temp];
         return real;
     }
-}
-export const nodefunctions = {
-    smallest: (array) => {
-        let smalllest = array[0];
-        let pointer = 0;
-        for (let i = 1; i < array.length; i++) {
-            if (array[i] < smalllest) {
-                smalllest = array[i];
-                pointer = i;
-            }
-        }
-        return pointer;
-    },
-    getSummonerId: (id: string, fun: Function, error: Function) => {
-        const url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
-        request(url, (error, response, data: string) => {
-            if (!error && response.statusCode == 200) {
-                data = JSON.parse(data);
-                this.near = data;
-                fun(data, id);
-                console.log('From GetSummonerId<-Upgradee.ts: ' + id);
-            } else {
-                error(response.statusCode);
-                console.log('From GetSummonerId<-Upgradee.ts: ' + response.statusCode);
-            }
-        })
-    }
-}
 
-// nodefunctions.getSummonerId('kikikiyomi', (data, id) => {
-//     var miao = new playstat(data.id, id);
-//     miao.getCurrent(data => {
-//         console.log(miao.analysisNear());
-//     })
-// })
-// var miao = new playstat(123);
-// miao.setNear(testjson);
-// nodefunctions.terminal(miao.analysisNear());
+}
 module.exports = { nodefunctions, playstat };
