@@ -12,15 +12,57 @@ const {
     electron,
     BrowserWindow,
     app,
-    ipcMain
+    ipcMain,
+    Menu
 } = require("electron");
 const path = require('path');
+const c = require('child_process')
 const nodefunctions = require('./upgradee.js').nodefunctions;
 const playstat = require('./upgradee.js').playstat;
+const iconPath = path.resolve(__dirname, '..', 'css', 'favicon.ico');
+const template = [{
+    label: 'Commands',
+    submenu: [{
+        label: 'Reload',
+        accelerator: 'CmdOrCtrl+R',
+        click: (item, focusedWindow) => {
+            if (focusedWindow)
+                focusedWindow.reload();
+        }
+    }]
+}, {
+    label: 'Window',
+    role: 'window',
+    submenu: [{
+            label: 'Minimize',
+            accelerator: 'CmdOrCtrl+M',
+            role: 'minimize'
+        },
+        {
+            label: 'Close',
+            accelerator: 'CmdOrCtrl+W',
+            role: 'close'
+        },
+    ]
+}, {
+    label: 'Help',
+    role: 'help',
+    submenu: [{
+        label: 'Github',
+        click: () => {
+            c.exec("start https://github.com/PCWMXPY/upgradeE");
+        }
+    }, {
+        label: 'Mengw.io',
+        click: () => {
+            c.exec("start http://www.mengw.io");
+        }
+    }]
+}];
 let currentsession = {
     summoner: '',
     miao: undefined
-}
+};
 // 创建一个浏览器窗口，主要用来加载HTML页面
 // const Tray = electron.Tray;
 // const path = electron.path;
@@ -28,8 +70,6 @@ let currentsession = {
 // 声明一个BrowserWindow对象实例
 let mainWindow;
 //定义一个创建浏览器窗口的方法
-
-var iconPath = path.resolve(__dirname, '..', 'css', 'favicon.ico');
 
 function createWindow() {
     // 创建一个浏览器窗口对象，并指定窗口的大小
@@ -45,7 +85,8 @@ function createWindow() {
     // trayIcon = new Tray(__dirname + '/../css/icon.ico');
     // console.log(mainWindow.icon);
     // mainWindow.setMenu(null);
-
+    var menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
     // 同时也可以简化成：mainWindow.loadURL('./index.html');
     mainWindow.loadURL('file://' + __dirname + '/../pages/index/index.html');
@@ -74,7 +115,7 @@ app.on("activate", function () {
     }
 });
 
-ipcMain.on('make-summnor', (event, arg) => {
+ipcMain.once('make-summnor', (event, arg) => {
     console.log(arg);
     currentsession.summonerid = arg;
     nodefunctions.getSummonerId(arg, (data, id) => {

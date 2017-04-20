@@ -199,7 +199,7 @@ var preference = {
             case 102:
                 return [3, 4, 2, 5, 1];
             case 103:
-                return [1, 5, 2, 3, 4];
+                return [1, 5, 4, 3, 4];
             case 104:
                 return [4, 3, 2, 5, 1];
             case 105:
@@ -628,10 +628,10 @@ var preference = {
                 break;
                 // return "Dot";
             case 11:
-                lane[0] += 2;
-                lane[1] += 2;
-                lane[3] += 2;
-                lane[4] -= 3.8;
+                lane[0] += 4;
+                lane[1] += 4;
+                lane[2] += 4;
+                lane[4] -= 5;
                 // return "Smite";
             case 12:
                 lane[0] -= 0.6;
@@ -674,6 +674,9 @@ var preference = {
             default:
                 return id;
         }
+    },
+    getRunesWeight: array => {
+
     }
 };
 module.exports = preference;
