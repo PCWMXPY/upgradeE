@@ -1,4 +1,7 @@
 {
+    "compilerOptions": {
+        "removeComments": true,
+    },
     "include": [
         "src/**/*"
     ],
