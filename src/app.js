@@ -13,27 +13,32 @@ const {
     BrowserWindow,
     app,
     ipcMain,
-    Menu
+    Menu,
+    MenuItem,
+    shell
 } = require("electron");
 const path = require('path');
-const c = require('child_process')
+// const c = require('child_process');
 const nodefunctions = require('./upgradee.js').nodefunctions;
 const playstat = require('./upgradee.js').playstat;
-const iconPath = path.resolve(__dirname, '..', 'css', 'favicon.ico');
-const template = [{
-    label: 'Commands',
-    submenu: [{
-        label: 'Reload',
-        accelerator: 'CmdOrCtrl+R',
-        click: (item, focusedWindow) => {
-            if (focusedWindow)
-                focusedWindow.reload();
-        }
-    }]
+const icons = {
+    favicon: path.resolve(__dirname, '..', 'css', 'favicon.ico'),
+    mengwio: path.resolve(__dirname, '..', 'css', 'mengw.ico')
+}
+let template = [{
+    label: 'Summoner',
+    submenu: []
 }, {
     label: 'Window',
     role: 'window',
     submenu: [{
+            label: 'Reload',
+            accelerator: 'CmdOrCtrl+R',
+            click: (item, focusedWindow) => {
+                if (focusedWindow)
+                    focusedWindow.reload();
+            }
+        }, {
             label: 'Minimize',
             accelerator: 'CmdOrCtrl+M',
             role: 'minimize'
@@ -45,17 +50,21 @@ const template = [{
         },
     ]
 }, {
-    label: 'Help',
+    label: 'About',
     role: 'help',
     submenu: [{
         label: 'Github',
+        sublabel: 'Open Github Page',
         click: () => {
-            c.exec("start https://github.com/PCWMXPY/upgradeE");
+            // c.exec("start https://github.com/PCWMXPY/upgradeE");
+            shell.openExternal('https://github.com/PCWMXPY/upgradeE');
         }
     }, {
         label: 'Mengw.io',
+        sublabel: 'Open Mengw.io',
         click: () => {
-            c.exec("start http://www.mengw.io");
+            shell.openExternal('http://www.mengw.io');
+            // c.exec("start http://www.mengw.io");
         }
     }]
 }];
@@ -77,7 +86,7 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 1024,
         height: 768,
-        icon: iconPath
+        icon: icons.favicon
     });
     // let win = new BrowserWindow({
     //     icon: __dirname + '/../css/icon.ico'
