@@ -1,6 +1,9 @@
 (function () {
     'use strict';
 }());
+var storage = require('electron-json-storage');
+var remote = require('electron').remote;
+// remote.getGlobal('sharedObject').test = 'new value';
 Vue.component('re-wave', {
     data: function () {
         return {
@@ -17,3 +20,34 @@ Vue.component('re-wave', {
 Vue.component('re-credit', {
     template: '<div><p style="color:#565656"><i class="fa fa-code"></i> Review.md with <i class="fa fa-heart"></i> by WMXPY@<a href="http://mengw.io">mengw.io</a> 2016</p></div>'
 });
+var Prefsystem = {
+    readPref: function () {
+        storage.get('foobar', function (error, data) {
+            if (error)
+                throw error;
+            console.log(data);
+        });
+    },
+    writePref: function () {
+        storage.set('foobar', { foo: 'bar' }, function (error) {
+            if (error)
+                throw error;
+        });
+    },
+    getKeys: function () {
+        storage.keys(function (error, keys) {
+            if (error)
+                throw error;
+            for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+                var key = keys_1[_i];
+                console.log('There is a key called: ' + key);
+            }
+        });
+    },
+    clearPref: function () {
+        storage.clear(function (error) {
+            if (error)
+                throw error;
+        });
+    }
+};

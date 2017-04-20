@@ -2,7 +2,6 @@
     'use strict';
 }());
 var ipcRenderer = require('electron').ipcRenderer;
-var rewave = [];
 var cdisplay = {
     cn: {
         input: '输入召唤师名称',

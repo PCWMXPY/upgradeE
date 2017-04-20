@@ -25,6 +25,9 @@ const icons = {
     favicon: path.resolve(__dirname, '..', 'css', 'favicon.ico'),
     mengwio: path.resolve(__dirname, '..', 'css', 'mengw.ico')
 }
+global.sharedObject = {
+    test: 'test'
+};
 let template = [{
     label: 'Summoner',
     submenu: [{
@@ -109,6 +112,7 @@ function createWindow() {
         // backgroundColor: '#fff',
         icon: icons.favicon
     });
+    // console.log(app.getPath('userdata'))
     // let win = new BrowserWindow({
     //     icon: __dirname + '/../css/icon.ico'
     // })

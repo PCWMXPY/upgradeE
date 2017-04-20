@@ -8,7 +8,7 @@
 declare function require(name: string);
 declare var module: any;
 const request = require('request');
-const fs = require('fs');
+const storage = require('electron-json-storage');
 const perference = require('./preference.js');
 // var exec = require('child_process').exec;
 // var cmdStr = 'curl http://www.weather.com.cn/data/sk/101010100.html';
@@ -123,15 +123,6 @@ export const nodefunctions = {
             }
         }
         return pointer;
-    },
-    readPref: () => {
-
-    },
-    writePref: () => {
-
-    },
-    createPref: () => {
-
     },
     getSummonerId: (id: string, fun: Function) => {
         const url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
