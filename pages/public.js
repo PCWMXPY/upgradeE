@@ -28,7 +28,7 @@ var Prefsystem = {
                 notexist();
             }
             else {
-                exist(data);
+                exist(data.id);
             }
         });
     },

@@ -13,7 +13,7 @@
 
 <body>
     <div id="main" class="container-fluid">
-        <div class="row" v-if="newuser">
+        <div class="row" v-if="newuser==true">
             <div class="col-sm-offset-3 col-sm-6 center ue-bg">
                 <div>
                     <h2>{{display.input}}</h2>
@@ -27,12 +27,16 @@
                 </div>
             </div>
         </div>
+        <div v-else-if="newuser==false">
+            fff
+        </div>
     </div>
 </body>
 <script>
     window.jQuery = window.$ = require('jquery');
     jQuery(document).ready(function () {
         $.backstretch("../../css/image.jpg");
+        main.register();
         main.preGet();
     })
 </script>

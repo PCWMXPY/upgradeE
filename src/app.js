@@ -29,14 +29,26 @@ const icons = {
 global.sharedObject = {
     test: 'test'
 };
+let renders = {
+    mainpage: null
+};
 let template = [{
     label: 'Summoner',
     submenu: [{
             label: 'Re-Announce Summoner',
             accelerator: 'CmdOrCtrl+Shift+S',
             click: (item, focusedWindow) => {
-                if (focusedWindow)
-                    focusedWindow.reload();
+                storage.remove('summorid', function (error) {
+                    if (error) throw error;
+                });
+                makesummnor();
+                renders.mainpage.sender.send('cover-message', 'RAS');
+            }
+        }, {
+            label: 'Test Function',
+            accelerator: 'CmdOrCtrl+K',
+            click: (item, focusedWindow) => {
+                renders.mainpage.sender.send('cover-message', 'test');
             }
         },
         {
@@ -80,7 +92,6 @@ let template = [{
         label: 'Github',
         sublabel: 'Open Github Page',
         click: () => {
-            // c.exec("start https://github.com/PCWMXPY/upgradeE");
             shell.openExternal('https://github.com/PCWMXPY/upgradeE');
         }
     }, {
@@ -110,16 +121,9 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         width: 1024,
         height: 768,
-        // backgroundColor: '#fff',
         icon: icons.favicon
     });
-    // console.log(app.getPath('userdata'))
-    // let win = new BrowserWindow({
-    //     icon: __dirname + '/../css/icon.ico'
-    // })
-    // trayIcon = new Tray(__dirname + '/../css/icon.ico');
-    // console.log(mainWindow.icon);
-    // mainWindow.setMenu(null);
+    makesummnor();
     var menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
@@ -149,27 +153,36 @@ app.on("activate", function () {
         createWindow();
     }
 });
-
-ipcMain.once('make-summnor', (event, arg) => {
-    currentsession.summonerid = arg;
-    storage.set('summorid', {
-        id: arg
-    }, function (error) {
-        if (error) throw error;
-    });
-    nodefunctions.getSummonerId(arg, (data, id) => {
-        currentsession.miao = new playstat(data.id, id);
-        currentsession.miao.getCurrent(data => {
-            event.sender.send('ana-near', currentsession.miao.analysisNear());
-        }, error => {
-            event.sender.send('send-error', error);
-        })
-    })
-    ipcMain.on('get-game', (event, arg) => {
-        currentsession.miao.getCurrent(data => {
-            event.sender.send('ana-near', currentsession.miao.analysisNear());
-        }, error => {
-            event.sender.send('send-error', error);
-        })
-    })
+ipcMain.on('register', (event, arg) => {
+    renders[arg] = event;
+    console.log(arg);
 });
+const makesummnor = function () {
+    ipcMain.removeAllListeners('get-game');
+    ipcMain.removeAllListeners('make-summnor');
+    ipcMain.once('make-summnor', (event, arg) => {
+        currentsession.summonerid = arg;
+        console.log(arg);
+        storage.set('summorid', {
+            id: arg
+        }, function (error) {
+            if (error) throw error;
+        });
+        nodefunctions.getSummonerId(arg, (data, id) => {
+            currentsession.miao = new playstat(data.id, id);
+            currentsession.miao.getCurrent(data => {
+                event.sender.send('ana-near', currentsession.miao.analysisNear());
+            }, error => {
+                event.sender.send('send-error', error);
+            })
+        })
+        ipcMain.on('get-game', (event, arg) => {
+            console.log('get-game');
+            currentsession.miao.getCurrent(data => {
+                event.sender.send('ana-near', currentsession.miao.analysisNear());
+            }, error => {
+                event.sender.send('send-error', error);
+            })
+        })
+    });
+}

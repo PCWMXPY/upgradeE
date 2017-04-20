@@ -28,11 +28,25 @@ let main = new Vue({
                 this.newuser = true;
             }, (data) => {
                 //exist
+                this.newuser = false;
+                ipcRenderer.send('make-summnor', data);
                 console.log(data);
             });
         },
+        register: function () {
+            ipcRenderer.on('cover-message', (event, arg) => {
+                console.log(arg);
+                switch (arg) {
+                    case 'RAS':
+                        main.preGet();
+                        break;
+                }
+            })
+            ipcRenderer.send('register', 'mainpage');
+        },
         sendSummorid: function () {
             ipcRenderer.once('ana-near', (event, arg) => {
+                main.preGet();
                 console.log(arg);
             })
             ipcRenderer.send('make-summnor', this.test);

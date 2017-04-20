@@ -34,7 +34,7 @@ const Prefsystem = {
             if (data.id == null) {
                 notexist();
             } else {
-                exist(data);
+                exist(data.id);
             }
         });
     },
