@@ -119,17 +119,18 @@ exports.nodefunctions = {
         }
         return pointer;
     },
-    getSummonerId: function (id, fun) {
+    getSummonerId: function (id, fun, error) {
         var url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
         request(url, function (error, response, data) {
             if (!error && response.statusCode == 200) {
                 data = JSON.parse(data);
                 _this.near = data;
                 fun(data, id);
-                console.log(id);
+                console.log('From GetSummonerId<-Upgradee.ts: ' + id);
             }
             else {
-                console.log(response.statusCode);
+                error(response.statusCode);
+                console.log('From GetSummonerId<-Upgradee.ts: ' + response.statusCode);
             }
         });
     }

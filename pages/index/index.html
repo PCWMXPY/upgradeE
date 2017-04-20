@@ -15,16 +15,16 @@
     <div id="main" class="container-fluid">
         <div class="row" v-if="newuser==true">
             <div class="col-sm-offset-3 col-sm-6 center ue-bg">
-                <div>
-                    <h2>{{display.input}}</h2>
-                </div>
-            </div>
-            <div class="col-sm-offset-3 col-sm-6 center lower ue-bg">
-                <div>
-                    <input placeholder="Username" class="form-username form-control" v-model="test" style="margin-bottom:10px;"></input>
-                    <!--<input class="form-password form-control" v-model="test"></input>-->
-                    <button v-on:click="sendSummorid" class="button button-rounded ue-button">{{display.submit}}</button>
-                </div>
+                <div style="display:inline-block;white-space:none;" class="no-font">
+                    <span>Upgr</span>
+                    <span style="color:#6b0000">a</span>
+                    <span style="color:#b90000">d</span>
+                    <span style="color:red">e<strong>E</strong></span>
+                </div><br>
+                <span class="small-font">{{display.youare}}</span>
+                <input placeholder="Username" class="form" v-model="test" style="margin-bottom:10px;"></input>
+                <!--<input class="form-password form-control" v-model="test"></input>-->
+                <button v-bind:disabled="button" v-on:click="sendSummorid" class="ue-button">{{display.submit}}</button>
             </div>
         </div>
         <div v-else-if="newuser==false">
@@ -35,7 +35,7 @@
 <script>
     window.jQuery = window.$ = require('jquery');
     jQuery(document).ready(function () {
-        $.backstretch("../../css/image.jpg");
+        // $.backstretch("../../css/image.jpg");
         main.register();
         main.preGet();
     })

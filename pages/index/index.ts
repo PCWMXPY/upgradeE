@@ -10,8 +10,10 @@ declare function require(name: string);
 const ipcRenderer = require('electron').ipcRenderer;
 const cdisplay = {
     cn: {
-        input: '输入召唤师名称',
-        submit: '提交'
+        input: 'upgrad',
+        input2: 'eE',
+        submit: 'SUBMIT',
+        youare: 'You\'re?..'
     }
 }
 let main = new Vue({
@@ -19,6 +21,7 @@ let main = new Vue({
     data: {
         test: '',
         display: cdisplay.cn,
+        button: false,
         newuser: false
     },
     methods: {
@@ -45,6 +48,7 @@ let main = new Vue({
             ipcRenderer.send('register', 'mainpage');
         },
         sendSummorid: function () {
+            this.button = true;
             ipcRenderer.once('ana-near', (event, arg) => {
                 main.preGet();
                 console.log(arg);

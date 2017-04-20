@@ -108,8 +108,6 @@ let currentsession = {
     miao: undefined
 };
 // 创建一个浏览器窗口，主要用来加载HTML页面
-// const Tray = electron.Tray;
-// const path = electron.path;
 // --- 窗口 ---
 // 声明一个BrowserWindow对象实例
 let mainWindow;
@@ -157,14 +155,14 @@ app.on("activate", function () {
 });
 ipcMain.on('register', (event, arg) => {
     renders[arg] = event;
-    console.log(arg);
+    console.log('From Event-Register<-app.js: ' + arg);
 });
 const makesummnor = function () {
     ipcMain.removeAllListeners('get-game');
     ipcMain.removeAllListeners('make-summnor');
     ipcMain.once('make-summnor', (event, arg) => {
         currentsession.summonerid = arg;
-        console.log(arg);
+        console.log('From makesummnor<-app.js: ' + arg);
         storage.set('summorid', {
             id: arg
         }, function (error) {
@@ -177,9 +175,11 @@ const makesummnor = function () {
             }, error => {
                 event.sender.send('send-error', error);
             })
+        }, error => {
+            event.sender.send('send-error', error);
         })
         ipcMain.on('get-game', (event, arg) => {
-            console.log('get-game');
+            console.log('From Event-get-game<-app.js: ' + 'get-game');
             currentsession.miao.getCurrent(data => {
                 event.sender.send('ana-near', currentsession.miao.analysisNear());
             }, error => {

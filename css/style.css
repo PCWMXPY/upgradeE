@@ -1,5 +1,5 @@
 .ue-bg {
-    background-color: rgba(0, 0, 0, 0.2);
+    /*background-color: rgba(0, 0, 0, 0.2);*/
     font-family: Georgia, "Times New Roman", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
 }
 
@@ -7,9 +7,40 @@
     margin-top: 25px;
 }
 
+.large-font {
+    font-size: 550%;
+    white-space: none;
+}
+
+.no-font {
+    font-size: 0;
+    white-space: none;
+    /*font*/
+}
+
+.no-font span {
+    font-size: 87px;
+    white-space: none;
+    /*font*/
+}
+
+.small-font {
+    font-size: 120%;
+}
+
+input {
+    width: 30%;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    height: 40px;
+}
+
 div .center {
     text-align: center;
     padding: 10px;
+    margin-top: 23%;
 }
 
 div .lower {
@@ -17,7 +48,11 @@ div .lower {
 }
 
 .ue-button {
-    width: 100%;
+    /*width: 100%;*/
+    width: 20%;
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 5px;
 }
 
 .backstretch {

@@ -124,16 +124,17 @@ export const nodefunctions = {
         }
         return pointer;
     },
-    getSummonerId: (id: string, fun: Function) => {
+    getSummonerId: (id: string, fun: Function, error: Function) => {
         const url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
         request(url, (error, response, data: string) => {
             if (!error && response.statusCode == 200) {
                 data = JSON.parse(data);
                 this.near = data;
                 fun(data, id);
-                console.log(id);
+                console.log('From GetSummonerId<-Upgradee.ts: ' + id);
             } else {
-                console.log(response.statusCode);
+                error(response.statusCode);
+                console.log('From GetSummonerId<-Upgradee.ts: ' + response.statusCode);
             }
         })
     }

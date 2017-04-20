@@ -4,8 +4,8 @@
 var ipcRenderer = require('electron').ipcRenderer;
 var cdisplay = {
     cn: {
-        input: '输入召唤师名称',
-        submit: '提交'
+        submit: 'SUBMIT',
+        youare: 'You\'re?..'
     }
 };
 var main = new Vue({
@@ -13,6 +13,7 @@ var main = new Vue({
     data: {
         test: '',
         display: cdisplay.cn,
+        button: false,
         newuser: false
     },
     methods: {
@@ -38,6 +39,7 @@ var main = new Vue({
             ipcRenderer.send('register', 'mainpage');
         },
         sendSummorid: function () {
+            this.button = true;
             ipcRenderer.once('ana-near', function (event, arg) {
                 main.preGet();
                 console.log(arg);
