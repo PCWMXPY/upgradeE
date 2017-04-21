@@ -13,21 +13,23 @@
 
 <body>
     <div id="main" class="container-fluid">
+        <div class="row center" v-if="newuser!=2">
+            <div style="display:inline-block;white-space:none;padding:5px;" class="no-font">
+                <span style="background-color:#6f6f6f;">Upgr</span>
+                <span style="background-color:#4a4a4a;color:#6b0000">a</span>
+                <span style="background-color:#414141;color:#b90000">d</span>
+                <span style="background-color:#363636;color:red">e<strong>E</strong></span>
+            </div><br>
+        </div>
         <div class="row" v-if="newuser==0">
-            <div class="col-md-offset-3 col-md-6 center ue-bg">
-                <div style="display:inline-block;white-space:none;" class="no-font">
-                    <span style="background-color:#6f6f6f;">Upgr</span>
-                    <span style="background-color:#4a4a4a;color:#6b0000">a</span>
-                    <span style="background-color:#414141;color:#b90000">d</span>
-                    <span style="background-color:#363636;color:red">e<strong>E</strong></span>
-                </div><br>
+            <div class="col-md-offset-3 col-md-6 topc-center ue-bg">
                 <span class="small-font">{{display.youare}}</span>
                 <input placeholder="Username" class="form" v-model="test" style="margin-bottom:10px;"></input>
                 <button v-bind:disabled="button" v-on:click="sendSummorid" class="ue-button">{{display.submit}}</button>
             </div>
         </div>
         <div class="row" v-else-if="newuser==1">
-            <div class="col-md-offset-1 col-md-10 center ue-bg"><button v-on:click="getGame()">Match Started</button></div>
+            <div class="col-md-offset-1 col-md-10 topc-center ue-bg"><button v-on:click="getGame()">Match Started</button></div>
         </div>
         <div class="row" v-else-if="newuser==2">
             <div class="col-md-offset-2 col-md-8 top-center ue-bg">

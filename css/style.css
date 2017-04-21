@@ -56,6 +56,11 @@ input {
     padding: 10px;
 }
 
+.topc-center {
+    text-align: center;
+    margin: 0px;
+}
+
 div .center {
     text-align: center;
     padding: 10px;

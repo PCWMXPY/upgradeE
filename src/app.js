@@ -38,6 +38,7 @@ let template = [{
     label: 'Summoner',
     submenu: [{
             label: 'Re-Announce Summoner',
+            sublabel: 'Start over again',
             accelerator: 'CmdOrCtrl+Shift+S',
             click: (item, focusedWindow) => {
                 storage.remove('summorid', function (error) {
