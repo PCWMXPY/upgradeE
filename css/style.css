@@ -6,7 +6,6 @@
 .fill {
     height: 100%;
     min-height: 100%;
-    background: gray;
     display: block;
 }
 
@@ -19,15 +18,14 @@ html,
 body {
     height: 100%;
     min-height: 100%;
-    background-color: gray;
 }
 
-.row {
-    /*margin-top: 25px;*/
+.ue-df {
+    padding-top: 35px;
 }
 
 .vs {
-    color: red;
+    color: #a69fff;
     font-size: 30px;
 }
 
@@ -73,6 +71,20 @@ input {
 .top-center {
     text-align: center;
     padding: 10px;
+}
+
+.left-center {
+    text-align: left;
+    float: left;
+    word-wrap: break-word;
+    word-break: normal;
+}
+
+.right-center {
+    text-align: right;
+    float: right;
+    word-wrap: break-word;
+    word-break: normal;
 }
 
 .topc-center {

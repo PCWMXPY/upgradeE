@@ -24,6 +24,7 @@ let main = new Vue({
         display: cdisplay.cn,
         button: false,
         oppoid: '',
+        domainid: '',
         newuser: 1,
         mypng: '../../css/favicon.ico',
         oppopng: '../../css/favicon.ico'
@@ -32,10 +33,13 @@ let main = new Vue({
         preGet: function () {
             Prefsystem.preLoad(() => {
                 //not exist
-                this.newuser = 0;
+                main.newuser = 0;
             }, (data) => {
                 //exist
-                this.newuser = 1;
+                main.newuser = 1;
+                riotapi.make(data, () => {
+                    console.log('Index.ts Preget -> Maked:' + data);
+                })
                 console.log('Index.ts Preget ->: ' + data);
             });
         },
@@ -53,26 +57,28 @@ let main = new Vue({
         sendSummorid: function () {
             this.button = true;
             riotapi.make(this.test, () => {
-                main.preGet();
+                main.newuser = 1;
+                main.button = false;
             });
         },
         getGame: function () {
             riotapi.find((data) => {
                 if (data != 404) {
-                    main.newuser = 2;
-                    main.mypng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][0].championId) + '.png';
-                    main.oppoid = data[1][1].summonerName;
-                    main.oppopng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][1].championId) + '.png';
-                    // riotapi.gtips(data[1][0].championId, data[1][1].championId, data => {
-                    //     switch (data[0]) {
-                    //         case 0:
-                    //             break;
-                    //         case 1:
-                    //             break;
-                    //         case 2:
-                    //             break;
-                    //     }
-                    // });
+                    this.newuser = 2;
+                    this.mypng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][0].championId) + '.png';
+                    this.oppoid = data[1][1].summonerName;
+                    this.domainid = data[1][0].summonerName;
+                    this.oppopng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][1].championId) + '.png';
+                    riotapi.gtips(data[1][0].championId, data[1][1].championId, data => {
+                        switch (data[0]) {
+                            case 0:
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                        }
+                    });
                 }
             });
         }
