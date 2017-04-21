@@ -3,6 +3,10 @@
     font-family: Georgia, "Times New Roman", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
 }
 
+body {
+    background-color: gray;
+}
+
 .row {
     margin-top: 25px;
 }
@@ -77,9 +81,9 @@ div .lower {
 
 .ue-button {
     /*width: 100%;*/
-    width: 20%;
-    height: 40px;
-    border: 2px solid white;
+    width: 35px;
+    height: 35px;
+    border: 1px;
     border-radius: 5px;
 }
 

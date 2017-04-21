@@ -15,6 +15,8 @@ const perference = require('./preference.js');
 // const testjson = require('./test.js');
 
 const api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
+const get_url = 'http://localhost:8080/upgradeE/server/requests/getTips.php';
+const post_url = 'http://localhost:8080/upgradeE/server/requests/pushTips.php';
 export class playstat {
     private id: string;
     private name: string;
@@ -35,9 +37,33 @@ export class playstat {
             // this.returnJson(error, response, data, fun, err);
         })
     }
-
 }
 export const nodefunctions = {
+    getTips: (domain: number, oppo: number, fun: Function) => {
+        const url = get_url + '?domain=' + domain + '&oppo=' + oppo;
+        request(url, (error, response, data: string) => {
+            if (!error && response.statusCode == 200) {
+                data = JSON.parse(data);
+                fun(data);
+            } else {
+                console.log(response.statusCode);
+            }
+        })
+    },
+    postTips: (domain: number, side: number, content: string, fun: Function) => {
+        request.post({
+            url: post_url,
+            form: {
+                'domain': domain,
+                'side': side,
+                'content': content
+            }
+        }, function (err, httpResponse, body) {
+            if (err) throw err;
+            body = JSON.parse(body);
+            fun(body)
+        })
+    },
     returnJson: (error, response, data, fun: Function, err: Function) => {
         if (!error && response.statusCode == 200) {
             data = JSON.parse(data);
@@ -70,7 +96,7 @@ export const nodefunctions = {
         }
         return pointer;
     },
-    getSummonerId: (id: string, fun: Function, error: Function) => {
+    getSummonerId: (id: string, fun: Function, errors: Function) => {
         const url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
         request(url, (error, response, data: string) => {
             if (!error && response.statusCode == 200) {
@@ -79,7 +105,7 @@ export const nodefunctions = {
                 fun(data, id);
                 console.log('From GetSummonerId<-Upgradee.ts: ' + id);
             } else {
-                error(response.statusCode);
+                errors(response.statusCode);
                 console.log('From GetSummonerId<-Upgradee.ts: ' + response.statusCode);
             }
         })

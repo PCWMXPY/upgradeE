@@ -8,6 +8,8 @@ var request = require('request');
 var storage = require('electron-json-storage');
 var perference = require('./preference.js');
 var api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
+var get_url = 'http://localhost:8080/upgradeE/server/requests/getTips.php';
+var post_url = 'http://localhost:8080/upgradeE/server/requests/pushTips.php';
 var playstat = (function () {
     function playstat(id, name) {
         this.id = id + '';
@@ -28,6 +30,21 @@ var playstat = (function () {
 }());
 exports.playstat = playstat;
 exports.nodefunctions = {
+    getTips: function (domain, oppo) {
+        request.get({
+            url: get_url,
+            form: {
+                'domain': domain,
+                'oppo': oppo
+            }
+        }, function (err, httpResponse, body) {
+            if (err)
+                throw err;
+            console.log(body);
+        });
+    },
+    postTips: function (domain, side, content) {
+    },
     returnJson: function (error, response, data, fun, err) {
         if (!error && response.statusCode == 200) {
             data = JSON.parse(data);
@@ -62,7 +79,7 @@ exports.nodefunctions = {
         }
         return pointer;
     },
-    getSummonerId: function (id, fun, error) {
+    getSummonerId: function (id, fun, errors) {
         var url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
         request(url, function (error, response, data) {
             if (!error && response.statusCode == 200) {
@@ -72,7 +89,7 @@ exports.nodefunctions = {
                 console.log('From GetSummonerId<-Upgradee.ts: ' + id);
             }
             else {
-                error(response.statusCode);
+                errors(response.statusCode);
                 console.log('From GetSummonerId<-Upgradee.ts: ' + response.statusCode);
             }
         });
