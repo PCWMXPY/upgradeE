@@ -3,12 +3,27 @@
     font-family: Georgia, "Times New Roman", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
 }
 
+.fill {
+    height: 100%;
+    min-height: 100%;
+    background: gray;
+    display: block;
+}
+
+.fillc {
+    height: 100%;
+    min-height: 100%;
+}
+
+html,
 body {
+    height: 100%;
+    min-height: 100%;
     background-color: gray;
 }
 
 .row {
-    margin-top: 25px;
+    /*margin-top: 25px;*/
 }
 
 .vs {
