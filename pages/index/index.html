@@ -32,9 +32,9 @@
             <div class="col-sm-offset-1 col-sm-10 topc-center ue-bg"><button v-on:click="getGame()">Match Started</button></div>
         </div>
         <div class="row" v-else-if="newuser==2">
-            <div class="col-sm-offset-2 col-sm-8 top-center ue-bg">
+            <div class="col-sm-offset-1 col-sm-10 top-center ue-bg">
                 <div class="counter"><img class="top-img" v-bind:src="mypng" /> Me
-                    <span class="vs">VS.</span> SNH48
+                    <span class="vs">VS.</span> {{oppoid}}
                     <img class="top-img" v-bind:src="oppopng" /></div>
             </div>
             <div class="col-sm-offset-3 col-sm-6 ue-bg">

@@ -86,9 +86,18 @@ var riotapi = {
         nfun.getCurrent(remote.getGlobal('miao').id, function (data) {
             remote.getGlobal('miao').near = nfun.analysisNear(data, remote.getGlobal('miao').miao);
             fun(remote.getGlobal('miao').near);
-            console.log(remote.getGlobal('miao').near);
         }, function (error) {
             console.log(error);
+        });
+    },
+    gtips: function (domain, oppo, fun) {
+        nfun.getTips(domain, oppo, function (data) {
+            fun(data);
+        });
+    },
+    ptips: function (domain, side, content) {
+        nfun.postTips(domain, side, content, function (data) {
+            console.log(data);
         });
     }
 };

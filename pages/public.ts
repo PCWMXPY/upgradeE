@@ -70,7 +70,7 @@ const Prefsystem = {
             if (error) throw error;
         });
     }
-}
+};
 const riotapi = {
     //remote.getGlobal('miao').id = 'new value';
     make: (id: any, fun: Function) => {
@@ -87,10 +87,18 @@ const riotapi = {
         nfun.getCurrent(remote.getGlobal('miao').id, data => {
             remote.getGlobal('miao').near = nfun.analysisNear(data, remote.getGlobal('miao').miao);
             fun(remote.getGlobal('miao').near);
-            console.log(remote.getGlobal('miao').near);
         }, error => {
             console.log(error);
         })
-
+    },
+    gtips: (domain: number, oppo: number, fun: Function) => {
+        nfun.getTips(domain, oppo, data => {
+            fun(data);
+        });
+    },
+    ptips: (domain: number, side: number, content: string) => {
+        nfun.postTips(domain, side, content, data => {
+            console.log(data);
+        });
     }
-}
+};

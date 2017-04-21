@@ -30,20 +30,32 @@ var playstat = (function () {
 }());
 exports.playstat = playstat;
 exports.nodefunctions = {
-    getTips: function (domain, oppo) {
-        request.get({
-            url: get_url,
+    getTips: function (domain, oppo, fun) {
+        var url = get_url + '?domain=' + domain + '&oppo=' + oppo;
+        request(url, function (error, response, data) {
+            if (!error) {
+                data = JSON.parse(data);
+                fun(data);
+            }
+            else {
+                throw error;
+            }
+        });
+    },
+    postTips: function (domain, side, content, fun) {
+        request.post({
+            url: post_url,
             form: {
                 'domain': domain,
-                'oppo': oppo
+                'side': side,
+                'content': content
             }
         }, function (err, httpResponse, body) {
             if (err)
                 throw err;
-            console.log(body);
+            body = JSON.parse(body);
+            fun(body);
         });
-    },
-    postTips: function (domain, side, content) {
     },
     returnJson: function (error, response, data, fun, err) {
         if (!error && response.statusCode == 200) {

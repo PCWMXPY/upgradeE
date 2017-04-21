@@ -42,11 +42,11 @@ export const nodefunctions = {
     getTips: (domain: number, oppo: number, fun: Function) => {
         const url = get_url + '?domain=' + domain + '&oppo=' + oppo;
         request(url, (error, response, data: string) => {
-            if (!error && response.statusCode == 200) {
+            if (!error) {
                 data = JSON.parse(data);
                 fun(data);
             } else {
-                console.log(response.statusCode);
+                throw error;
             }
         })
     },

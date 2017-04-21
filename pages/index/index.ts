@@ -23,6 +23,7 @@ let main = new Vue({
         test: '',
         display: cdisplay.cn,
         button: false,
+        oppoid: '',
         newuser: 1,
         mypng: '../../css/favicon.ico',
         oppopng: '../../css/favicon.ico'
@@ -60,7 +61,18 @@ let main = new Vue({
                 if (data != 404) {
                     main.newuser = 2;
                     main.mypng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][0].championId) + '.png';
+                    main.oppoid = data[1][1].summonerName;
                     main.oppopng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][1].championId) + '.png';
+                    riotapi.gtips(data[1][0].championId, data[1][1].championId, data => {
+                        switch (data[0]) {
+                            case 0:
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                        }
+                    });
                 }
             });
         }
