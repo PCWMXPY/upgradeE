@@ -98,7 +98,6 @@ exports.nodefunctions = {
                 data = JSON.parse(data);
                 _this.near = data;
                 fun(data, id);
-                console.log('From GetSummonerId<-Upgradee.ts: ' + id);
             }
             else {
                 errors(response.statusCode);

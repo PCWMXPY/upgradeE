@@ -105,7 +105,7 @@ var preference = {
             case 39:
                 return [2, 5, 1, 4, 3];
             case 40:
-                return [3, 4, 2, 1, 5];
+                return [3, 4, 6, 1, 5];
             case 41:
                 return [2, 3, 1, 4, 5];
             case 42:
@@ -139,7 +139,7 @@ var preference = {
             case 60:
                 return [2, 5, 3, 4, 1];
             case 61:
-                return [1, 5, 3, 2, 4];
+                return [1, 5, 3, 3.6, 4];
             case 62:
                 return [3, 5, 1, 4, 2];
             case 63:

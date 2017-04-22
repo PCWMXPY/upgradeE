@@ -40,6 +40,12 @@ const Prefsystem = {
             }
         });
     },
+    updateTitle: function (content: string) {
+        document.getElementById('title').innerHTML = 'UpgradeE -> ' + content;
+    },
+    resetTitle: function () {
+        document.getElementById('title').innerHTML = 'UpgradeE';
+    },
     fixdata: (data: Array<Array<string>>) => {
         let re = [];
         for (let i = 0; i < data.length; i++) {
@@ -52,7 +58,21 @@ const Prefsystem = {
                 re[i].push(q);
             }
         }
-        return re;
+        let temp = [];
+        for (let i = 0; i < re.length; i++) {
+            let ttemp = {
+                L: [],
+                E: [],
+                M: [],
+                A: [],
+                R: []
+            };
+            for (let j = 0; j < re[i].length; j++) {
+                ttemp[re[i][j].time].push(re[i][j].content);
+            }
+            temp.push(ttemp);
+        }
+        return temp;
     },
     readPref: () => {
         storage.get('summorid', function (error, data) {
@@ -87,13 +107,15 @@ const Prefsystem = {
 };
 const riotapi = {
     //remote.getGlobal('miao').id = 'new value';
-    make: (id: any, fun: Function) => {
-        remote.getGlobal('miao').miao = id;
-        Prefsystem.writePref(id);
+    make: (id: any, fun: Function, err: Function) => {
         nfun.getSummonerId(id, (data, name) => {
+            remote.getGlobal('miao').miao = id;
+            Prefsystem.writePref(id);
             remote.getGlobal('miao').id = data.id;
+            Prefsystem.updateTitle(data.name);
             fun();
         }, error => {
+            err();
             console.log(error);
         });
     },
@@ -106,7 +128,9 @@ const riotapi = {
         })
     },
     gtips: (domain: number, oppo: number, fun: Function) => {
-        nfun.getTips(domain, oppo, data => {
+        let dom = 'C' + domain;
+        let opp = 'C' + oppo;
+        nfun.getTips(dom, opp, data => {
             fun(data);
         });
     },

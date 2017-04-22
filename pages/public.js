@@ -35,6 +35,12 @@ var Prefsystem = {
             }
         });
     },
+    updateTitle: function (content) {
+        document.getElementById('title').innerHTML = 'UpgradeE -> ' + content;
+    },
+    resetTitle: function () {
+        document.getElementById('title').innerHTML = 'UpgradeE';
+    },
     fixdata: function (data) {
         var re = [];
         for (var i = 0; i < data.length; i++) {
@@ -47,7 +53,21 @@ var Prefsystem = {
                 re[i].push(q);
             }
         }
-        return re;
+        var temp = [];
+        for (var i = 0; i < re.length; i++) {
+            var ttemp = {
+                L: [],
+                E: [],
+                M: [],
+                A: [],
+                R: []
+            };
+            for (var j = 0; j < re[i].length; j++) {
+                ttemp[re[i][j].time].push(re[i][j].content);
+            }
+            temp.push(ttemp);
+        }
+        return temp;
     },
     readPref: function () {
         storage.get('summorid', function (error, data) {
@@ -86,13 +106,15 @@ var Prefsystem = {
     }
 };
 var riotapi = {
-    make: function (id, fun) {
-        remote.getGlobal('miao').miao = id;
-        Prefsystem.writePref(id);
+    make: function (id, fun, err) {
         nfun.getSummonerId(id, function (data, name) {
+            remote.getGlobal('miao').miao = id;
+            Prefsystem.writePref(id);
             remote.getGlobal('miao').id = data.id;
+            Prefsystem.updateTitle(data.name);
             fun();
         }, function (error) {
+            err();
             console.log(error);
         });
     },
@@ -105,7 +127,9 @@ var riotapi = {
         });
     },
     gtips: function (domain, oppo, fun) {
-        nfun.getTips(domain, oppo, function (data) {
+        var dom = 'C' + domain;
+        var opp = 'C' + oppo;
+        nfun.getTips(dom, opp, function (data) {
             fun(data);
         });
     },

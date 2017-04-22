@@ -103,7 +103,7 @@ export const nodefunctions = {
                 data = JSON.parse(data);
                 this.near = data;
                 fun(data, id);
-                console.log('From GetSummonerId<-Upgradee.ts: ' + id);
+                // console.log('From GetSummonerId<-Upgradee.ts: ' + id);
             } else {
                 errors(response.statusCode);
                 console.log('From GetSummonerId<-Upgradee.ts: ' + response.statusCode);

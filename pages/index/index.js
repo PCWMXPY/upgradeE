@@ -58,12 +58,12 @@ var main = new Vue({
             this.stopeverything();
             Prefsystem.preLoad(function () {
                 main.newuser = 0;
+                Prefsystem.resetTitle();
             }, function (data) {
                 main.newuser = 1;
                 riotapi.make(data, function () {
-                    console.log('Index.ts Preget -> Maked:' + data);
+                }, function () {
                 });
-                console.log('Index.ts Preget ->: ' + data);
             });
         },
         register: function () {
@@ -91,6 +91,8 @@ var main = new Vue({
             riotapi.make(this.test, function () {
                 main.newuser = 1;
                 main.button = false;
+            }, function () {
+                main.button = false;
             });
         },
         localupdate: function (categery, event) {
@@ -103,23 +105,83 @@ var main = new Vue({
         updatetips: function () {
             var date = new Date();
             var gametime = (date.getTime() - this.data2.starttime) / 60000;
-            console.log(gametime);
-            if (gametime < 10) {
-                this.gameperiod = 'In Early Game:';
-            }
-            else if (gametime < 20) {
-                this.gameperiod = 'In Middle Game:';
-            }
-            else if (gametime < 30) {
-                this.gameperiod = 'In Late Game:';
+            var re = [];
+            this.stopeverything();
+            if (gametime < 40) {
+                var t = (40 - gametime) * 60000;
+                re.push(t);
+                this.stopper.push(setTimeout(function () {
+                    main.doupdate(40);
+                }, t));
             }
             else {
-                this.gameperiod = 'In REALLY Late Game:';
+                main.doupdate(40);
+                return re;
             }
-            this.stopeverything();
-            this.stopper.push(setTimeout(function () {
-                main.updatetips();
-            }, 3000));
+            if (gametime < 30) {
+                var t = (30 - gametime) * 60000;
+                re.push(t);
+                this.stopper.push(setTimeout(function () {
+                    main.doupdate(30);
+                }, t));
+            }
+            else {
+                main.doupdate(30);
+                return re;
+            }
+            if (gametime < 20) {
+                var t = (20 - gametime) * 60000;
+                re.push(t);
+                this.stopper.push(setTimeout(function () {
+                    main.doupdate(20);
+                }, t));
+            }
+            else {
+                main.doupdate(20);
+                return re;
+            }
+            if (gametime < 10) {
+                var t = (10 - gametime) * 60000;
+                re.push(t);
+                main.doupdate(0);
+                this.stopper.push(setTimeout(function () {
+                    main.doupdate(10);
+                }, t));
+            }
+            else {
+                main.doupdate(10);
+                return re;
+            }
+            return re;
+        },
+        doupdate: function (period) {
+            switch (period) {
+                case 0:
+                    this.gameperiod = 'In Lane:';
+                    this.tips.domain = this.vars.domain.L;
+                    this.tips.oppo = this.vars.oppo.L;
+                    break;
+                case 10:
+                    this.gameperiod = 'In Early Game:';
+                    this.tips.domain = this.vars.domain.E;
+                    this.tips.oppo = this.vars.oppo.E;
+                    break;
+                case 20:
+                    this.gameperiod = 'In Middle Game:';
+                    this.tips.domain = this.vars.domain.M;
+                    this.tips.oppo = this.vars.oppo.M;
+                    break;
+                case 30:
+                    this.gameperiod = 'In Late Game:';
+                    this.tips.domain = this.vars.domain.A;
+                    this.tips.oppo = this.vars.oppo.A;
+                    break;
+                case 40:
+                    this.gameperiod = 'In REALLY Late Game:';
+                    this.tips.domain = this.vars.domain.R;
+                    this.tips.oppo = this.vars.oppo.R;
+                    break;
+            }
         },
         stopeverything: function () {
             for (var i = 0; i < this.stopper; i++) {
@@ -131,7 +193,6 @@ var main = new Vue({
             var _this = this;
             this.stopeverything();
             riotapi.find(function (data) {
-                console.log(data);
                 if (data != 404) {
                     _this.newuser = 2;
                     _this.mypng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][0].championId) + '.png';
