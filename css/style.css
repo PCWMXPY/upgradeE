@@ -80,6 +80,12 @@ input {
     word-break: normal;
 }
 
+.leftc-center {
+    text-align: left;
+    word-wrap: break-word;
+    word-break: normal;
+}
+
 .right-center {
     text-align: right;
     float: right;

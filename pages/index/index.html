@@ -13,7 +13,7 @@
 
 <body>
     <div id="main" class="container-fluid fillc">
-        <div class="row center" v-if="newuser!=2">
+        <div class="row center" v-if="newuser<2">
             <div style="display:inline-block;white-space:none;padding:5px;" class="no-font">
                 <span style="background-color:#6f6f6f;">Upgr</span>
                 <span style="background-color:#4a4a4a;color:#6b0000">a</span>
@@ -32,15 +32,34 @@
             <div class="col-xs-offset-1 col-xs-10 topc-center ue-bg"><button v-on:click="getGame()">Match Started</button></div>
         </div>
         <div class="row fillc" v-else-if="newuser==2">
-            <div class="col-xs-5 ue-df ue-bg fill" style="color:#dfdfdf;background: #686868;">
-                <div class="counter top-center"><span class="left-center">{{domainid}}</span><br>
+            <div class="col-xs-5 ue-df ue-bg fill" style="background: black;">
+                <div class="counter top-center" style="color:#dfdfdf;"><span class="left-center">{{domainid}}</span><br>
                     <span><img class="top-img" src="../../css/favicon.ico" v-bind:src="mypng" />
                     <span class="vs">VS.</span> <img class="top-img" src="../../css/favicon.ico" v-bind:src="oppopng"
                     /></span>
                     <br><span class="right-center">{{oppoid}}</span></div>
+                <div class="top-center">
+                    <button v-on:click="editchamp(1)">How to play Against {{oppochamp.name}}</button>
+                    <button v-on:click="editchamp(0)">How to Advantage {{domainchamp.name}}</button>
+                </div>
             </div>
-            <div class="col-xs-7 ue-bg fill" style="color:#494949;background: #bababa;">
+            <div class="col-xs-7 ue-bg fill" style="color:#494949;">
                 Tips:
+            </div>
+        </div>
+        <div class="row fillc" v-else-if="newuser==3">
+            <div class="col-xs-offset-1 col-xs-10 leftc-center ue-bg">
+                <strong>D</strong>
+                <div contenteditable="true" v-on:keyup="localupdate('domain',$event)">{{edit.domain}}</div>
+                <strong>C</strong>
+                <div contenteditable="true" v-on:keyup="localupdate('categery',$event)">{{edit.categery}}</div>
+                <strong>P</strong>
+                <div contenteditable="true" v-on:keyup="localupdate('period',$event)">{{edit.period}}</div>
+                <strong>S</strong>
+                <div contenteditable="true" v-on:keyup="localupdate('side',$event)">{{edit.side}}</div>
+                <strong>n</strong>
+                <div contenteditable="true" v-on:keyup="localupdate('content',$event)">{{edit.content}}</div>
+                <button v-on:click="pushedit">SUBMIT</button>
             </div>
         </div>
     </div>

@@ -96,9 +96,16 @@ const riotapi = {
             fun(data);
         });
     },
-    ptips: (domain: number, side: number, content: string) => {
-        nfun.postTips(domain, side, content, data => {
+    ptips: (domain: number, categery: string, period: string, side: number, content: string) => {
+        //Champion C, Runes R, Mysterys Y
+        if (categery.length != 1 || period.length != 1) {
+            return false;
+        }
+        const topic = categery + domain;
+        const cont = period + content;
+        nfun.postTips(topic, side, cont, data => {
             console.log(data);
         });
+        return true;
     }
 };
