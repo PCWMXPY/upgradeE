@@ -25,6 +25,7 @@ let main = new Vue({
         button: false,
         oppoid: '',
         domainid: '',
+        gameperiod: '',
         stopper: [],
         data2: null,
         vars: {
@@ -60,6 +61,7 @@ let main = new Vue({
     },
     methods: {
         preGet: function () {
+            this.stopeverything();
             Prefsystem.preLoad(() => {
                 //not exist
                 main.newuser = 0;
@@ -73,6 +75,7 @@ let main = new Vue({
             });
         },
         register: function () {
+            this.stopeverything();
             ipcRenderer.on('cover-message', (event, arg) => {
                 console.log(arg);
                 switch (arg) {
@@ -109,8 +112,21 @@ let main = new Vue({
         },
         updatetips: function () {
             let date = new Date();
-            console.log(date.getTime() - this.data2.starttime);
+            let gametime = (date.getTime() - this.data2.starttime) / 60000;
+            console.log(gametime);
+            if (gametime < 10) {
+                this.gameperiod = 'In Early Game:';
+            } else if (gametime < 20) {
+                this.gameperiod = 'In Middle Game:';
+            } else if (gametime < 30) {
+                this.gameperiod = 'In Late Game:';
+            } else {
+                this.gameperiod = 'In REALLY Late Game:';
+            }
             this.stopeverything();
+            this.stopper.push(setTimeout(() => {
+                main.updatetips();
+            }, 3000))
         },
         stopeverything: function () {
             for (let i = 0; i < this.stopper; i++) {
@@ -119,6 +135,7 @@ let main = new Vue({
             this.stopper = [];
         },
         getGame: function () {
+            this.stopeverything();
             riotapi.find((data) => {
                 console.log(data);
                 if (data != 404) {
