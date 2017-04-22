@@ -35,6 +35,20 @@ var Prefsystem = {
             }
         });
     },
+    fixdata: function (data) {
+        var re = [];
+        for (var i = 0; i < data.length; i++) {
+            re.push([]);
+            for (var j = 0; j < data[i].length; j++) {
+                var q = {
+                    time: data[i][j].substring(0, 1),
+                    content: data[i][j].substring(1, data[i][j].length)
+                };
+                re[i].push(q);
+            }
+        }
+        return re;
+    },
     readPref: function () {
         storage.get('summorid', function (error, data) {
             if (error)

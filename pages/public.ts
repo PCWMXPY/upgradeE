@@ -40,6 +40,20 @@ const Prefsystem = {
             }
         });
     },
+    fixdata: (data: Array<Array<string>>) => {
+        let re = [];
+        for (let i = 0; i < data.length; i++) {
+            re.push([]);
+            for (let j = 0; j < data[i].length; j++) {
+                let q = {
+                    time: data[i][j].substring(0, 1),
+                    content: data[i][j].substring(1, data[i][j].length)
+                }
+                re[i].push(q);
+            }
+        }
+        return re;
+    },
     readPref: () => {
         storage.get('summorid', function (error, data) {
             if (error) throw error;

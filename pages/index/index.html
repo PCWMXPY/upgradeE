@@ -43,8 +43,15 @@
                     <button v-on:click="editchamp(0)">How to Advantage {{domainchamp.name}}</button>
                 </div>
             </div>
-            <div class="col-xs-7 ue-bg fill" style="color:#494949;">
-                Tips:
+            <div class="col-xs-7 ue-df ue-bg fill" style="color:#494949;">
+                <h2>The <span style="color: #4556ff">Advantage</span> of {{domainchamp.name}}</h2>
+                <ul>
+                    <li v-for="tip in tips.domain">{{tip}}</li>
+                </ul>
+                <h2>To <span style="color: #ff4545">Against</span> {{oppochamp.name}}</h2>
+                <ul>
+                    <li v-for="tip in tips.oppo">{{tip}}</li>
+                </ul>
             </div>
         </div>
         <div class="row fillc" v-else-if="newuser==3">

@@ -163,7 +163,19 @@ exports.nodefunctions = {
                 }
             }
         }
-        var real = [result, temp];
+        var otherinfo = {
+            bans: near.bannedChampions,
+            gameId: near.gameId,
+            time: near.gameLength,
+            mode: near.gameMode,
+            queue: near.gameQueueConfigId,
+            starttime: near.gameStartTime,
+            type: near.gameType,
+            map: near.mapId,
+            key: near.observers.encryptionKey,
+            platform: near.platformId
+        };
+        var real = [result, temp, otherinfo];
         return real;
     }
 };
