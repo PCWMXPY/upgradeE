@@ -71,6 +71,14 @@ input {
 .top-center {
     text-align: center;
     padding: 10px;
+    /*margin: 10px;*/
+}
+
+.keep-top {
+    /*margin-top: 10px;*/
+    width: 100%;
+    display: inline-block;
+    /*border: 1px;*/
 }
 
 .left-center {
@@ -116,6 +124,14 @@ div .lower {
     /*width: 100%;*/
     width: 35px;
     height: 35px;
+    border: 1px;
+    border-radius: 5px;
+}
+
+.ue-wbutton {
+    /*width: 100%;*/
+    height: 40px;
+    font-size: 30px;
     border: 1px;
     border-radius: 5px;
 }

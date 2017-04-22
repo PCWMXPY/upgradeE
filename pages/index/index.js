@@ -100,6 +100,17 @@ var main = new Vue({
         },
         pushedit: function () {
             if (riotapi.ptips(this.edit.domain, this.edit.categery, this.edit.period, this.edit.side, this.edit.content)) {
+                main.newuser = 2;
+                if (this.edit.side == 0) {
+                    this.tips.domain.push('Just Added: ' + this.edit.content);
+                }
+                else {
+                    this.tips.oppo.push('Just Added: ' + this.edit.content);
+                }
+                this.tips.domain;
+            }
+            else {
+                console.log('error');
             }
         },
         updatetips: function () {
