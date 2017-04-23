@@ -4,6 +4,8 @@
   "description": "Strong like tiger if upgradeE",
   "main": "./src/app.js",
   "scripts": {
+    "start": "electron .",
+    "package": "electron-packager ./ upgradee --all --out ~/Desktop/upgradee --version 0.30.2 --overwrite --icon=./app/img/app-icon.icns",
     "test": "test"
   },
   "repository": {
@@ -25,5 +27,8 @@
     "caperjs": "^0.3.15",
     "electron-json-storage": "^3.0.5",
     "request": "2.81.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^8.6.0"
   }
 }
