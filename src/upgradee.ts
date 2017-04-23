@@ -15,8 +15,10 @@ const perference = require('./preference.js');
 // const testjson = require('./test.js');
 
 const api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
-const get_url = 'http://localhost:8080/upgradeE/server/requests/getTips.php';
-const post_url = 'http://localhost:8080/upgradeE/server/requests/pushTips.php';
+// const get_url = 'http://localhost:8080/upgradeE/server/requests/getTips.php';
+// const post_url = 'http://localhost:8080/upgradeE/server/requests/pushTips.php';
+const get_url = 'http://upgradee.sushithedog.com/server/requests/getTips.php';
+const post_url = 'http://upgradee.sushithedog.com/server/requests/pushTips.php';
 export class playstat {
     private id: string;
     private name: string;

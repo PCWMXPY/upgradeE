@@ -8,8 +8,8 @@ var request = require('request');
 var storage = require('electron-json-storage');
 var perference = require('./preference.js');
 var api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
-var get_url = 'http://localhost:8080/upgradeE/server/requests/getTips.php';
-var post_url = 'http://localhost:8080/upgradeE/server/requests/pushTips.php';
+var get_url = 'http://upgradee.sushithedog.com/server/requests/getTips.php';
+var post_url = 'http://upgradee.sushithedog.com/server/requests/pushTips.php';
 var playstat = (function () {
     function playstat(id, name) {
         this.id = id + '';
