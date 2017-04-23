@@ -1,6 +1,6 @@
 {
-  "name": "upgradeE",
-  "version": "0.2.2",
+  "name": "upgradee",
+  "version": "1.0.1",
   "description": "Strong like tiger if upgradeE",
   "main": "./src/app.js",
   "scripts": {

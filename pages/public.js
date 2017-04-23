@@ -35,6 +35,40 @@ var Prefsystem = {
             }
         });
     },
+    updateTitle: function (content) {
+        document.getElementById('title').innerHTML = 'UpgradeE -> ' + content;
+    },
+    resetTitle: function () {
+        document.getElementById('title').innerHTML = 'UpgradeE';
+    },
+    fixdata: function (data) {
+        var re = [];
+        for (var i = 0; i < data.length; i++) {
+            re.push([]);
+            for (var j = 0; j < data[i].length; j++) {
+                var q = {
+                    time: data[i][j].substring(0, 1),
+                    content: data[i][j].substring(1, data[i][j].length)
+                };
+                re[i].push(q);
+            }
+        }
+        var temp = [];
+        for (var i = 0; i < re.length; i++) {
+            var ttemp = {
+                L: [],
+                E: [],
+                M: [],
+                A: [],
+                R: []
+            };
+            for (var j = 0; j < re[i].length; j++) {
+                ttemp[re[i][j].time].push(re[i][j].content);
+            }
+            temp.push(ttemp);
+        }
+        return temp;
+    },
     readPref: function () {
         storage.get('summorid', function (error, data) {
             if (error)
@@ -72,13 +106,15 @@ var Prefsystem = {
     }
 };
 var riotapi = {
-    make: function (id, fun) {
-        remote.getGlobal('miao').miao = id;
-        Prefsystem.writePref(id);
+    make: function (id, fun, err) {
         nfun.getSummonerId(id, function (data, name) {
+            remote.getGlobal('miao').miao = id;
+            Prefsystem.writePref(id);
             remote.getGlobal('miao').id = data.id;
+            Prefsystem.updateTitle(data.name);
             fun();
         }, function (error) {
+            err();
             console.log(error);
         });
     },
@@ -91,13 +127,21 @@ var riotapi = {
         });
     },
     gtips: function (domain, oppo, fun) {
-        nfun.getTips(domain, oppo, function (data) {
+        var dom = 'C' + domain;
+        var opp = 'C' + oppo;
+        nfun.getTips(dom, opp, function (data) {
             fun(data);
         });
     },
-    ptips: function (domain, side, content) {
-        nfun.postTips(domain, side, content, function (data) {
+    ptips: function (domain, categery, period, side, content) {
+        if (categery.length != 1 || period.length != 1) {
+            return false;
+        }
+        var topic = categery + domain;
+        var cont = period + content;
+        nfun.postTips(topic, side, cont, function (data) {
             console.log(data);
         });
+        return true;
     }
 };

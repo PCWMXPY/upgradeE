@@ -103,7 +103,7 @@ export const nodefunctions = {
                 data = JSON.parse(data);
                 this.near = data;
                 fun(data, id);
-                console.log('From GetSummonerId<-Upgradee.ts: ' + id);
+                // console.log('From GetSummonerId<-Upgradee.ts: ' + id);
             } else {
                 errors(response.statusCode);
                 console.log('From GetSummonerId<-Upgradee.ts: ' + response.statusCode);
@@ -167,7 +167,19 @@ export const nodefunctions = {
                 }
             }
         }
-        let real = [result, temp];
+        let otherinfo = {
+            bans: near.bannedChampions,
+            gameId: near.gameId,
+            time: near.gameLength,
+            mode: near.gameMode,
+            queue: near.gameQueueConfigId,
+            starttime: near.gameStartTime,
+            type: near.gameType,
+            map: near.mapId,
+            key: near.observers.encryptionKey,
+            platform: near.platformId
+        }
+        let real = [result, temp, otherinfo];
         return real;
     }
 

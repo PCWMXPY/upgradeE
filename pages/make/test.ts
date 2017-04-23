@@ -1,17 +1,19 @@
-var node = (function () {
-    function node(data) {
+class node {
+    data: number;
+    left: node;
+    right: node;
+    constructor(data: number) {
         this.data = data;
         this.left = null;
         this.right = null;
     }
-    return node;
-}());
-var mis = function (node) {
+}
+const mis = (node: node) => {
     if (node == null) {
         return [];
     }
-    var rre = mis(node.left).concat(mis(node.right));
-    var re = [node];
+    let rre = mis(node.left).concat(mis(node.right));
+    let re: Array<node> = [node];
     if (node.left) {
         re.concat(mis(node.left.left));
         re.concat(mis(node.left.right));
@@ -22,12 +24,11 @@ var mis = function (node) {
     }
     if (rre.length > re.length) {
         return rre;
-    }
-    else {
+    } else {
         return re;
     }
-};
-var root = new node(20);
+}
+let root = new node(20);
 root.left = new node(8);
 root.left.left = new node(4);
 root.left.right = new node(12);
