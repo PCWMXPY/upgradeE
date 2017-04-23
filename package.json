@@ -8,7 +8,17 @@
   "scripts": {
     "start": "electron .",
     "package": "electron-packager . --platform=win32 --arch=ia32 --electron-version=1.4.15 --overwrite",
-    "test": "test"
+    "test": "test",
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "build": {
+    "appId": "upgradee",
+    "mac": {
+      "title": "upgradee",
+      "icon": "css/facion-m.icns",
+      "icon-size": 128
+    }
   },
   "repository": {
     "type": "git",
@@ -29,6 +39,7 @@
     "request": "2.81.0"
   },
   "devDependencies": {
+    "electron-builder": "^17.0.3",
     "electron-packager": "^8.6.0"
   }
 }
