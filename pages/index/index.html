@@ -77,13 +77,9 @@
     </div>
 </body>
 <script>
-    window.jQuery = window.$ = require('jquery');
-    jQuery(document).ready(function () {
-        // $.backstretch("../../css/bgimg.png");
-        main.register();
-        main.preGet();
-    })
+    window.jQuery = window.$ = require('../../lib/jquery-3.2.1.min.js');
 </script>
+<!--<script src="../../lib/jquery-3.2.1.min.js"></script>-->
 <script src="../../lib/bootstrap.min.js"></script>
 <script src="../../lib/buttons.min.js"></script>
 <script src="../../lib/jquery.backstretch.min.js"></script>
@@ -91,6 +87,12 @@
 <script src="../../lib/caper.js"></script>
 <script src="../public.js"></script>
 <script src="./index.js"></script>
-
+<script>
+    jQuery(document).ready(function () {
+        // $.backstretch("../../css/bgimg.png");
+        main.register();
+        main.preGet();
+    })
+</script>
 
 </html>

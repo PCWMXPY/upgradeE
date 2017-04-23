@@ -13,12 +13,7 @@
     "dist": "build"
   },
   "build": {
-    "appId": "upgradee",
-    "mac": {
-      "title": "upgradee",
-      "icon": "css/facion-m.icns",
-      "icon-size": 128
-    }
+    "appId": "upgradee"
   },
   "repository": {
     "type": "git",
@@ -40,6 +35,7 @@
   },
   "devDependencies": {
     "electron-builder": "^17.0.3",
-    "electron-packager": "^8.6.0"
+    "electron-packager": "^8.6.0",
+    "electron": "1.4.15"
   }
 }
