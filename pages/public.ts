@@ -135,13 +135,13 @@ const riotapi = {
             fun(data);
         });
     },
-    ptips: (domain: number, categery: string, period: string, side: number, content: string) => {
+    ptips: (domain: number, categery: string, period: string, side: number, content: string, position: string) => {
         //Champion C, Runes R, Mysterys Y
-        if (categery.length != 1 || period.length != 1) {
+        if (categery.length != 1 || period.length != 1 || position.length != 1) {
             return false;
         }
         const topic = categery + domain;
-        const cont = period + content;
+        const cont = period + position + content;
         nfun.postTips(topic, side, cont, data => {
             console.log(data);
         });

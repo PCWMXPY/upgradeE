@@ -89,6 +89,7 @@ var main = new Vue({
             this.edit.domain = (side == 0) ? this.domainchamp.id : this.oppochamp.id;
             this.edit.categery = 'C';
             this.edit.period = 'E';
+            this.edit.counter = 'A';
             this.edit.side = side;
             this.edit.content = 'EditHere';
             this.newuser = 3;
@@ -106,7 +107,19 @@ var main = new Vue({
             this.edit[categery] = event.srcElement.innerHTML;
         },
         pushedit: function () {
-            console.log(this.edit);
+            if (riotapi.ptips(this.edit.domain, this.edit.categery, this.edit.period, this.edit.side, this.edit.content, this.edit.counter)) {
+                main.newuser = 2;
+                if (this.edit.side == 0) {
+                    this.tips.domain.push('Just Added: ' + this.edit.content);
+                }
+                else {
+                    this.tips.oppo.push('Just Added: ' + this.edit.content);
+                }
+                this.tips.domain;
+            }
+            else {
+                console.log('error');
+            }
         },
         updatetips: function () {
             var date = new Date();

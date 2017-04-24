@@ -134,12 +134,12 @@ var riotapi = {
             fun(data);
         });
     },
-    ptips: function (domain, categery, period, side, content) {
-        if (categery.length != 1 || period.length != 1) {
+    ptips: function (domain, categery, period, side, content, position) {
+        if (categery.length != 1 || period.length != 1 || position.length != 1) {
             return false;
         }
         var topic = categery + domain;
-        var cont = period + content;
+        var cont = period + position + content;
         nfun.postTips(topic, side, cont, function (data) {
             console.log(data);
         });

@@ -6,6 +6,7 @@
  * @contect wm@wmpcxpy.com
  */
 declare var Vue: any;
+declare var wangEditor: any;
 declare function require(name: string);
 const ipcRenderer = require('electron').ipcRenderer;
 const pref = require('../../src/preference.js');
@@ -107,6 +108,8 @@ let main = new Vue({
             this.edit.side = side;
             this.edit.content = 'EditHere';
             this.newuser = 3;
+            // var editor = new wangEditor('textarea1');
+            // editor.create();
             // this.changeselect();
         },
         sendSummorid: function () {
@@ -122,18 +125,17 @@ let main = new Vue({
             this.edit[categery] = event.srcElement.innerHTML;
         },
         pushedit: function () {
-            console.log(this.edit);
-            // if (riotapi.ptips(this.edit.domain, this.edit.categery, this.edit.period, this.edit.side, this.edit.content)) {
-            //     main.newuser = 2;
-            //     if (this.edit.side == 0) {
-            //         this.tips.domain.push('Just Added: ' + this.edit.content);
-            //     } else {
-            //         this.tips.oppo.push('Just Added: ' + this.edit.content);
-            //     }
-            //     this.tips.domain
-            // } else {
-            //     console.log('error');
-            // }
+            if (riotapi.ptips(this.edit.domain, this.edit.categery, this.edit.period, this.edit.side, this.edit.content, this.edit.counter)) {
+                main.newuser = 2;
+                if (this.edit.side == 0) {
+                    this.tips.domain.push('Just Added: ' + this.edit.content);
+                } else {
+                    this.tips.oppo.push('Just Added: ' + this.edit.content);
+                }
+                this.tips.domain
+            } else {
+                console.log('error');
+            }
         },
         updatetips: function () {
             let date = new Date();

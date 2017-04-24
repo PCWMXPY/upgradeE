@@ -20,6 +20,11 @@ body {
     min-height: 100%;
 }
 
+.m-editor {
+    height: 100px;
+    background-color: #b5b5b5;
+}
+
 .ue-df {
     padding-top: 35px;
 }
