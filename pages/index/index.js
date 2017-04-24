@@ -39,6 +39,7 @@ var main = new Vue({
             categery: '',
             period: '',
             side: '',
+            counter: '',
             content: ''
         },
         oppochamp: {
@@ -50,8 +51,14 @@ var main = new Vue({
             name: ''
         },
         newuser: 1,
+        selchampn: '',
         mypng: '../../css/favicon.ico',
         oppopng: '../../css/favicon.ico'
+    },
+    computed: {
+        selectedchampname: function () {
+            return pref.getChampName(parseInt(this.edit.domain));
+        }
     },
     methods: {
         preGet: function () {
@@ -99,19 +106,7 @@ var main = new Vue({
             this.edit[categery] = event.srcElement.innerHTML;
         },
         pushedit: function () {
-            if (riotapi.ptips(this.edit.domain, this.edit.categery, this.edit.period, this.edit.side, this.edit.content)) {
-                main.newuser = 2;
-                if (this.edit.side == 0) {
-                    this.tips.domain.push('Just Added: ' + this.edit.content);
-                }
-                else {
-                    this.tips.oppo.push('Just Added: ' + this.edit.content);
-                }
-                this.tips.domain;
-            }
-            else {
-                console.log('error');
-            }
+            console.log(this.edit);
         },
         updatetips: function () {
             var date = new Date();
@@ -169,29 +164,42 @@ var main = new Vue({
             switch (period) {
                 case 0:
                     this.gameperiod = 'In Lane:';
-                    this.tips.domain = this.vars.domain.L;
-                    this.tips.oppo = this.vars.oppo.L;
+                    display('L');
                     break;
                 case 10:
                     this.gameperiod = 'In Early Game:';
-                    this.tips.domain = this.vars.domain.E;
-                    this.tips.oppo = this.vars.oppo.E;
+                    display('E');
                     break;
                 case 20:
                     this.gameperiod = 'In Middle Game:';
-                    this.tips.domain = this.vars.domain.M;
-                    this.tips.oppo = this.vars.oppo.M;
+                    display('M');
                     break;
                 case 30:
                     this.gameperiod = 'In Late Game:';
-                    this.tips.domain = this.vars.domain.A;
-                    this.tips.oppo = this.vars.oppo.A;
+                    display('A');
                     break;
                 case 40:
                     this.gameperiod = 'In REALLY Late Game:';
-                    this.tips.domain = this.vars.domain.R;
-                    this.tips.oppo = this.vars.oppo.R;
+                    display('R');
                     break;
+            }
+            function display(time) {
+                for (var i = 0; i < main.vars.domain[time].length; i++) {
+                    if (main.vars.domain[time][i].substring(0, 1) == main.data2.position || main.data2.position == 'A') {
+                        main.tips.domain.push(main.vars.domain[time][i].substring(1, main.vars.domain[time][i].length));
+                    }
+                    else if (main.vars.domain[time][i].substring(0, 1) == 'B' && (main.data2.position == 'S' || main.data2.position == 'D')) {
+                        main.tips.domain.push(main.vars.domain[time][i].substring(1, main.vars.domain[time][i].length));
+                    }
+                }
+                for (var i = 0; i < main.vars.oppo[time].length; i++) {
+                    if (main.vars.oppo[time][i].substring(0, 1) == main.data2.position || main.data2.position == 'A') {
+                        main.tips.oppo.push(main.vars.oppo[time][i].substring(1, main.vars.oppo[time][i].length));
+                    }
+                    else if (main.vars.oppo[time][i].substring(0, 1) == 'B' && (main.data2.position == 'S' || main.data2.position == 'D')) {
+                        main.tips.oppo.push(main.vars.oppo[time][i].substring(1, main.vars.oppo[time][i].length));
+                    }
+                }
             }
         },
         stopeverything: function () {
@@ -204,6 +212,7 @@ var main = new Vue({
             var _this = this;
             this.stopeverything();
             riotapi.find(function (data) {
+                console.log(data);
                 if (data != 404) {
                     _this.newuser = 2;
                     _this.mypng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][0].championId) + '.png';

@@ -60,7 +60,8 @@ var Prefsystem = {
                 E: [],
                 M: [],
                 A: [],
-                R: []
+                R: [],
+                T: []
             };
             for (var j = 0; j < re[i].length; j++) {
                 ttemp[re[i][j].time].push(re[i][j].content);

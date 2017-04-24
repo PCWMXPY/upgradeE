@@ -172,8 +172,30 @@ exports.nodefunctions = {
             type: near.gameType,
             map: near.mapId,
             key: near.observers.encryptionKey,
-            platform: near.platformId
+            platform: near.platformId,
+            position: 'N'
         };
+        for (var i = 0; i < result[0].length; i++) {
+            if (result[0][i] == perference.getChampName(temp[0].championId)) {
+                switch (i) {
+                    case 0:
+                        otherinfo.position = 'M';
+                        break;
+                    case 1:
+                        otherinfo.position = 'D';
+                        break;
+                    case 2:
+                        otherinfo.position = 'T';
+                        break;
+                    case 3:
+                        otherinfo.position = 'S';
+                        break;
+                    case 4:
+                        otherinfo.position = 'J';
+                        break;
+                }
+            }
+        }
         var real = [result, temp, otherinfo];
         return real;
     }
