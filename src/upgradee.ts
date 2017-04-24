@@ -180,25 +180,25 @@ export const nodefunctions = {
             map: near.mapId,
             key: near.observers.encryptionKey,
             platform: near.platformId,
-            position: 'N'
+            position: 'AN'
         }
         for (let i = 0; i < result[0].length; i++) {
             if (result[0][i] == perference.getChampName(temp[0].championId)) {
                 switch (i) {
                     case 0:
-                        otherinfo.position = 'M';
+                        otherinfo.position = 'AM';
                         break;
                     case 1:
-                        otherinfo.position = 'D';
+                        otherinfo.position = 'AD';
                         break;
                     case 2:
-                        otherinfo.position = 'T';
+                        otherinfo.position = 'AT';
                         break;
                     case 3:
-                        otherinfo.position = 'S';
+                        otherinfo.position = 'AS';
                         break;
                     case 4:
-                        otherinfo.position = 'J';
+                        otherinfo.position = 'AJ';
                         break;
                 }
             }

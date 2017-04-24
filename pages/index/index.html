@@ -48,6 +48,9 @@
                     <button class="left-center ue-wbutton" v-on:click="editchamp(0)"><i class="ra ra-doubled"></i>{{domainchamp.name}}</button>
                     <button class="right-center ue-wbutton" v-on:click="editchamp(1)"><i class="ra ra-lightning-sword"></i>{{oppochamp.name}}</button>
                 </div>
+                <div class="top-center keep-top">
+                    <button class="left-center ue-wbutton" v-on:click="backtoMain"><i class="ra ra-cancel"></i>返回</button>
+                </div>
             </div>
             <div class="col-xs-7 ue-df ue-bg fill" style="color:#494949;">
                 <h3>{{gameperiod}}</h3>
@@ -72,11 +75,11 @@
                 </div>
             </div>
             <div class="col-xs-offset-1 col-xs-10 leftc-center ue-bg">
-                <label>英雄ID</label>
+                <label><i class="ra ra-player"></i>&nbsp;英雄ID</label>
                 <input type="text" v-model="edit.domain"></input><br>
                 <!--<strong>C</strong>
                 <div contenteditable="true" v-on:keyup="localupdate('categery',$event)">{{edit.categery}}</div>-->
-                <label>游戏阶段:</label>
+                <label><i class="ra ra-bottle-vapors"></i>&nbsp;游戏阶段:</label>
                 <select v-model="edit.period">
                     <option value="L">对线期</option>
                     <option value="E">前期</option>
@@ -85,23 +88,25 @@
                     <option value="R">大后期</option>
                     <option value="T" selected>整场游戏</option>
                 </select><br>
-                <label>位置:</label>
+                <label><i class="ra ra-castle-flag"></i>&nbsp;位置:</label>
                 <select v-model="edit.counter">
-                    <option value="M">中路</option>
-                    <option value="D">射手</option>
-                    <option value="T">上单</option>
-                    <option value="S">辅助</option>
-                    <option value="J">打野</option>
-                    <option value="A" selected>任何位置</option>
-                    <option value="B">下路二人组</option>
+                    <option value="AM">中路</option>
+                    <option value="AD">射手</option>
+                    <option value="AT">上单</option>
+                    <option value="AS">辅助</option>
+                    <option value="AJ">打野</option>
+                    <option value="AA" selected>任何位置</option>
+                    <option value="AB">下路二人组</option>
                 </select><br>
                 <input type="radio" value="0" v-model="edit.side">
                 <label for="one">使用{{selectedchampname}}</label>
                 <input type="radio" value="1" v-model="edit.side">
                 <label for="two">对抗{{selectedchampname}}</label><br>
-                <strong>内容</strong>
-                <div class="m-editor" contenteditable="true" v-on:keyup="localupdate('content',$event)"></div>
-                <button v-on:click="pushedit">SUBMIT</button>
+                <strong><i class="ra ra-cog"></i>&nbsp;内容</strong>
+                <div class="m-editor" contenteditable="true" v-on:keyup="localupdate('content',$event)"></div><br>
+                <button v-on:click="pushedit(0)"><i class="ra  ra-save"></i>&nbsp;提交并返回</button>
+                <button v-on:click="pushedit(1)"><i class="ra  ra-load"></i>&nbsp;提交并退出</button>
+                <button v-on:click="backtoMain"><i class="ra  ra-player-dodge"></i>&nbsp;不保存离开攻略编辑器</button>
             </div>
         </div>
     </div>

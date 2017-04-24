@@ -137,7 +137,7 @@ const riotapi = {
     },
     ptips: (domain: number, categery: string, period: string, side: number, content: string, position: string) => {
         //Champion C, Runes R, Mysterys Y
-        if (categery.length != 1 || period.length != 1 || position.length != 1) {
+        if (categery.length != 1 || period.length != 1 || position.length != 2) {
             return false;
         }
         const topic = categery + domain;

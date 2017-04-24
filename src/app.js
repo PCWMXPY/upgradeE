@@ -27,7 +27,12 @@ const icons = {
     mengwio: path.resolve(__dirname, '..', 'css', 'mengw.ico')
 };
 let renders = {
-    mainpage: null
+    mainpage: null,
+    programmer: null
+};
+let currentrender = {
+    rander: null,
+    identification: ''
 };
 global.miao = {
     id: null,
@@ -35,70 +40,86 @@ global.miao = {
     near: null
 };
 let template = [{
-    label: 'Summoner',
+    label: '召唤师',
     submenu: [{
-            label: 'Re-Announce Summoner',
-            sublabel: 'Start over again',
-            accelerator: 'CmdOrCtrl+Shift+S',
-            click: (item, focusedWindow) => {
+        label: '声明召唤师ID',
+        sublabel: '初始化',
+        accelerator: 'CmdOrCtrl+Shift+R',
+        click: (item, focusedWindow) => {
+            if (currentrender.identification = 'mainpage') {
                 storage.remove('summorid', function (error) {
                     if (error) throw error;
                 });
-                renders.mainpage.sender.send('cover-message', 'RAS');
-            }
-        }, {
-            label: 'Test Function',
-            accelerator: 'CmdOrCtrl+K',
-            click: (item, focusedWindow) => {
-                renders.mainpage.sender.send('cover-message', 'test');
-            }
-        },
-        {
-            label: 'Preferences',
-            role: 'preferences',
-            accelerator: 'CmdOrCtrl+,',
-            click: (item, focusedWindow) => {}
-        }, {
-            label: 'Quit',
-            accelerator: 'CmdOrCtrl+Q',
-            click: function () {
-                app.quit();
+                currentrender.rander.sender.send('cover-message', 'RAS');
             }
         }
-    ]
+    }, {
+        label: '返回主菜单',
+        accelerator: 'CmdOrCtrl+K',
+        click: (item, focusedWindow) => {
+            if (currentrender.identification = 'mainpage') {
+                currentrender.rander.sender.send('cover-message', 'BTM');
+            } else {}
+        }
+    }, {
+        label: '启动高级编辑器',
+        sublabel: '需要攻略作者ID（开发中）',
+        accelerator: 'CmdOrCtrl+Shift+P',
+        click: (item, focusedWindow) => {
+            renders.mainpage = null;
+            mainWindow.loadURL('file://' + __dirname + '/../pages/index/index.html');
+        }
+    }, {
+        label: '设置',
+        role: 'preferences',
+        accelerator: 'CmdOrCtrl+,',
+        click: (item, focusedWindow) => {}
+    }, {
+        label: '退出',
+        accelerator: 'CmdOrCtrl+Q',
+        click: function () {
+            app.quit();
+        }
+    }]
 }, {
-    label: 'Window',
+    label: '窗口',
     role: 'window',
     submenu: [{
-            label: 'Reload',
+            label: '重新加载',
             accelerator: 'CmdOrCtrl+R',
             click: (item, focusedWindow) => {
                 if (focusedWindow)
                     focusedWindow.reload();
             }
         }, {
-            label: 'Minimize',
+            label: '最小化',
             accelerator: 'CmdOrCtrl+M',
             role: 'minimize'
         },
         {
-            label: 'Close',
+            label: '关闭',
             accelerator: 'CmdOrCtrl+W',
             role: 'close'
         },
     ]
 }, {
-    label: 'About',
+    label: '帮助',
     role: 'help',
     submenu: [{
         label: 'Github',
-        sublabel: 'Open Github Page',
+        sublabel: '浏览源码',
         click: () => {
             shell.openExternal('https://github.com/PCWMXPY/upgradeE');
         }
     }, {
         label: 'Mengw.io',
-        sublabel: 'Open Mengw.io',
+        sublabel: '打开博客',
+        click: () => {
+            shell.openExternal('http://www.mengw.io');
+            // c.exec("start http://www.mengw.io");
+        }
+    }, {
+        label: '回报BUG',
         click: () => {
             shell.openExternal('http://www.mengw.io');
             // c.exec("start http://www.mengw.io");
@@ -124,7 +145,7 @@ function createWindow() {
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
     // 同时也可以简化成：mainWindow.loadURL('./index.html');
     mainWindow.loadURL('file://' + __dirname + '/../pages/index/index.html');
-    // mainWindow.openDevTools();
+    mainWindow.openDevTools();
     // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
     mainWindow.on("closed", function () {
         renders.mainpage = null;
@@ -151,5 +172,7 @@ app.on("activate", function () {
 });
 ipcMain.on('register', (event, arg) => {
     renders[arg] = event;
+    currentrender.rander = event;
+    currentrender.identification = arg;
     console.log('From Event-Register<-app.js: ' + arg);
 });

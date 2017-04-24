@@ -135,7 +135,7 @@ var riotapi = {
         });
     },
     ptips: function (domain, categery, period, side, content, position) {
-        if (categery.length != 1 || period.length != 1 || position.length != 1) {
+        if (categery.length != 1 || period.length != 1 || position.length != 2) {
             return false;
         }
         var topic = categery + domain;

@@ -43,11 +43,11 @@ var main = new Vue({
             content: ''
         },
         oppochamp: {
-            id: 0,
+            id: 1,
             name: ''
         },
         domainchamp: {
-            id: 0,
+            id: 1,
             name: ''
         },
         newuser: 1,
@@ -73,13 +73,19 @@ var main = new Vue({
                 });
             });
         },
+        backtoMain: function () {
+            this.stopeverything();
+            main.newuser = 1;
+        },
         register: function () {
             this.stopeverything();
             ipcRenderer.on('cover-message', function (event, arg) {
-                console.log(arg);
                 switch (arg) {
                     case 'RAS':
                         main.preGet();
+                        break;
+                    case 'BTM':
+                        main.backtoMain();
                         break;
                 }
             });
@@ -106,9 +112,14 @@ var main = new Vue({
         localupdate: function (categery, event) {
             this.edit[categery] = event.srcElement.innerHTML;
         },
-        pushedit: function () {
+        pushedit: function (mode) {
             if (riotapi.ptips(this.edit.domain, this.edit.categery, this.edit.period, this.edit.side, this.edit.content, this.edit.counter)) {
-                main.newuser = 2;
+                if (mode == 0) {
+                    main.newuser = 2;
+                }
+                else {
+                    main.newuser = 1;
+                }
                 if (this.edit.side == 0) {
                     this.tips.domain.push('Just Added: ' + this.edit.content);
                 }
@@ -196,21 +207,22 @@ var main = new Vue({
                     display('R');
                     break;
             }
+            display('T');
             function display(time) {
                 for (var i = 0; i < main.vars.domain[time].length; i++) {
-                    if (main.vars.domain[time][i].substring(0, 1) == main.data2.position || main.data2.position == 'A') {
-                        main.tips.domain.push(main.vars.domain[time][i].substring(1, main.vars.domain[time][i].length));
+                    if (main.vars.domain[time][i].substring(0, 2) == main.data2.position || main.vars.domain[time][i].substring(0, 2) == 'AA') {
+                        main.tips.domain.push(main.vars.domain[time][i].substring(2, main.vars.domain[time][i].length));
                     }
-                    else if (main.vars.domain[time][i].substring(0, 1) == 'B' && (main.data2.position == 'S' || main.data2.position == 'D')) {
-                        main.tips.domain.push(main.vars.domain[time][i].substring(1, main.vars.domain[time][i].length));
+                    else if (main.vars.domain[time][i].substring(0, 2) == 'AB' && (main.data2.position == 'AS' || main.data2.position == 'AD')) {
+                        main.tips.domain.push(main.vars.domain[time][i].substring(2, main.vars.domain[time][i].length));
                     }
                 }
                 for (var i = 0; i < main.vars.oppo[time].length; i++) {
-                    if (main.vars.oppo[time][i].substring(0, 1) == main.data2.position || main.data2.position == 'A') {
-                        main.tips.oppo.push(main.vars.oppo[time][i].substring(1, main.vars.oppo[time][i].length));
+                    if (main.vars.oppo[time][i].substring(0, 2) == main.data2.position || main.vars.oppo[time][i].substring(0, 2) == 'AA') {
+                        main.tips.oppo.push(main.vars.oppo[time][i].substring(2, main.vars.oppo[time][i].length));
                     }
-                    else if (main.vars.oppo[time][i].substring(0, 1) == 'B' && (main.data2.position == 'S' || main.data2.position == 'D')) {
-                        main.tips.oppo.push(main.vars.oppo[time][i].substring(1, main.vars.oppo[time][i].length));
+                    else if (main.vars.oppo[time][i].substring(0, 2) == 'AB' && (main.data2.position == 'AS' || main.data2.position == 'AD')) {
+                        main.tips.oppo.push(main.vars.oppo[time][i].substring(2, main.vars.oppo[time][i].length));
                     }
                 }
             }
@@ -225,7 +237,6 @@ var main = new Vue({
             var _this = this;
             this.stopeverything();
             riotapi.find(function (data) {
-                console.log(data);
                 if (data != 404) {
                     _this.newuser = 2;
                     _this.mypng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][0].championId) + '.png';
