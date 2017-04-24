@@ -46,7 +46,7 @@ let template = [{
         sublabel: '初始化',
         accelerator: 'CmdOrCtrl+Shift+R',
         click: (item, focusedWindow) => {
-            if (currentrender.identification = 'mainpage') {
+            if (currentrender.identification == 'mainpage') {
                 storage.remove('summorid', function (error) {
                     if (error) throw error;
                 });
@@ -57,9 +57,11 @@ let template = [{
         label: '返回主菜单',
         accelerator: 'CmdOrCtrl+K',
         click: (item, focusedWindow) => {
-            if (currentrender.identification = 'mainpage') {
+            if (currentrender.identification == 'mainpage') {
                 currentrender.rander.sender.send('cover-message', 'BTM');
-            } else {}
+            } else {
+                mainWindow.loadURL('file://' + __dirname + '/../pages/index/index.html');
+            }
         }
     }, {
         label: '启动高级编辑器',
@@ -67,7 +69,7 @@ let template = [{
         accelerator: 'CmdOrCtrl+Shift+P',
         click: (item, focusedWindow) => {
             renders.mainpage = null;
-            mainWindow.loadURL('file://' + __dirname + '/../pages/index/index.html');
+            mainWindow.loadURL('file://' + __dirname + '/../pages/programmer/programmer.html');
         }
     }, {
         label: '设置',
@@ -121,7 +123,7 @@ let template = [{
     }, {
         label: '回报BUG',
         click: () => {
-            shell.openExternal('http://www.mengw.io');
+            shell.openExternal('https://github.com/PCWMXPY/upgradeE/issues/new');
             // c.exec("start http://www.mengw.io");
         }
     }]
@@ -145,7 +147,7 @@ function createWindow() {
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
     // 同时也可以简化成：mainWindow.loadURL('./index.html');
     mainWindow.loadURL('file://' + __dirname + '/../pages/index/index.html');
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
     // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
     mainWindow.on("closed", function () {
         renders.mainpage = null;
