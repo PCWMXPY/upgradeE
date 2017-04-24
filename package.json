@@ -1,6 +1,6 @@
 {
   "name": "upgradee",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Strong like tiger if upgradeE",
   "main": "./src/app.js",
   "author": "WMXPY",
@@ -8,12 +8,12 @@
   "scripts": {
     "start": "electron .",
     "package": "electron-packager . --platform=win32 --arch=ia32 --electron-version=1.4.15 --overwrite",
-    "test": "test",
     "pack": "build --dir",
     "dist": "build"
   },
   "build": {
-    "appId": "upgradee"
+    "appId": "upgradee",
+    "win": {}
   },
   "repository": {
     "type": "git",
