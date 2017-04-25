@@ -10,19 +10,11 @@ declare var wangEditor: any;
 declare function require(name: string);
 const ipcRenderer = require('electron').ipcRenderer;
 const pref = require('../../src/preference.js');
-const cdisplay = {
-    cn: {
-        input: 'upgrad',
-        input2: 'eE',
-        submit: 'SUBMIT',
-        youare: 'You\'re?..'
-    }
-}
 let main = new Vue({
     el: '#main',
     data: {
         test: '',
-        display: cdisplay.cn,
+        debugdisplay: '',
         button: false,
         oppoid: '',
         domainid: '',
@@ -72,6 +64,7 @@ let main = new Vue({
     methods: {
         preGet: function () {
             this.stopeverything();
+            this.resetdebugdisplay();
             Prefsystem.preLoad(() => {
                 //not exist
                 main.newuser = 0;
@@ -87,6 +80,9 @@ let main = new Vue({
                 // console.log('Index.ts Preget ->: ' + data);
             });
             // this.newuser = 3;
+        },
+        resetdebugdisplay: function () {
+            this.debugdisplay = '主E蕹鵺猛如虎';
         },
         backtoMain: function () {
             this.stopeverything();
