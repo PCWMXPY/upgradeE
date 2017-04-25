@@ -9,6 +9,7 @@ var storage = require('electron-json-storage');
 var perference = require('./preference.js');
 var api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
 var get_url = 'http://upgradee.sushithedog.com/server/requests/getTips.php';
+var version_url = 'https://raw.githubusercontent.com/PCWMXPY/upgradeE/master/version.json';
 var post_url = 'http://upgradee.sushithedog.com/server/requests/pushTips.php';
 var playstat = (function () {
     function playstat(id, name) {
@@ -29,6 +30,34 @@ var playstat = (function () {
     return playstat;
 }());
 exports.playstat = playstat;
+exports.appfunctions = {
+    getVersion: function (currentVersion, fun) {
+        request(version_url, function (error, response, data) {
+            if (!error) {
+                var parsed = JSON.parse(data);
+                var link = parsed.downloadlink;
+                var str = parsed.currentversion.str;
+                console.log(parsed);
+                var obj = {
+                    update: 0,
+                    str: str,
+                    link: link
+                };
+                console.log(obj);
+                if (parsed.currentversion.int > currentVersion.int) {
+                    if (parsed.lastemergency.int > currentVersion.int) {
+                        obj.update = 2;
+                    }
+                    obj.update = 1;
+                }
+                fun(obj);
+            }
+            else {
+                throw error;
+            }
+        });
+    }
+};
 exports.nodefunctions = {
     getTips: function (domain, oppo, fun) {
         var url = get_url + '?domain=' + domain + '&oppo=' + oppo;
@@ -200,4 +229,4 @@ exports.nodefunctions = {
         return real;
     }
 };
-module.exports = { nodefunctions: exports.nodefunctions, playstat: playstat };
+module.exports = { appfunctions: exports.appfunctions, nodefunctions: exports.nodefunctions, playstat: playstat };

@@ -29,6 +29,7 @@ let main = new Vue({
         gameperiod: '',
         stopper: [],
         data2: null,
+        versionmessage: 'Getting Data From Github...',
         vars: {
             domain: [],
             oppo: [],
@@ -101,6 +102,9 @@ let main = new Vue({
                         main.backtoMain();
                         break;
                 }
+            })
+            ipcRenderer.once('version', (event, arg) => {
+                console.log(arg);
             })
             ipcRenderer.send('register', 'mainpage');
         },

@@ -1,5 +1,11 @@
 {
-    "currentversion": "1.3.2",
-    "lastemergency": "1.3.2",
+    "currentversion": {
+        "str": "1.3.2",
+        "int": 10302
+    },
+    "lastemergency": {
+        "str": "1.3.2",
+        "int": 10302
+    },
     "downloadlink": "https://github.com/PCWMXPY/upgradeE/releases/tag/1.3.2"
 }

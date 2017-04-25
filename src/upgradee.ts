@@ -18,6 +18,7 @@ const api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
 // const get_url = 'http://localhost:8080/upgradeE/server/requests/getTips.php';
 // const post_url = 'http://localhost:8080/upgradeE/server/requests/pushTips.php';
 const get_url = 'http://upgradee.sushithedog.com/server/requests/getTips.php';
+const version_url = 'https://raw.githubusercontent.com/PCWMXPY/upgradeE/master/version.json';
 const post_url = 'http://upgradee.sushithedog.com/server/requests/pushTips.php';
 export class playstat {
     private id: string;
@@ -37,7 +38,34 @@ export class playstat {
         const url = 'https://na.api.riotgames.com/api/lol/NA/v1.3/game/by-summoner/' + this.id + '/recent?api_key=' + api_key;
         request(url, (error, response, data: string) => {
             // this.returnJson(error, response, data, fun, err);
-        })
+        });
+    }
+}
+export const appfunctions = {
+    getVersion: (currentVersion: any, fun: Function) => {
+        request(version_url, (error, response, data: string) => {
+            if (!error) {
+                let parsed = JSON.parse(data);
+                let link = parsed.downloadlink;
+                let str = parsed.currentversion.str;
+                console.log(parsed);
+                let obj = {
+                    update: 0,
+                    str: str,
+                    link: link
+                }
+                console.log(obj);
+                if (parsed.currentversion.int > currentVersion.int) {
+                    if (parsed.lastemergency.int > currentVersion.int) {
+                        obj.update = 2;
+                    }
+                    obj.update = 1;
+                }
+                fun(obj);
+            } else {
+                throw error;
+            }
+        });
     }
 }
 export const nodefunctions = {
@@ -208,4 +236,4 @@ export const nodefunctions = {
     }
 
 }
-module.exports = { nodefunctions, playstat };
+module.exports = { appfunctions, nodefunctions, playstat };

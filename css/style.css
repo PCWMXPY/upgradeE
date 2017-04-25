@@ -3,6 +3,15 @@
     font-family: Georgia, "Times New Roman", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
 }
 
+.buttom-forever {
+    float: left;
+    position: fixed;
+    left: 1%;
+    bottom: 1%;
+    _position: absolute;
+    /* position fixed for IE6 */
+}
+
 .fill {
     height: 100%;
     min-height: 100%;

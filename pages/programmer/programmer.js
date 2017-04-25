@@ -9,6 +9,9 @@ var mainpr = new Vue({
             ipcRenderer.on('cover-message', function (event, arg) {
                 console.log(arg);
             });
+            ipcRenderer.once('version', function (event, arg) {
+                console.log(arg);
+            });
             ipcRenderer.send('register', 'programmer');
         }
     }
