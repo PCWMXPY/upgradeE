@@ -38,7 +38,7 @@ exports.appfunctions = {
                 var link = parsed.downloadlink;
                 var str = parsed.currentversion.str;
                 var obj = {
-                    update: 2,
+                    update: 0,
                     str: str,
                     link: link
                 };
