@@ -29,7 +29,8 @@ var Prefsystem = {
                 throw error;
             if (data.id == null) {
                 notexist();
-            } else {
+            }
+            else {
                 exist(data.id);
             }
         });
@@ -42,9 +43,7 @@ var Prefsystem = {
         });
     },
     writePref: function (ids) {
-        storage.set('summorid', {
-            id: ids
-        }, function (error) {
+        storage.set('summorid', { id: ids }, function (error) {
             if (error)
                 throw error;
         });
