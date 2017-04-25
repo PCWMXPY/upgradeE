@@ -8,7 +8,8 @@
 declare var renders: any;
 declare var app: any;
 declare var shell: any;
-let menutemplate = [{
+declare var module: any;
+export let menutemplate = [{
     label: 'Summoner',
     submenu: [{
         label: 'Re-Announce Summoner',
@@ -78,3 +79,4 @@ let menutemplate = [{
         }
     }]
 }];
+module.exports = { menutemplate };

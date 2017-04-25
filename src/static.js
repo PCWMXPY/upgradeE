@@ -1,7 +1,9 @@
+"use strict";
+exports.__esModule = true;
 (function () {
     'use strict';
 }());
-var menutemplate = [{
+exports.menutemplate = [{
         label: 'Summoner',
         submenu: [{
                 label: 'Re-Announce Summoner',
@@ -71,3 +73,4 @@ var menutemplate = [{
                 }
             }]
     }];
+module.exports = { menutemplate: exports.menutemplate };
