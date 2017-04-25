@@ -5,20 +5,42 @@
     <title></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../../css/style.css" rel="stylesheet">
+    <!--<link href="../../css/style.css" rel="stylesheet">-->
 </head>
 
 <body>
-
+    <!--<div src="./oppo.html"></div>-->
+    <!--<div itemscope itemtype="http://schema.org/Movie">
+        <h1 itemprop="name">Avatar</h1>
+        <span>Director:
+    <span itemprop="director">James Cameron</span> (born August 16, 1954)
+        </span>
+        
+        <a href="../movies/avatar-theatrical-trailer.html" itemprop="trailer">Trailer</a>
+    </div>-->
+    <span id="qq" class="tetst">Science fiction</span>
 </body>
-<script src="../../lib/caper.js"></script>
+<!--<script src="../../lib/caper.js"></script>-->
 <script>
-    Ca$.get({
-        url: 'http://localhost:8080/Notebook.md/php/header.php',
-        success: function (data) {
-            console.log(data);
-        }
-    })
+    // Ca$.get({
+    //     url: 'http://localhost:8080/Notebook.md/php/header.php',
+    //     success: function (data) {
+    //         console.log(data);
+    //     }
+    // })
+    function col() {
+        document.getElementById('qq').style.opacity = 0;
+    }
 </script>
+<style>
+    .tetst {
+        /*opacity: 0;*/
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        -ms-transition: all 0.5s;
+    }
+</style>
 
 </html>

@@ -21,19 +21,143 @@ const path = require('path');
 const storage = require('electron-json-storage');
 // const c = require('child_process');
 const nodefunctions = require('./upgradee.js').nodefunctions;
+const afun = require('./upgradee.js').appfunctions;
 const playstat = require('./upgradee.js').playstat;
 const icons = {
     favicon: path.resolve(__dirname, '..', 'css', 'favicon.ico'),
     mengwio: path.resolve(__dirname, '..', 'css', 'mengw.ico')
 };
+const version = {
+    str: "1.3.4",
+    int: 10304
+}
+let gloarg = {
+    version: {
+        update: 0,
+        str: version.str,
+        link: ''
+    }
+}
 let renders = {
-    mainpage: null
+    mainpage: null,
+    programmer: null
+};
+let currentrender = {
+    rander: null,
+    identification: ''
 };
 global.miao = {
     id: null,
-    miao: null
+    miao: null,
+    near: null
 };
+<<<<<<< HEAD
 let template = require('./static.js').menutemplate;
+=======
+let template = [{
+    label: 'UpgradeE',
+    role: 'file',
+    submenu: [{
+        label: '关于 UpgradeE',
+        click: (item, focusedWindow) => {}
+    }, {
+        label: '设置',
+        role: 'preferences',
+        accelerator: 'CmdOrCtrl+,',
+        click: (item, focusedWindow) => {}
+    }, {
+        label: '退出',
+        accelerator: 'CmdOrCtrl+Q',
+        click: function () {
+            app.quit();
+        }
+    }]
+}, {
+    label: '召唤师',
+    submenu: [{
+        label: '声明召唤师ID',
+        sublabel: '初始化',
+        accelerator: 'CmdOrCtrl+Shift+R',
+        click: (item, focusedWindow) => {
+            if (currentrender.identification == 'mainpage') {
+                storage.remove('summorid', function (error) {
+                    if (error) throw error;
+                });
+                currentrender.rander.sender.send('cover-message', 'RAS');
+            }
+        }
+    }, {
+        label: '返回主菜单',
+        sublabel: '回到功能页面',
+        accelerator: 'CmdOrCtrl+K',
+        click: (item, focusedWindow) => {
+            if (currentrender.identification == 'mainpage') {
+                currentrender.rander.sender.send('cover-message', 'BTM');
+            } else {
+                mainWindow.loadURL('file://' + __dirname + '/../pages/index/index.html');
+            }
+        }
+    }, {
+        label: '启动高级编辑器',
+        sublabel: '需要攻略作者ID（开发中）',
+        accelerator: 'CmdOrCtrl+Shift+P',
+        click: (item, focusedWindow) => {
+            renders.mainpage = null;
+            mainWindow.loadURL('file://' + __dirname + '/../pages/programmer/programmer.html');
+        }
+    }]
+}, {
+    label: '窗口',
+    role: 'window',
+    submenu: [{
+            label: '重新加载',
+            accelerator: 'CmdOrCtrl+R',
+            click: (item, focusedWindow) => {
+                if (focusedWindow)
+                    focusedWindow.reload();
+            }
+        }, {
+            label: '最小化',
+            accelerator: 'CmdOrCtrl+M',
+            role: 'minimize'
+        },
+        {
+            label: '关闭',
+            accelerator: 'CmdOrCtrl+W',
+            role: 'close'
+        },
+    ]
+}, {
+    label: '帮助',
+    role: 'help',
+    submenu: [{
+        label: 'Github',
+        sublabel: '浏览源码',
+        click: () => {
+            shell.openExternal('https://github.com/PCWMXPY/upgradeE');
+        }
+    }, {
+        label: 'Mengw.io',
+        sublabel: '打开博客',
+        click: () => {
+            shell.openExternal('http://www.mengw.io');
+            // c.exec("start http://www.mengw.io");
+        }
+    }, {
+        label: '回报BUG',
+        click: () => {
+            shell.openExternal('https://github.com/PCWMXPY/upgradeE/issues/new');
+            // c.exec("start http://www.mengw.io");
+        }
+    }, {
+        label: '下载更新',
+        click: () => {
+            shell.openExternal(gloarg.version.link);
+            // c.exec("start http://www.mengw.io");
+        }
+    }]
+}];
+>>>>>>> 16a9b596136e0a8ecce45d28a4bc37b1a011aa11
 // 创建一个浏览器窗口，主要用来加载HTML页面
 // 声明一个BrowserWindow对象实例
 let mainWindow;
@@ -51,13 +175,13 @@ function createWindow() {
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
     // 同时也可以简化成：mainWindow.loadURL('./index.html');
     mainWindow.loadURL('file://' + __dirname + '/../pages/index/index.html');
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
     // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
     mainWindow.on("closed", function () {
-        currentsession.miao = null;
         renders.mainpage = null;
         mainWindow = null;
     });
+
 }
 // 监听应用程序对象是否初始化完成，初始化完成之后即可创建浏览器窗口
 app.on("ready", createWindow);
@@ -79,5 +203,11 @@ app.on("activate", function () {
 });
 ipcMain.on('register', (event, arg) => {
     renders[arg] = event;
+    currentrender.rander = event;
+    currentrender.identification = arg;
+    afun.getVersion(version, (obj) => {
+        gloarg.version = obj
+        currentrender.rander.sender.send('version', gloarg.version);
+    });
     console.log('From Event-Register<-app.js: ' + arg);
 });

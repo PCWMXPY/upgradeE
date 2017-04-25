@@ -1,10 +1,19 @@
 {
-  "name": "upgradeE",
-  "version": "0.2.2",
+  "name": "upgradee",
+  "version": "1.3.4",
   "description": "Strong like tiger if upgradeE",
   "main": "./src/app.js",
+  "author": "WMXPY",
+  "license": "MIT",
   "scripts": {
-    "test": "test"
+    "start": "electron .",
+    "package": "electron-packager . --platform=win32 --arch=ia32 --electron-version=1.4.15 --overwrite",
+    "pack": "build --dir",
+    "dist": "build"
+  },
+  "build": {
+    "appId": "upgradee",
+    "win": {}
   },
   "repository": {
     "type": "git",
@@ -14,8 +23,6 @@
     "LeagueofLegends",
     "electron"
   ],
-  "author": "WMXPY",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/PCWMXPY/upgradeE/issues"
   },
@@ -25,5 +32,10 @@
     "caperjs": "^0.3.15",
     "electron-json-storage": "^3.0.5",
     "request": "2.81.0"
+  },
+  "devDependencies": {
+    "electron-builder": "^17.0.3",
+    "electron-packager": "^8.6.0",
+    "electron": "1.4.15"
   }
 }

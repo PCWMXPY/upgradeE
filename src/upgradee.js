@@ -8,6 +8,9 @@ var request = require('request');
 var storage = require('electron-json-storage');
 var perference = require('./preference.js');
 var api_key = 'RGAPI-2c57be6f-0f51-42cc-b54c-d62f19e26023';
+var get_url = 'http://upgradee.sushithedog.com/server/requests/getTips.php';
+var version_url = 'https://raw.githubusercontent.com/PCWMXPY/upgradeE/master/version.json';
+var post_url = 'http://upgradee.sushithedog.com/server/requests/pushTips.php';
 var playstat = (function () {
     function playstat(id, name) {
         this.id = id + '';
@@ -19,36 +22,120 @@ var playstat = (function () {
     playstat.prototype.setNear = function (near) {
         this.near = near;
     };
-    playstat.prototype.returnJson = function (error, response, data, fun, err) {
+    playstat.prototype.getRecent = function (fun, err) {
+        var url = 'https://na.api.riotgames.com/api/lol/NA/v1.3/game/by-summoner/' + this.id + '/recent?api_key=' + api_key;
+        request(url, function (error, response, data) {
+        });
+    };
+    return playstat;
+}());
+exports.playstat = playstat;
+exports.appfunctions = {
+    getVersion: function (currentVersion, fun) {
+        request(version_url, function (error, response, data) {
+            if (!error) {
+                var parsed = JSON.parse(data);
+                var link = parsed.downloadlink;
+                var str = parsed.currentversion.str;
+                var obj = {
+                    update: 0,
+                    str: str,
+                    link: link
+                };
+                if (parsed.currentversion.int > currentVersion.int) {
+                    if (parsed.lastemergency.int > currentVersion.int) {
+                        obj.update = 2;
+                    }
+                    obj.update = 1;
+                }
+                fun(obj);
+            }
+            else {
+                throw error;
+            }
+        });
+    }
+};
+exports.nodefunctions = {
+    getTips: function (domain, oppo, fun) {
+        var url = get_url + '?domain=' + domain + '&oppo=' + oppo;
+        request(url, function (error, response, data) {
+            if (!error) {
+                data = JSON.parse(data);
+                fun(data);
+            }
+            else {
+                throw error;
+            }
+        });
+    },
+    postTips: function (domain, side, content, fun) {
+        request.post({
+            url: post_url,
+            form: {
+                'domain': domain,
+                'side': side,
+                'content': content
+            }
+        }, function (err, httpResponse, body) {
+            if (err)
+                throw err;
+            body = JSON.parse(body);
+            fun(body);
+        });
+    },
+    returnJson: function (error, response, data, fun, err) {
         if (!error && response.statusCode == 200) {
             data = JSON.parse(data);
-            this.near = data;
             fun(data);
         }
         else {
             err(response.statusCode);
             console.log(response.statusCode);
         }
-    };
-    playstat.prototype.getCurrent = function (fun, err) {
-        var _this = this;
-        var url = 'https://na.api.riotgames.com/observer-mode/rest/consumer/getSpectatorGameInfo/NA1/' + this.id + '?api_key=' + api_key;
+    },
+    getCurrent: function (id, fun, err) {
+        var url = 'https://na.api.riotgames.com/observer-mode/rest/consumer/getSpectatorGameInfo/NA1/' + id + '?api_key=' + api_key;
         request(url, function (error, response, data) {
-            _this.returnJson(error, response, data, fun, err);
+            if (!error && response.statusCode == 200) {
+                data = JSON.parse(data);
+                fun(data);
+            }
+            else {
+                err(response.statusCode);
+            }
         });
-    };
-    playstat.prototype.getRecent = function (fun, err) {
-        var _this = this;
-        var url = 'https://na.api.riotgames.com/api/lol/NA/v1.3/game/by-summoner/' + this.id + '/recent?api_key=' + api_key;
+    },
+    smallest: function (array) {
+        var smalllest = array[0];
+        var pointer = 0;
+        for (var i = 1; i < array.length; i++) {
+            if (array[i] < smalllest) {
+                smalllest = array[i];
+                pointer = i;
+            }
+        }
+        return pointer;
+    },
+    getSummonerId: function (id, fun, errors) {
+        var url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
         request(url, function (error, response, data) {
-            _this.returnJson(error, response, data, fun, err);
+            if (!error && response.statusCode == 200) {
+                data = JSON.parse(data);
+                _this.near = data;
+                fun(data, id);
+            }
+            else {
+                errors(response.statusCode);
+                console.log('From GetSummonerId<-Upgradee.ts: ' + response.statusCode);
+            }
         });
-    };
-    playstat.prototype.analysisNear = function () {
+    },
+    analysisNear: function (near, miao) {
         var people = [[], []];
         var ids = [[], []];
         var result = [[], []];
-        var participants = this.near['participants'];
+        var participants = near['participants'];
         for (var i = 0; i < participants.length; i++) {
             var champid = participants[i]['championId'];
             var summorskill = [participants[i]['spell1Id'], participants[i]['spell2Id']];
@@ -77,7 +164,7 @@ var playstat = (function () {
         }
         var temp = [];
         for (var i = 0; i < participants.length; i++) {
-            if (participants[i].summonerName.replace(/\s+/g, "").toLowerCase() == this.name) {
+            if (participants[i].summonerName.replace(/\s+/g, "").toLowerCase() == miao) {
                 temp.push(participants[i]);
                 i = 10;
             }
@@ -101,38 +188,42 @@ var playstat = (function () {
                 }
             }
         }
-        var real = [result, temp];
-        return real;
-    };
-    return playstat;
-}());
-exports.playstat = playstat;
-exports.nodefunctions = {
-    smallest: function (array) {
-        var smalllest = array[0];
-        var pointer = 0;
-        for (var i = 1; i < array.length; i++) {
-            if (array[i] < smalllest) {
-                smalllest = array[i];
-                pointer = i;
+        var otherinfo = {
+            bans: near.bannedChampions,
+            gameId: near.gameId,
+            time: near.gameLength,
+            mode: near.gameMode,
+            queue: near.gameQueueConfigId,
+            starttime: near.gameStartTime,
+            type: near.gameType,
+            map: near.mapId,
+            key: near.observers.encryptionKey,
+            platform: near.platformId,
+            position: 'AN'
+        };
+        for (var i = 0; i < result[0].length; i++) {
+            if (result[0][i] == perference.getChampName(temp[0].championId)) {
+                switch (i) {
+                    case 0:
+                        otherinfo.position = 'AM';
+                        break;
+                    case 1:
+                        otherinfo.position = 'AD';
+                        break;
+                    case 2:
+                        otherinfo.position = 'AT';
+                        break;
+                    case 3:
+                        otherinfo.position = 'AS';
+                        break;
+                    case 4:
+                        otherinfo.position = 'AJ';
+                        break;
+                }
             }
         }
-        return pointer;
-    },
-    getSummonerId: function (id, fun, error) {
-        var url = 'https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/' + id + '?api_key=' + api_key;
-        request(url, function (error, response, data) {
-            if (!error && response.statusCode == 200) {
-                data = JSON.parse(data);
-                _this.near = data;
-                fun(data, id);
-                console.log('From GetSummonerId<-Upgradee.ts: ' + id);
-            }
-            else {
-                error(response.statusCode);
-                console.log('From GetSummonerId<-Upgradee.ts: ' + response.statusCode);
-            }
-        });
+        var real = [result, temp, otherinfo];
+        return real;
     }
 };
-module.exports = { nodefunctions: exports.nodefunctions, playstat: playstat };
+module.exports = { appfunctions: exports.appfunctions, nodefunctions: exports.nodefunctions, playstat: playstat };
