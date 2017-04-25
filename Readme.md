@@ -4,6 +4,8 @@ Best choice for League player (hope so)
 
 ## Changelog
 
+-   Version 1.3.3
+    -   Verison control system
 -   Version 1.3.2
     -   Add update functions
     -   Add better editor page

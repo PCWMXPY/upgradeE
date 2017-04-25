@@ -28,8 +28,8 @@ const icons = {
     mengwio: path.resolve(__dirname, '..', 'css', 'mengw.ico')
 };
 const version = {
-    str: "1.3.2",
-    int: 10302
+    str: "1.3.3",
+    int: 10303
 }
 let gloarg = {
     version: {
@@ -159,7 +159,7 @@ function createWindow() {
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
     // 同时也可以简化成：mainWindow.loadURL('./index.html');
     mainWindow.loadURL('file://' + __dirname + '/../pages/index/index.html');
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
     // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
     mainWindow.on("closed", function () {
         renders.mainpage = null;

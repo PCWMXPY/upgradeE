@@ -30,6 +30,7 @@ let main = new Vue({
         stopper: [],
         data2: null,
         versionmessage: 'Getting Data From Github...',
+        versioncolor: 'version-green',
         vars: {
             domain: [],
             oppo: [],
@@ -104,7 +105,20 @@ let main = new Vue({
                 }
             })
             ipcRenderer.once('version', (event, arg) => {
-                console.log(arg);
+                switch (arg.update) {
+                    case 0:
+                        main.versionmessage = 'UpgradeE 无需版本更新';
+                        main.versioncolor = 'version-green';
+                        break;
+                    case 1:
+                        main.versionmessage = 'UpgradeE 的 ' + arg.str + ' 版本可供下载, 点击帮助菜单 -> 下载更新, 以了解更多';
+                        main.versioncolor = 'version-yellow';
+                        break;
+                    case 2:
+                        main.versionmessage = '当前版本的 UpgradeE 已经不可用, 请访问此链接下载最新版本: ' + arg.link;
+                        main.versioncolor = 'version-red';
+                        break;
+                }
             })
             ipcRenderer.send('register', 'mainpage');
         },

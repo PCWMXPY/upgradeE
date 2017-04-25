@@ -37,13 +37,11 @@ exports.appfunctions = {
                 var parsed = JSON.parse(data);
                 var link = parsed.downloadlink;
                 var str = parsed.currentversion.str;
-                console.log(parsed);
                 var obj = {
-                    update: 0,
+                    update: 2,
                     str: str,
                     link: link
                 };
-                console.log(obj);
                 if (parsed.currentversion.int > currentVersion.int) {
                     if (parsed.lastemergency.int > currentVersion.int) {
                         obj.update = 2;

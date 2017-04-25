@@ -12,6 +12,18 @@
     /* position fixed for IE6 */
 }
 
+.version-green {
+    color: #0b8100;
+}
+
+.version-yellow {
+    color: #ee8500;
+}
+
+.version-red {
+    color: #de0000;
+}
+
 .fill {
     height: 100%;
     min-height: 100%;
