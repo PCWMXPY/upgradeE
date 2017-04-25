@@ -28,8 +28,8 @@ const icons = {
     mengwio: path.resolve(__dirname, '..', 'css', 'mengw.ico')
 };
 const version = {
-    str: "1.3.3",
-    int: 10303
+    str: "1.3.4",
+    int: 10304
 }
 let gloarg = {
     version: {
@@ -52,6 +52,24 @@ global.miao = {
     near: null
 };
 let template = [{
+    label: 'UpgradeE',
+    role: 'file',
+    submenu: [{
+        label: '关于 UpgradeE',
+        click: (item, focusedWindow) => {}
+    }, {
+        label: '设置',
+        role: 'preferences',
+        accelerator: 'CmdOrCtrl+,',
+        click: (item, focusedWindow) => {}
+    }, {
+        label: '退出',
+        accelerator: 'CmdOrCtrl+Q',
+        click: function () {
+            app.quit();
+        }
+    }]
+}, {
     label: '召唤师',
     submenu: [{
         label: '声明召唤师ID',
@@ -67,6 +85,7 @@ let template = [{
         }
     }, {
         label: '返回主菜单',
+        sublabel: '回到功能页面',
         accelerator: 'CmdOrCtrl+K',
         click: (item, focusedWindow) => {
             if (currentrender.identification == 'mainpage') {
@@ -82,17 +101,6 @@ let template = [{
         click: (item, focusedWindow) => {
             renders.mainpage = null;
             mainWindow.loadURL('file://' + __dirname + '/../pages/programmer/programmer.html');
-        }
-    }, {
-        label: '设置',
-        role: 'preferences',
-        accelerator: 'CmdOrCtrl+,',
-        click: (item, focusedWindow) => {}
-    }, {
-        label: '退出',
-        accelerator: 'CmdOrCtrl+Q',
-        click: function () {
-            app.quit();
         }
     }]
 }, {
@@ -136,6 +144,12 @@ let template = [{
         label: '回报BUG',
         click: () => {
             shell.openExternal('https://github.com/PCWMXPY/upgradeE/issues/new');
+            // c.exec("start http://www.mengw.io");
+        }
+    }, {
+        label: '下载更新',
+        click: () => {
+            shell.openExternal(gloarg.version.link);
             // c.exec("start http://www.mengw.io");
         }
     }]

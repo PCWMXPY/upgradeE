@@ -24,6 +24,10 @@
     color: #de0000;
 }
 
+.version-purple {
+    color: #7e00de;
+}
+
 .fill {
     height: 100%;
     min-height: 100%;
@@ -153,7 +157,7 @@ input[type=text] {
 div .center {
     text-align: center;
     padding: 10px;
-    margin-top: 20%;
+    margin-top: 21%;
 }
 
 div .counter {

@@ -109,7 +109,6 @@ export const nodefunctions = {
                 fun(data);
             } else {
                 err(response.statusCode);
-                console.log(response.statusCode);
             }
         })
     },

@@ -103,7 +103,6 @@ exports.nodefunctions = {
             }
             else {
                 err(response.statusCode);
-                console.log(response.statusCode);
             }
         });
     },

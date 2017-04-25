@@ -15,16 +15,17 @@
 
 <body>
     <div id="main" class="container-fluid fillc">
-        <div v-if="newuser!=2" v-bind:class="versioncolor" class="buttom-forever">{{versionmessage}}</div>
+        <div v-if="newuser!=2" v-bind:class="versioncolor" class="buttom-forever"><i v-bind:class="versionicon"></i>&nbsp;{{versionmessage}}</div>
         <div class="row center" v-if="newuser<2">
             <div style="display:inline-block;white-space:none;padding:5px;" class="no-font">
                 <span style="background-color:#6f6f6f;">Upgr</span>
-                <span style="background-color:#4a4a4a;color:#6b0000">a</span>
+                <span style="background-color:#4a4a4a;color:#790000">a</span>
                 <span style="background-color:#414141;color:#b90000">d</span>
                 <span style="background-color:#363636;color:red">e<strong>E</strong></span>
             </div><br>
-            <span>{{debugdisplay}}</span>
+            <span class="ue-bg small-font"><i class="fa fa-terminal"></i>&nbsp;{{debugdisplay}}</span>
         </div>
+
         <div class="row" v-if="newuser==0">
             <div class="col-xs-offset-3 col-xs-6 topc-center ue-bg">
                 <span class="small-font">你是?..</span>
@@ -70,7 +71,7 @@
             <div class="col-xs-12 top-center ue-bg">
                 <div style="display:inline-block;white-space:none;padding:5px;" class="no-font2">
                     <span style="background-color:#6f6f6f;">Upgr</span>
-                    <span style="background-color:#4a4a4a;color:#6b0000">a</span>
+                    <span style="background-color:#4a4a4a;color:#790000">a</span>
                     <span style="background-color:#414141;color:#b90000">d</span>
                     <span style="background-color:#363636;color:red">e<strong>E</strong> </span>
                     <span style="background-color:#6f6f6f;color:white">|攻略编辑器</span>

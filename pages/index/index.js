@@ -3,19 +3,11 @@
 }());
 var ipcRenderer = require('electron').ipcRenderer;
 var pref = require('../../src/preference.js');
-var cdisplay = {
-    cn: {
-        input: 'upgrad',
-        input2: 'eE',
-        submit: 'SUBMIT',
-        youare: 'You\'re?..'
-    }
-};
 var main = new Vue({
     el: '#main',
     data: {
         test: '',
-        display: cdisplay.cn,
+        debugdisplay: '',
         button: false,
         oppoid: '',
         domainid: '',
@@ -23,7 +15,8 @@ var main = new Vue({
         stopper: [],
         data2: null,
         versionmessage: 'Getting Data From Github...',
-        versioncolor: 'version-green',
+        versioncolor: 'version-purple',
+        versionicon: 'fa-cloud-download',
         vars: {
             domain: [],
             oppo: [],
@@ -65,6 +58,7 @@ var main = new Vue({
     methods: {
         preGet: function () {
             this.stopeverything();
+            this.resetdebugdisplay();
             Prefsystem.preLoad(function () {
                 main.newuser = 0;
                 Prefsystem.resetTitle();
@@ -74,6 +68,9 @@ var main = new Vue({
                 }, function () {
                 });
             });
+        },
+        resetdebugdisplay: function () {
+            this.debugdisplay = '主E蕹鵺猛如虎';
         },
         backtoMain: function () {
             this.stopeverything();
@@ -96,14 +93,19 @@ var main = new Vue({
                     case 0:
                         main.versionmessage = 'UpgradeE 无需版本更新';
                         main.versioncolor = 'version-green';
+                        main.versionicon = 'fa fa-star';
                         break;
                     case 1:
-                        main.versionmessage = 'UpgradeE 的 ' + arg.str + ' 版本可供下载, 点击帮助菜单 -> 下载更新, 以了解更多';
+                        main.versionmessage = 'UpgradeE 的 ' + arg.str + ' 版本可供下载, 了解更多: 点击"帮助"菜单 -> 下载更新';
                         main.versioncolor = 'version-yellow';
+                        main.versionicon = 'fa fa-star-half-o';
+                        main.debugdisplay = 'UpgradeE 可以更新了';
                         break;
                     case 2:
-                        main.versionmessage = '当前版本的 UpgradeE 已经不可用, 请访问此链接下载最新版本: ' + arg.link;
+                        main.versionmessage = '当前版本的 UpgradeE 已经不可用, 请访问此链接下载最新版本: ' + arg.link + ' 也可以 点击"帮助"菜单 -> 下载更新';
                         main.versioncolor = 'version-red';
+                        main.versionicon = 'ra ra-blade-bite';
+                        main.debugdisplay = '你必须更新 UpgradeE';
                         break;
                 }
             });
@@ -120,10 +122,11 @@ var main = new Vue({
         },
         sendSummorid: function () {
             this.button = true;
-            riotapi.make(this.test, function () {
+            riotapi.make(this.test.replace(/\s+/g, "").toLowerCase(), function () {
                 main.newuser = 1;
                 main.button = false;
-            }, function () {
+            }, function (error) {
+                main.debugdisplay = '玩家不存在, 请检查拼写';
                 main.button = false;
             });
         },
@@ -154,6 +157,7 @@ var main = new Vue({
             var date = new Date();
             var gametime = (date.getTime() - this.data2.starttime) / 60000;
             var re = [];
+            this.cleanTipsDisplay();
             this.stopeverything();
             if (gametime < 40) {
                 var t = (40 - gametime) * 60000;
@@ -164,6 +168,7 @@ var main = new Vue({
             }
             else {
                 main.doupdate(40);
+                main.displayT('T');
                 return re;
             }
             if (gametime < 30) {
@@ -175,6 +180,7 @@ var main = new Vue({
             }
             else {
                 main.doupdate(30);
+                main.displayT('T');
                 return re;
             }
             if (gametime < 20) {
@@ -186,6 +192,7 @@ var main = new Vue({
             }
             else {
                 main.doupdate(20);
+                main.displayT('T');
                 return re;
             }
             if (gametime < 10) {
@@ -198,6 +205,7 @@ var main = new Vue({
             }
             else {
                 main.doupdate(10);
+                main.displayT('T');
                 return re;
             }
             return re;
@@ -206,44 +214,51 @@ var main = new Vue({
             switch (period) {
                 case 0:
                     this.gameperiod = 'In Lane:';
-                    display('L');
+                    main.displayT('L');
                     break;
                 case 10:
                     this.gameperiod = 'In Early Game:';
-                    display('E');
+                    main.displayT('E');
                     break;
                 case 20:
                     this.gameperiod = 'In Middle Game:';
-                    display('M');
+                    main.displayT('M');
                     break;
                 case 30:
                     this.gameperiod = 'In Late Game:';
-                    display('A');
+                    main.displayT('A');
                     break;
                 case 40:
                     this.gameperiod = 'In REALLY Late Game:';
-                    display('R');
+                    main.displayT('R');
                     break;
             }
-            display('T');
-            function display(time) {
-                for (var i = 0; i < main.vars.domain[time].length; i++) {
-                    if (main.vars.domain[time][i].substring(0, 2) == main.data2.position || main.vars.domain[time][i].substring(0, 2) == 'AA') {
-                        main.tips.domain.push(main.vars.domain[time][i].substring(2, main.vars.domain[time][i].length));
-                    }
-                    else if (main.vars.domain[time][i].substring(0, 2) == 'AB' && (main.data2.position == 'AS' || main.data2.position == 'AD')) {
-                        main.tips.domain.push(main.vars.domain[time][i].substring(2, main.vars.domain[time][i].length));
-                    }
+        },
+        displayT: function (time) {
+            for (var i = 0; i < main.vars.domain[time].length; i++) {
+                if (main.vars.domain[time][i].substring(0, 2) == main.data2.position || main.vars.domain[time][i].substring(0, 2) == 'AA') {
+                    main.tips.domain.push(main.vars.domain[time][i].substring(2, main.vars.domain[time][i].length));
                 }
-                for (var i = 0; i < main.vars.oppo[time].length; i++) {
-                    if (main.vars.oppo[time][i].substring(0, 2) == main.data2.position || main.vars.oppo[time][i].substring(0, 2) == 'AA') {
-                        main.tips.oppo.push(main.vars.oppo[time][i].substring(2, main.vars.oppo[time][i].length));
-                    }
-                    else if (main.vars.oppo[time][i].substring(0, 2) == 'AB' && (main.data2.position == 'AS' || main.data2.position == 'AD')) {
-                        main.tips.oppo.push(main.vars.oppo[time][i].substring(2, main.vars.oppo[time][i].length));
-                    }
+                else if (main.vars.domain[time][i].substring(0, 2) == 'AB' && (main.data2.position == 'AS' || main.data2.position == 'AD')) {
+                    main.tips.domain.push(main.vars.domain[time][i].substring(2, main.vars.domain[time][i].length));
                 }
             }
+            for (var i = 0; i < main.vars.oppo[time].length; i++) {
+                if (main.vars.oppo[time][i].substring(0, 2) == main.data2.position || main.vars.oppo[time][i].substring(0, 2) == 'AA') {
+                    main.tips.oppo.push(main.vars.oppo[time][i].substring(2, main.vars.oppo[time][i].length));
+                }
+                else if (main.vars.oppo[time][i].substring(0, 2) == 'AB' && (main.data2.position == 'AS' || main.data2.position == 'AD')) {
+                    main.tips.oppo.push(main.vars.oppo[time][i].substring(2, main.vars.oppo[time][i].length));
+                }
+            }
+        },
+        cleanTipsDisplay: function () {
+            main.tips = {
+                domain: [],
+                oppo: [],
+                runes: [],
+                Mysterys: []
+            };
         },
         stopeverything: function () {
             for (var i = 0; i < this.stopper; i++) {
@@ -272,6 +287,13 @@ var main = new Vue({
                         main.vars.oppo = fixed[1];
                         main.updatetips();
                     });
+                }
+            }, function (error) {
+                if (error == 404) {
+                    main.debugdisplay = '游戏并没有开始';
+                }
+                else {
+                    main.debugdisplay = '出现了没有预料到的错误, 点击"帮助" -> 回报BUG告诉我们发生了什么';
                 }
             });
         }

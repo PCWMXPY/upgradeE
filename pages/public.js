@@ -115,16 +115,16 @@ var riotapi = {
             Prefsystem.updateTitle(data.name);
             fun();
         }, function (error) {
-            err();
+            err(error);
             console.log(error);
         });
     },
-    find: function (fun) {
+    find: function (fun, errors) {
         nfun.getCurrent(remote.getGlobal('miao').id, function (data) {
             remote.getGlobal('miao').near = nfun.analysisNear(data, remote.getGlobal('miao').miao);
             fun(remote.getGlobal('miao').near);
         }, function (error) {
-            console.log(error);
+            errors(error);
         });
     },
     gtips: function (domain, oppo, fun) {

@@ -116,16 +116,16 @@ const riotapi = {
             Prefsystem.updateTitle(data.name);
             fun();
         }, error => {
-            err();
+            err(error);
             console.log(error);
         });
     },
-    find: (fun: Function) => {
+    find: (fun: Function, errors: Function) => {
         nfun.getCurrent(remote.getGlobal('miao').id, data => {
             remote.getGlobal('miao').near = nfun.analysisNear(data, remote.getGlobal('miao').miao);
             fun(remote.getGlobal('miao').near);
         }, error => {
-            console.log(error);
+            errors(error);
         })
     },
     gtips: (domain: number, oppo: number, fun: Function) => {
