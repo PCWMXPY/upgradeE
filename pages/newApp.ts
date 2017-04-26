@@ -8,9 +8,9 @@
 declare var Vue: any;
 declare var wangEditor: any;
 declare function require(name: string);
-const ipcRenderer = require('electron').ipcRenderer;
-const pref = require('../../src/preference.js');
-let main = new Vue({
+var ipcRenderer = require('electron').ipcRenderer;
+var pref = require('../../src/preference.js');
+var main = new Vue({
     el: '#main',
     data: {
         test: '',
