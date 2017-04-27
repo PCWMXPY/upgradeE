@@ -170,7 +170,7 @@ function createWindow() {
     Menu.setApplicationMenu(menu);
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
     // 同时也可以简化成：mainWindow.loadURL('./index.html');
-    mainWindow.loadURL('file://' + __dirname + '/../pages/test/test.html');
+    mainWindow.loadURL('file://' + __dirname + '/../pages/index/index.html');
     mainWindow.openDevTools();
     // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
     mainWindow.on("closed", function () {
@@ -201,9 +201,9 @@ ipcMain.on('register', (event, arg) => {
     renders[arg] = event;
     currentrender.rander = event;
     currentrender.identification = arg;
-    afun.getVersion(version, (obj) => {
-        gloarg.version = obj
-        currentrender.rander.sender.send('version', gloarg.version);
-    });
+    // afun.getVersion(version, (obj) => {
+    //     gloarg.version = obj
+    //     currentrender.rander.sender.send('version', gloarg.version);
+    // });
     console.log('From Event-Register<-app.js: ' + arg);
 });

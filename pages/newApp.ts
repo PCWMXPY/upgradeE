@@ -6,7 +6,6 @@
  * @contect wm@wmpcxpy.com
  */
 declare var Vue: any;
-declare var wangEditor: any;
 declare function require(name: string);
 var ipcRenderer = require('electron').ipcRenderer;
 var pref = require('../../src/preference.js');
