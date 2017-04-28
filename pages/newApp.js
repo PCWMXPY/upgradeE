@@ -40,7 +40,7 @@ var nav = new Vue({
 var main = new Vue({
     el: '#main',
     data: {
-        test: '',
+        page: 'login',
         debugdisplay: '',
         button: false,
         oppoid: '',
@@ -87,8 +87,8 @@ var main = new Vue({
         }
     },
     methods: {
-        test: function () {
-            console.log('test');
+        test: function (content) {
+            console.log(content);
         },
         preGet: function () {
             this.stopeverything();
@@ -102,9 +102,6 @@ var main = new Vue({
                 }, function () {
                 });
             });
-        },
-        resetdebugdisplay: function () {
-            this.debugdisplay = '主E蕹鵺猛如虎';
         },
         backtoMain: function () {
             this.stopeverything();

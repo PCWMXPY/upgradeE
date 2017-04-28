@@ -46,7 +46,7 @@ var nav = new Vue({
 var main = new Vue({
     el: '#main',
     data: {
-        test: '',
+        page: 'login',
         debugdisplay: '',
         button: false,
         oppoid: '',
@@ -93,8 +93,8 @@ var main = new Vue({
         }
     },
     methods: {
-        test: function () {
-            console.log('test');
+        test: function (content: any) {
+            console.log(content);
         },
         preGet: function () {
             this.stopeverything();
@@ -114,9 +114,6 @@ var main = new Vue({
                 // console.log('Index.ts Preget ->: ' + data);
             });
             // this.newuser = 3;
-        },
-        resetdebugdisplay: function () {
-            this.debugdisplay = '主E蕹鵺猛如虎';
         },
         backtoMain: function () {
             this.stopeverything();

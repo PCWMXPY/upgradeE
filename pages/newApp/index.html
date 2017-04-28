@@ -26,13 +26,9 @@
                 </div>
             </div>
             <div id="main" class="col-xs-offset-3 col-xs-9 right-panel fill">
-                <div id="app">
-                    <router-view></router-view>
-                </div>
-
+                <login v-if="page=='login'"></login>
             </div>
         </div>
-        <!--<router-view></router-view>-->
     </div>
 </body>
 <script>
@@ -44,7 +40,7 @@
 <script src="../../lib/vue.min.js "></script>
 <script src="../../lib/vue-router.js "></script>
 <script src="../../lib/caper.js "></script>
-<script src="../router.js "></script>
+<script src="../component.js "></script>
 <script src="../public.js "></script>
 <script src="../newApp.js "></script>
 <script>
