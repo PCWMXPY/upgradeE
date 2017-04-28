@@ -18,14 +18,18 @@
         <div class="row fill">
             <div id="nav" class="col-xs-3 left-panel fill">
                 <uge-title size="45"></uge-title>
+                <version v-bind:version="onscreen.version" v-bind:realversion="offscreen.version"></version>
                 <div>
                     <div v-for="bar in navbar">
-                        <button v-on:click="bar.fun" class="nav button button-block"><i v-bind:class="bar.icon"></i>&nbsp;<span style="text-align:center;" v-text="bar.text"></span></button>
+                        <button v-on:click="bar.fun" class="nav button button-block"><i v-bind:class="bar.icon" class="fa-fw"></i>&nbsp;<span class="chinese"  style="text-align:center;" v-text="bar.text"></span></button>
                     </div>
                 </div>
             </div>
-            <div id="main" class="col-xs-9 right-panel fill">
-                RIGHT
+            <div id="main" class="col-xs-offset-3 col-xs-9 right-panel fill">
+                <div id="app">
+                    <router-view></router-view>
+                </div>
+
             </div>
         </div>
         <!--<router-view></router-view>-->

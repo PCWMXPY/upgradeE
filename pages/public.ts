@@ -8,6 +8,9 @@
 declare var Vue: any;
 declare var rewave: any;
 declare function require(name: string);
+function test() {
+    console.log('test');
+}
 const storage = require('electron-json-storage');
 const { remote } = require('electron');
 const nfun = require('../../src/upgradee.js')
@@ -25,6 +28,36 @@ Vue.component('uge-title', {
     // template: '<div v-bind:style="computedsize"><span style="background-color:#6f6f6f;">Upgr</span><span style="background-color:#4a4a4a;color:#790000">a</span><span style="background-color:#414141;color:#b90000">d</span><span style="background-color:#363636;color:red">e<strong>E</strong></span><span v-if="secondtitle" style="background-color:#6f6f6f;color:white">|{{secondtitle}}</span></div>'
     template: '<div class="logo" v-bind:style="computedsize"><span>Upgr</span><span style="color:#790000">a</span><span style="color:#b90000">d</span><span style="color:red">e<strong>E</strong></span><span v-if="secondtitle" style="color:white">|{{secondtitle}}</span></div>'
 });
+Vue.component('version', {
+    props: ['version', 'realversion'],
+    data: function () {
+        return {
+            style: 'color: #454545'
+        }
+    },
+    computed: {
+        versions: function () {
+            if (this.realversion.int > this.version.int) {
+                return this.version.str + '->' + this.realversion.str;
+            }
+            return this.version.str;
+        },
+        displays: function () {
+            if (this.realversion.int > this.version.int) {
+                if (this.realversion.emer > this.version.int) {
+                    this.style = 'color: #c60000;';
+                    return '需要立即更新';
+                } else {
+                    this.style = 'color: #4635ed;';
+                    return '推荐更新' + this.realversion.str + '版本';
+                }
+            } else {
+                return '主E蕹鵺猛如虎';
+            }
+        }
+    },
+    template: '<div v-bind:style="style"><span>{{versions}}</span><br><span>{{displays}}</span></div>'
+})
 Vue.component('re-credit', {
     template: '<div><p style="color:#565656"><i class="fa fa-code"></i> Review.md with <i class="fa fa-heart"></i> by WMXPY@<a href="http://mengw.io">mengw.io</a> 2016</p></div>'
 });

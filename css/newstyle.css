@@ -3,14 +3,28 @@ div .left-panel {
     padding-top: 20px;
     background-color: #d4d4d4;
     text-align: center;
+    position: fixed;
 }
 
 html,
 body,
 .fill {
-    font-family: 'Lato', sans-serif, Georgia, "Times New Roman", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
+    font-family: 'Lato', sans-serif, 'Microsoft YaHei', '微软雅黑', STXihei, '华文细黑', serif;
     height: 100%;
     min-height: 100%;
+}
+
+input[type="text"] {
+    width: 100px;
+}
+
+.very-center {
+    text-align: center;
+    padding-top: 23%;
+}
+
+.chinese {
+    font-family: 'Lato', sans-serif, 'Microsoft YaHei', '微软雅黑', STXihei, '华文细黑'
 }
 
 button.nav {
@@ -24,7 +38,6 @@ button.nav {
 .logo {
     font-family: 'Righteous', cursive;
     font-weight: 800;
-    padding-bottom: 20px;
 }
 
 .button-block {

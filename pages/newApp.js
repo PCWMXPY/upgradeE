@@ -6,11 +6,24 @@ var pref = require('../../src/preference.js');
 var nav = new Vue({
     el: '#nav',
     data: {
+        onscreen: {
+            version: {
+                int: 20001,
+                str: '1.3.4'
+            }
+        },
+        offscreen: {
+            version: {
+                int: 20001,
+                emer: 10305,
+                str: '2.0.1'
+            }
+        },
         navbar: [{
                 icon: "fa fa-cog",
                 text: "测试",
                 fun: function () {
-                    console.log('test');
+                    nav.navbar[0].text = '更高之后';
                 }
             }, {
                 icon: "fa fa-question",
@@ -35,9 +48,6 @@ var main = new Vue({
         gameperiod: '',
         stopper: [],
         data2: null,
-        versionmessage: 'Getting Data From Github...',
-        versioncolor: 'version-purple',
-        versionicon: 'fa-cloud-download',
         vars: {
             domain: [],
             oppo: [],
@@ -77,6 +87,9 @@ var main = new Vue({
         }
     },
     methods: {
+        test: function () {
+            console.log('test');
+        },
         preGet: function () {
             this.stopeverything();
             this.resetdebugdisplay();
