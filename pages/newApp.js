@@ -8,15 +8,16 @@ var nav = new Vue({
     data: {
         onscreen: {
             version: {
-                int: 20001,
-                str: '1.3.4'
+                int: 0,
+                str: ''
             }
         },
         offscreen: {
             version: {
-                int: 20001,
-                emer: 10305,
-                str: '2.0.1'
+                int: 0,
+                emer: 0,
+                str: '',
+                link: ''
             }
         },
         navbar: [{
@@ -112,25 +113,8 @@ var main = new Vue({
                 }
             });
             ipcRenderer.once('version', function (event, arg) {
-                switch (arg.update) {
-                    case 0:
-                        main.versionmessage = 'UpgradeE 无需版本更新';
-                        main.versioncolor = 'version-green';
-                        main.versionicon = 'fa fa-star';
-                        break;
-                    case 1:
-                        main.versionmessage = 'UpgradeE 的 ' + arg.str + ' 版本可供下载, 了解更多: 点击"帮助"菜单 -> 下载更新';
-                        main.versioncolor = 'version-yellow';
-                        main.versionicon = 'fa fa-star-half-o';
-                        main.debugdisplay = 'UpgradeE 可以更新了';
-                        break;
-                    case 2:
-                        main.versionmessage = '当前版本的 UpgradeE 已经不可用, 请访问此链接下载最新版本: ' + arg.link + ' 也可以 点击"帮助"菜单 -> 下载更新';
-                        main.versioncolor = 'version-red';
-                        main.versionicon = 'ra ra-blade-bite';
-                        main.debugdisplay = '你必须更新 UpgradeE';
-                        break;
-                }
+                nav.onscreen.version = arg[0];
+                nav.offscreen.version = arg[1];
             });
             ipcRenderer.send('register', 'mainpage');
         },

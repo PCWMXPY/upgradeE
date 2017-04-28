@@ -28,8 +28,8 @@ const icons = {
     mengwio: path.resolve(__dirname, '..', 'css', 'mengw.ico')
 };
 const version = {
-    str: "1.3.4",
-    int: 10304
+    str: "2.0.1",
+    int: 20001
 }
 let gloarg = {
     version: {
@@ -201,9 +201,9 @@ ipcMain.on('register', (event, arg) => {
     renders[arg] = event;
     currentrender.rander = event;
     currentrender.identification = arg;
-    // afun.getVersion(version, (obj) => {
-    //     gloarg.version = obj
-    //     currentrender.rander.sender.send('version', gloarg.version);
-    // });
+    afun.getVersion(version, (obj) => {
+        gloarg.version = obj
+        currentrender.rander.sender.send('version', gloarg.version);
+    });
     console.log('From Event-Register<-app.js: ' + arg);
 });

@@ -31,9 +31,18 @@ Vue.component('login', {
             this.$parent.sendSummorid(this.id, (re: number) => {
                 if (re == 0) {
                     this.buttonstat = false;
-                    this.title = 'NotFound';
+                    // this.title = 'NotFound';
+                    Cp$.Caper(this, {
+                        elem: 'title',
+                        data: {
+                            start: this.title,
+                            end: 'NotFound'
+                        },
+                        mode: 'iter',
+                        duration: 50
+                    })
                 } else {
-                    // this.buttonstat = true;
+                    this.buttonstat = true;
                 }
             });
         }
