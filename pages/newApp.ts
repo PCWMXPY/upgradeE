@@ -9,6 +9,27 @@ declare var Vue: any;
 declare function require(name: string);
 var ipcRenderer = require('electron').ipcRenderer;
 var pref = require('../../src/preference.js');
+var nav = new Vue({
+    el: '#nav',
+    data: {
+        navbar: [{
+            icon: "fa fa-cog",
+            text: "测试",
+            fun: () => {
+                console.log('test');
+            }
+        }, {
+            icon: "fa fa-question",
+            text: "测试2",
+            fun: this.test
+        }]
+    },
+    methods: {
+        test: () => {
+            console.log('test');
+        }
+    }
+});
 var main = new Vue({
     el: '#main',
     data: {

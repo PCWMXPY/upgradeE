@@ -14,13 +14,17 @@
 </head>
 
 <body>
-    <div id="main" class="container-fluid fill">
+    <div class="container-fluid fill">
         <div class="row fill">
-            <div class="col-xs-3 left-panel fill">
+            <div id="nav" class="col-xs-3 left-panel fill">
                 <uge-title size="45"></uge-title>
-                LEFT Test font
+                <div>
+                    <div v-for="bar in navbar">
+                        <button v-on:click="bar.fun" class="nav button button-block"><i v-bind:class="bar.icon"></i>&nbsp;<span style="text-align:center;" v-text="bar.text"></span></button>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-9 right-panel fill">
+            <div id="main" class="col-xs-9 right-panel fill">
                 RIGHT
             </div>
         </div>

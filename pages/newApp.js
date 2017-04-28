@@ -3,6 +3,27 @@
 }());
 var ipcRenderer = require('electron').ipcRenderer;
 var pref = require('../../src/preference.js');
+var nav = new Vue({
+    el: '#nav',
+    data: {
+        navbar: [{
+                icon: "fa fa-cog",
+                text: "测试",
+                fun: function () {
+                    console.log('test');
+                }
+            }, {
+                icon: "fa fa-question",
+                text: "测试2",
+                fun: this.test
+            }]
+    },
+    methods: {
+        test: function () {
+            console.log('test');
+        }
+    }
+});
 var main = new Vue({
     el: '#main',
     data: {

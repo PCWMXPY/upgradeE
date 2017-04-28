@@ -1,5 +1,8 @@
 div .left-panel {
-    background-color: gray;
+    padding: 0px;
+    padding-top: 20px;
+    background-color: #d4d4d4;
+    text-align: center;
 }
 
 html,
@@ -10,7 +13,20 @@ body,
     min-height: 100%;
 }
 
+button.nav {
+    background-color: transparent;
+    color: #454545;
+    text-align: left;
+    padding-left: 6px;
+    font-size: 1.5em;
+}
+
 .logo {
     font-family: 'Righteous', cursive;
     font-weight: 800;
+    padding-bottom: 20px;
+}
+
+.button-block {
+    width: 100%;
 }
