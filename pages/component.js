@@ -33,12 +33,11 @@ Vue.component('waiting', {
                     end: name
                 },
                 mode: 'iter',
-                duration: 100
+                duration: 60
             });
         }
     },
     data: function () {
-        console.log('called');
         this.mutated(this.name);
         return {
             sizes: 80
@@ -61,7 +60,7 @@ Vue.component('login', {
                             end: 'Id Not Found'
                         },
                         mode: 'iter',
-                        duration: 100
+                        duration: 50
                     });
                 }
                 else {

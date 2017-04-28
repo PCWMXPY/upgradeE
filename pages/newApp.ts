@@ -291,7 +291,6 @@ var main = new Vue({
             riotapi.find((data) => {
                 // console.log(data);
                 if (data != 404) {
-                    this.newuser = 2;
                     this.mypng = 'http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + pref.getChampName(data[1][0].championId) + '.png';
                     this.domainchamp.name = pref.getChampName(data[1][0].championId);
                     this.domainchamp.id = data[1][0].championId;

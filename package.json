@@ -7,7 +7,6 @@
   "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager . --platform=win32 --arch=ia32 --electron-version=1.4.15 --overwrite",
     "pack": "build --dir",
     "dist": "build"
   },
