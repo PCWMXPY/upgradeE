@@ -9,6 +9,7 @@ var remote = require('electron').remote;
 var nfun = require('../../src/upgradee.js')
     .nodefunctions;
 var playstat = require('../../src/upgradee.js').playstat;
+var indexfuncton = {};
 var Prefsystem = {
     preLoad: function (notexist, exist) {
         storage.get('summorid', function (error, data) {

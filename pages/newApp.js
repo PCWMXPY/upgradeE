@@ -81,15 +81,7 @@ var main = new Vue({
         mypng: '../../css/favicon.ico',
         oppopng: '../../css/favicon.ico'
     },
-    computed: {
-        selectedchampname: function () {
-            return pref.getChampName(parseInt(this.edit.domain));
-        }
-    },
     methods: {
-        test: function (content) {
-            console.log(content);
-        },
         preGet: function () {
             this.stopeverything();
             this.resetdebugdisplay();
@@ -151,14 +143,14 @@ var main = new Vue({
             this.edit.content = 'EditHere';
             this.newuser = 3;
         },
-        sendSummorid: function () {
-            this.button = true;
-            riotapi.make(this.test.replace(/\s+/g, "").toLowerCase(), function () {
+        sendSummorid: function (name, domcontrol) {
+            riotapi.make(name.replace(/\s+/g, "").toLowerCase(), function () {
+                console.log('success');
+                domcontrol(1);
                 main.newuser = 1;
-                main.button = false;
             }, function (error) {
                 main.debugdisplay = '玩家不存在, 请检查拼写';
-                main.button = false;
+                domcontrol(0);
             });
         },
         localupdate: function (categery, event) {

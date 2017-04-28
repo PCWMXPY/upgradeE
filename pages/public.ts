@@ -16,6 +16,9 @@ const { remote } = require('electron');
 const nfun = require('../../src/upgradee.js')
     .nodefunctions;
 const playstat = require('../../src/upgradee.js').playstat;
+const indexfuncton = {
+
+}
 const Prefsystem = {
     preLoad: (notexist: Function, exist: Function) => {
         storage.get('summorid', function (error, data) {

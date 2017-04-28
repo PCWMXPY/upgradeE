@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/PCWMXPY/upgradeE#readme",
   "dependencies": {
-    "caperjs": "^0.3.15",
+    "caperjs": "^0.3.32",
     "electron-json-storage": "^3.0.5",
     "request": "2.81.0"
   },

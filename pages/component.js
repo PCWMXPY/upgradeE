@@ -2,26 +2,44 @@
     'use strict';
 }());
 Vue.component('uge-title', {
-    props: ['size', 'secondtitle'],
+    props: ['size', 'secondtitle', 'title'],
     computed: {
         computedsize: function () {
             var re = 'font-size:' + this.size + 'px;';
             re += '';
             return 'font-size:' + this.size + 'px';
+        },
+        titles: function () {
+            var title = '<span>' + this.title.substring(0, this.title.length - 4) + '</span>';
+            title += '<span style="color:#790000">' + this.title.substring(this.title.length - 4, this.title.length - 3) + '</span>';
+            title += '<span style="color:#b90000">' + this.title.substring(this.title.length - 3, this.title.length - 2) + '</span>';
+            title += '<span style="color:red">' + this.title.substring(this.title.length - 2, this.title.length - 1) + this.title.substring(this.title.length - 1, this.title.length).toUpperCase() + '</span>';
+            return title;
         }
     },
-    template: '<div class="logo" v-bind:style="computedsize"><span>Upgr</span><span style="color:#790000">a</span><span style="color:#b90000">d</span><span style="color:red">e<strong>E</strong></span><span v-if="secondtitle" style="color:white">|{{secondtitle}}</span></div>'
+    template: '<div class="logo" v-bind:style="computedsize"><span v-if="!title"><span>Upgr</span><span style="color:#790000">a</span><span style="color:#b90000">d</span><span style="color:red">e<strong>E</strong></span></span><span v-if="title" v-html="titles"></span><span v-if="secondtitle" style="color:white">|{{secondtitle}}</span></div>'
 });
 Vue.component('login', {
-    template: '<div class="row"><div class="col-xs-offset-3 col-xs-6 very-center"><uge-title size="80"></uge-title><span>你是?..</span><input v-model="id" type="text" placeholder="召唤师ID"><button v-on:click="logup">T</button></input>{{id}}</div></div>',
+    template: '<div class="row"><div class="col-xs-offset-3 col-xs-6 very-center"><uge-title size="80" v-bind:title="title"></uge-title>123<span>你是?..</span><input v-model="id" type="text" placeholder="召唤师ID"><button class="" v-bind:disabled="buttonstat" v-on:click="logup">搜索</button></input></div></div>',
     methods: {
         logup: function () {
-            this.$parent.test(this.id);
+            var _this = this;
+            this.buttonstat = true;
+            this.$parent.sendSummorid(this.id, function (re) {
+                if (re == 0) {
+                    _this.buttonstat = false;
+                    _this.title = 'NotFound';
+                }
+                else {
+                }
+            });
         }
     },
     data: function () {
         return {
-            id: ''
+            id: '',
+            buttonstat: false,
+            title: 'UpgradeE'
         };
     }
 });
