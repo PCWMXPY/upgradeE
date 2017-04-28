@@ -7,7 +7,15 @@ var nfun = require('../../src/upgradee.js')
     .nodefunctions;
 var playstat = require('../../src/upgradee.js').playstat;
 Vue.component('uge-title', {
-    template: '<div style="display:inline-block;white-space:none;padding:5px;" class="no-font"><span style="background-color:#6f6f6f;">Upgr</span><span style="background-color:#4a4a4a;color:#790000">a</span><span style="background-color:#414141;color:#b90000">d</span><span style="background-color:#363636;color:red">e<strong>E</strong></span><span v-if="second-title" style="background-color:#6f6f6f;color:white">|{{second-title}</span></div>'
+    props: ['size', 'secondtitle'],
+    computed: {
+        computedsize: function () {
+            var re = 'font-size:' + this.size + 'px;';
+            re += '';
+            return 'font-size:' + this.size + 'px';
+        }
+    },
+    template: '<div class="logo" v-bind:style="computedsize"><span>Upgr</span><span style="color:#790000">a</span><span style="color:#b90000">d</span><span style="color:red">e<strong>E</strong></span><span v-if="secondtitle" style="color:white">|{{secondtitle}}</span></div>'
 });
 Vue.component('re-credit', {
     template: '<div><p style="color:#565656"><i class="fa fa-code"></i> Review.md with <i class="fa fa-heart"></i> by WMXPY@<a href="http://mengw.io">mengw.io</a> 2016</p></div>'

@@ -1,0 +1,16 @@
+div .left-panel {
+    background-color: gray;
+}
+
+html,
+body,
+.fill {
+    font-family: 'Lato', sans-serif, Georgia, "Times New Roman", "Microsoft YaHei", "微软雅黑", STXihei, "华文细黑", serif;
+    height: 100%;
+    min-height: 100%;
+}
+
+.logo {
+    font-family: 'Righteous', cursive;
+    font-weight: 800;
+}

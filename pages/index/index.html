@@ -9,7 +9,6 @@
     <link href="../../lib/bootstrap.min.css" rel="stylesheet">
     <link href="../../lib/buttons.css" rel="stylesheet">
     <link href="../../lib/css/font-awesome.min.css" rel="stylesheet">
-    <!--<link href="../../lib/wangeditor/css/wangEditor.min.css" rel="stylesheet">-->
     <link href="../../lib/css/rpg-awesome.min.css" rel="stylesheet">
 </head>
 
@@ -17,7 +16,7 @@
     <div id="main" class="container-fluid fillc">
         <div v-if="newuser!=2" v-bind:class="versioncolor" class="buttom-forever"><i v-bind:class="versionicon"></i>&nbsp;{{versionmessage}}</div>
         <div class="row center" v-if="newuser<2">
-            <!--<uge-title second-title=""></uge-title>-->
+            <uge-title></uge-title>
             <br>
             <span class="ue-bg small-font"><i class="fa fa-terminal"></i>&nbsp;{{debugdisplay}}</span>
         </div>
@@ -65,7 +64,7 @@
         </div>
         <div class="row fillc" v-else-if="newuser==3">
             <div class="col-xs-12 top-center ue-bg">
-                <!--<uge-title second-title="攻略编辑器"></uge-title>-->
+                <uge-title secondtitle="攻略编辑器"></uge-title>
             </div>
             <div class="col-xs-offset-1 col-xs-10 leftc-center ue-bg">
                 <label><i class="ra ra-player"></i>&nbsp;英雄ID</label>
@@ -119,8 +118,8 @@
 <script>
     jQuery(document).ready(function () {
         // $.backstretch("../../css/bgimg.png");
-        main.register();
-        main.preGet();
+        // main.register();
+        // main.preGet();
     })
 </script>
 
