@@ -27,6 +27,7 @@
             </div>
             <div id="main" class="col-xs-offset-3 col-xs-9 right-panel fill">
                 <login v-if="page=='login'"></login>
+                <waiting v-if="page=='waiting'" v-bind:title="display.title" v-bind:name="user.name"></waiting>
             </div>
         </div>
     </div>
@@ -46,7 +47,7 @@
 <script>
     jQuery(document).ready(function () {
         // Comments for DEV
-        main.register();
+        // main.register();
         // main.preGet();
     })
 </script>

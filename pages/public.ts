@@ -104,7 +104,7 @@ const riotapi = {
             Prefsystem.writePref(id);
             remote.getGlobal('miao').id = data.id;
             Prefsystem.updateTitle(data.name);
-            fun();
+            fun(data.name);
         }, error => {
             err(error);
             console.log(error);

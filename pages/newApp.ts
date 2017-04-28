@@ -49,8 +49,12 @@ var main = new Vue({
     el: '#main',
     data: {
         page: 'login',
-        debugdisplay: '',
-        button: false,
+        display: {
+            title: null,
+        },
+        user: {
+            name: null
+        },
         oppoid: '',
         domainid: '',
         gameperiod: '',
@@ -84,7 +88,6 @@ var main = new Vue({
             id: 1,
             name: ''
         },
-        newuser: 1,
         selchampn: '',
         mypng: '../../css/favicon.ico',
         oppopng: '../../css/favicon.ico'
@@ -108,6 +111,10 @@ var main = new Vue({
                 // console.log('Index.ts Preget ->: ' + data);
             });
             // this.newuser = 3;
+        },
+        switchtoWait: function (title: string) {
+            this.display.title = title;
+            this.page = 'waiting';
         },
         backtoMain: function () {
             this.stopeverything();
@@ -141,18 +148,12 @@ var main = new Vue({
             this.edit.side = side;
             this.edit.content = 'EditHere';
             this.newuser = 3;
-            // var editor = new wangEditor('textarea1');
-            // editor.create();
-            // this.changeselect();
         },
         sendSummorid: function (name: string, domcontrol: Function) {
-            riotapi.make(name.replace(/\s+/g, "").toLowerCase(), () => {
-                console.log('success');
-                domcontrol(1);
-                main.newuser = 1;
+            riotapi.make(name.replace(/\s+/g, "").toLowerCase(), (name) => {
+                domcontrol(1, name);
             }, (error) => {
-                main.debugdisplay = '玩家不存在, 请检查拼写';
-                domcontrol(0);
+                domcontrol(0, null);
             });
         },
         localupdate: function (categery: string, event) {

@@ -19,27 +19,54 @@ Vue.component('uge-title', {
     },
     template: '<div class="logo" v-bind:style="computedsize"><span v-if="!title"><span>Upgr</span><span style="color:#790000">a</span><span style="color:#b90000">d</span><span style="color:red">e<strong>E</strong></span></span><span v-if="title" v-html="titles"></span><span v-if="secondtitle" style="color:white">|{{secondtitle}}</span></div>'
 });
+Vue.component('waiting', {
+    props: ['title', 'name'],
+    template: '<div class="row"><div class="col-xs-12 very-center"><uge-title v-bind:size="sizes" v-bind:title="title"></uge-title></div></div>',
+    methods: {
+        mutated: function (name) {
+            if (name.length > 8)
+                this.sizes = 65;
+            Cp$.Caper(this, {
+                elem: 'title',
+                data: {
+                    start: this.title,
+                    end: name
+                },
+                mode: 'iter',
+                duration: 100
+            });
+        }
+    },
+    data: function () {
+        console.log('called');
+        this.mutated(this.name);
+        return {
+            sizes: 80
+        };
+    }
+});
 Vue.component('login', {
-    template: '<div class="row"><div class="col-xs-offset-3 col-xs-6 very-center"><uge-title size="80" v-bind:title="title"></uge-title>123<span>你是?..</span><input v-model="id" type="text" placeholder="召唤师ID"><button class="" v-bind:disabled="buttonstat" v-on:click="logup">搜索</button></input></div></div>',
+    template: '<div class="row"><div class="col-xs-12 very-center"><uge-title v-bind:size="sizes" v-bind:title="title"></uge-title><span>你是?..</span><input v-model="id" type="text" placeholder="召唤师ID"><button class="" v-bind:disabled="buttonstat" v-on:click="logup">搜索</button></input></div></div>',
     methods: {
         logup: function () {
             var _this = this;
             this.buttonstat = true;
-            this.$parent.sendSummorid(this.id, function (re) {
+            this.$parent.sendSummorid(this.id, function (re, name) {
                 if (re == 0) {
                     _this.buttonstat = false;
                     Cp$.Caper(_this, {
                         elem: 'title',
                         data: {
                             start: _this.title,
-                            end: 'NotFound'
+                            end: 'Id Not Found'
                         },
                         mode: 'iter',
-                        duration: 50
+                        duration: 100
                     });
                 }
                 else {
-                    _this.buttonstat = true;
+                    _this.$parent.user.name = name;
+                    _this.$parent.switchtoWait(_this.title);
                 }
             });
         }
@@ -47,6 +74,7 @@ Vue.component('login', {
     data: function () {
         return {
             id: '',
+            sizes: 80,
             buttonstat: false,
             title: 'UpgradeE'
         };

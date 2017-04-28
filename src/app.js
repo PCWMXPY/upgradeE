@@ -35,7 +35,8 @@ let gloarg = {
     version: {
         update: 0,
         str: version.str,
-        link: ''
+        link: '',
+        message: ''
     }
 }
 let renders = {
@@ -149,8 +150,7 @@ let template = [{
     }, {
         label: '下载更新',
         click: () => {
-            shell.openExternal(gloarg.version.link);
-            // c.exec("start http://www.mengw.io");
+            shell.openExternal('https://github.com/PCWMXPY/upgradeE/releases/');
         }
     }]
 }];
@@ -162,8 +162,8 @@ function createWindow() {
     // 创建一个浏览器窗口对象，并指定窗口的大小
     // 1024×768 合理的窗口大小
     mainWindow = new BrowserWindow({
-        width: 1024,
-        height: 768,
+        width: 1150,
+        height: 700,
         icon: icons.favicon
     });
     var menu = Menu.buildFromTemplate(template);

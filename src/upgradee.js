@@ -44,7 +44,8 @@ exports.appfunctions = {
                         int: parsed.currentversion.int,
                         str: parsed.currentversion.str,
                         emer: parsed.lastemergency.int,
-                        link: link
+                        link: link,
+                        message: parsed.message
                     }];
                 fun(obj);
             }
