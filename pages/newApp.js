@@ -23,18 +23,14 @@ var nav = new Vue({
         navbar: [{
                 icon: "fa fa-cog",
                 text: "测试",
-                fun: function () {
-                    nav.navbar[0].text = '更高之后';
-                }
-            }, {
-                icon: "fa fa-cog",
-                text: "测试",
+                role: 'nav-side',
                 fun: function () {
                     nav.navbar[0].text = '更高之后';
                 }
             }, {
                 icon: "fa fa-question",
                 text: "测试2",
+                role: 'nav-side',
                 fun: this.test
             }]
     },
@@ -95,6 +91,12 @@ var main = new Vue({
         },
         switchtoWait: function (title) {
             this.display.title = title;
+            nav.navbar.unshift({
+                icon: "fa fa-question",
+                text: "测试2",
+                role: 'nav-main',
+                fun: this.test
+            });
             this.page = 'waiting';
         },
         backtoMain: function () {
@@ -107,10 +109,8 @@ var main = new Vue({
                 console.log(arg);
                 switch (arg) {
                     case 'RAS':
-                        main.preGet();
                         break;
                     case 'BTM':
-                        main.backtoMain();
                         break;
                 }
             });

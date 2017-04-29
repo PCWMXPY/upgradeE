@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../../css/newstyle.css" rel="stylesheet">
     <link href="../../lib/bootstrap.min.css" rel="stylesheet">
-    <link href="../../lib/buttons.css" rel="stylesheet">
+    <!--<link href="../../lib/buttons.css" rel="stylesheet">-->
     <link href="../../lib/css/font-awesome.min.css" rel="stylesheet">
     <link href="../../lib/css/rpg-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato|Righteous" rel="stylesheet">
@@ -21,7 +21,7 @@
                 <version v-bind:version="onscreen.version" v-bind:realversion="offscreen.version"></version>
                 <div>
                     <div v-for="bar in navbar">
-                        <button v-on:click="bar.fun" class="nav button button-block"><i v-bind:class="bar.icon" class="fa-fw"></i>&nbsp;<span class="chinese"  style="text-align:center;" v-text="bar.text"></span></button>
+                        <button v-on:click="bar.fun" class="nav button" v-bind:class="bar.role"><i v-bind:class="bar.icon" class="fa-fw"></i>&nbsp;<span class="chinese"  style="text-align:center;" v-text="bar.text"></span></button>
                     </div>
                 </div>
             </div>
@@ -38,8 +38,8 @@
     window.jQuery = window.$ = require('../../lib/jquery-3.2.1.min.js');
 </script>
 <script src="../../lib/bootstrap.min.js "></script>
-<script src="../../lib/buttons.min.js "></script>
-<script src="../../lib/jquery.backstretch.min.js "></script>
+<!--<script src="../../lib/buttons.min.js "></script>-->
+<!--<script src="../../lib/jquery.backstretch.min.js "></script>-->
 <script src="../../lib/vue.min.js "></script>
 <script src="../../lib/vue-router.js "></script>
 <script src="../../lib/caper.js "></script>
