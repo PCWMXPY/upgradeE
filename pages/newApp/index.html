@@ -28,6 +28,7 @@
             <div id="main" class="col-xs-offset-3 col-xs-9 right-panel fill">
                 <login v-if="page=='login'"></login>
                 <waiting v-if="page=='waiting'" v-bind:title="display.title" v-bind:name="user.name"></waiting>
+                <current v-if="page=='current'" v-bind:transfer="transfer_current" v-bind:tips="tips" v-bind:period="gameperiod"></current>
             </div>
         </div>
     </div>
