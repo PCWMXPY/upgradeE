@@ -27,6 +27,12 @@ var nav = new Vue({
                     nav.navbar[0].text = '更高之后';
                 }
             }, {
+                icon: "fa fa-cog",
+                text: "测试",
+                fun: function () {
+                    nav.navbar[0].text = '更高之后';
+                }
+            }, {
                 icon: "fa fa-question",
                 text: "测试2",
                 fun: this.test
@@ -98,6 +104,7 @@ var main = new Vue({
         register: function () {
             this.stopeverything();
             ipcRenderer.on('cover-message', function (event, arg) {
+                console.log(arg);
                 switch (arg) {
                     case 'RAS':
                         main.preGet();

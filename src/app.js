@@ -89,11 +89,12 @@ let template = [{
         sublabel: '回到功能页面',
         accelerator: 'CmdOrCtrl+K',
         click: (item, focusedWindow) => {
-            if (currentrender.identification == 'mainpage') {
-                currentrender.rander.sender.send('cover-message', 'BTM');
-            } else {
-                mainWindow.loadURL('file://' + __dirname + '/../pages/newApp/index.html');
-            }
+            console.log(currentrender.identification);
+            // if (currentrender.identification == 'mainpage') {
+            //     currentrender.rander.sender.send('cover-message', 'BTM');
+            // } else {
+            //     mainWindow.loadURL('file://' + __dirname + '/../pages/newApp/index.html');
+            // }
         }
     }, {
         label: '启动高级编辑器',

@@ -25,7 +25,7 @@ Vue.component('uge-title', {
 });
 Vue.component('waiting', {
     props: ['title', 'name'],
-    template: '<div class="row"><div class="col-xs-12 very-center"><uge-title v-bind:size="sizes" v-bind:title="title"></uge-title><button v-on:click="searchgame">T</button></div></div>',
+    template: '<div class="row"><div class="col-xs-12 very-center"><uge-title v-bind:size="sizes" v-bind:title="title"></uge-title></div></div>',
     methods: {
         mutated: function (name: string) {
             if (name.length > 8) this.sizes = 65;

@@ -102,6 +102,7 @@ var main = new Vue({
         },
         switchtoWait: function (title: string) {
             this.display.title = title;
+            nav.navbar
             this.page = 'waiting';
         },
         backtoMain: function () {
@@ -111,12 +112,13 @@ var main = new Vue({
         register: function () {
             this.stopeverything();
             ipcRenderer.on('cover-message', (event, arg) => {
+                console.log(arg);
                 switch (arg) {
                     case 'RAS':
-                        main.preGet();
+                        // main.preGet();
                         break;
                     case 'BTM':
-                        main.backtoMain();
+                        // main.backtoMain();
                         break;
                 }
             })
