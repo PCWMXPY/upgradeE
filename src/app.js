@@ -52,109 +52,7 @@ global.miao = {
     miao: null,
     near: null
 };
-let template = [{
-    label: 'UpgradeE',
-    role: 'file',
-    submenu: [{
-        label: '关于 UpgradeE',
-        click: (item, focusedWindow) => {}
-    }, {
-        label: '设置',
-        role: 'preferences',
-        accelerator: 'CmdOrCtrl+,',
-        click: (item, focusedWindow) => {}
-    }, {
-        label: '退出',
-        accelerator: 'CmdOrCtrl+Q',
-        click: function () {
-            app.quit();
-        }
-    }]
-}, {
-    label: '召唤师',
-    submenu: [{
-        label: '声明召唤师ID',
-        sublabel: '初始化',
-        accelerator: 'CmdOrCtrl+Shift+R',
-        click: (item, focusedWindow) => {
-            if (currentrender.identification == 'mainpage') {
-                storage.remove('summorid', function (error) {
-                    if (error) throw error;
-                });
-                currentrender.rander.sender.send('cover-message', 'RAS');
-            }
-        }
-    }, {
-        label: '返回主菜单',
-        sublabel: '回到功能页面',
-        accelerator: 'CmdOrCtrl+K',
-        click: (item, focusedWindow) => {
-            console.log(currentrender.identification);
-            // if (currentrender.identification == 'mainpage') {
-            //     currentrender.rander.sender.send('cover-message', 'BTM');
-            // } else {
-            //     mainWindow.loadURL('file://' + __dirname + '/../pages/newApp/index.html');
-            // }
-        }
-    }, {
-        label: '启动高级编辑器',
-        sublabel: '需要攻略作者ID（开发中）',
-        accelerator: 'CmdOrCtrl+Shift+P',
-        click: (item, focusedWindow) => {
-            renders.mainpage = null;
-            mainWindow.loadURL('file://' + __dirname + '/../pages/programmer/programmer.html');
-        }
-    }]
-}, {
-    label: '窗口',
-    role: 'window',
-    submenu: [{
-            label: '重新加载',
-            accelerator: 'CmdOrCtrl+R',
-            click: (item, focusedWindow) => {
-                if (focusedWindow)
-                    focusedWindow.reload();
-            }
-        }, {
-            label: '最小化',
-            accelerator: 'CmdOrCtrl+M',
-            role: 'minimize'
-        },
-        {
-            label: '关闭',
-            accelerator: 'CmdOrCtrl+W',
-            role: 'close'
-        },
-    ]
-}, {
-    label: '帮助',
-    role: 'help',
-    submenu: [{
-        label: 'Github',
-        sublabel: '浏览源码',
-        click: () => {
-            shell.openExternal('https://github.com/PCWMXPY/upgradeE');
-        }
-    }, {
-        label: 'Mengw.io',
-        sublabel: '打开博客',
-        click: () => {
-            shell.openExternal('http://www.mengw.io');
-            // c.exec("start http://www.mengw.io");
-        }
-    }, {
-        label: '回报BUG',
-        click: () => {
-            shell.openExternal('https://github.com/PCWMXPY/upgradeE/issues/new');
-            // c.exec("start http://www.mengw.io");
-        }
-    }, {
-        label: '下载更新',
-        click: () => {
-            shell.openExternal('https://github.com/PCWMXPY/upgradeE/releases/');
-        }
-    }]
-}];
+// let template = ...
 // 创建一个浏览器窗口，主要用来加载HTML页面
 // 声明一个BrowserWindow对象实例
 let mainWindow;
@@ -167,10 +65,9 @@ function createWindow() {
         height: 700,
         icon: icons.favicon
     });
-    var menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
+    Menu.setApplicationMenu(null);
     // 通过浏览器窗口对象加载index.html文件，同时也是可以加载一个互联网地址的
-    // 同时也可以简化成：mainWindow.loadURL('./index.html');
+    // 同时也可以简化成： mainWindow.loadURL('./index.html');
     mainWindow.loadURL('file://' + __dirname + '/../pages/newApp/index.html');
     mainWindow.openDevTools();
     // 监听浏览器窗口对象是否关闭，关闭之后直接将mainWindow指向空引用，也就是回收对象内存空间
@@ -178,7 +75,6 @@ function createWindow() {
         renders.mainpage = null;
         mainWindow = null;
     });
-
 }
 // 监听应用程序对象是否初始化完成，初始化完成之后即可创建浏览器窗口
 app.on("ready", createWindow);

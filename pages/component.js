@@ -1,6 +1,10 @@
 (function () {
     'use strict';
 }());
+Vue.component('nav-bar', {
+    props: ['navbar', 'extranavbar'],
+    template: '<div><span v-if="extranavbar.length>0"><hr></span><div v-for="bar in extranavbar"><button v-on:click="bar.fun" class="nav button" v-bind:style="bar.style"><span class="chinese normal"><i v-bind:class="bar.icon" class="fa-fw"></i>&nbsp;<span style="text-align:center;" v-text="bar.text"></span></span></button></div><hr><div v-for="bar in navbar"><button v-on:click="bar.fun" class="nav button" v-bind:style="bar.style"><span class="chinese normal"><i v-bind:class="bar.icon" class="fa-fw"></i>&nbsp;<span style="text-align:center;" v-text="bar.text"></span></span></button></div></div>'
+});
 Vue.component('uge-title', {
     props: ['size', 'secondtitle', 'title'],
     computed: {

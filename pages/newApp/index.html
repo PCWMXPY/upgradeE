@@ -19,11 +19,7 @@
             <div id="nav" class="col-xs-3 left-panel fill">
                 <uge-title size="45"></uge-title>
                 <version v-bind:version="onscreen.version" v-bind:realversion="offscreen.version"></version>
-                <div>
-                    <div v-for="bar in navbar">
-                        <button v-on:click="bar.fun" class="nav button" v-bind:class="bar.role"><i v-bind:class="bar.icon" class="fa-fw"></i>&nbsp;<span class="chinese"  style="text-align:center;" v-text="bar.text"></span></button>
-                    </div>
-                </div>
+                <nav-bar v-bind:navbar="navbar" v-bind:extranavbar="extranavbar"></nav-bar>
             </div>
             <div id="main" class="col-xs-offset-3 col-xs-9 right-panel fill">
                 <login v-if="page=='login'"></login>

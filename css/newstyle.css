@@ -27,6 +27,10 @@ input[type="text"] {
     font-family: 'Lato', sans-serif, 'Microsoft YaHei', '微软雅黑', STXihei, '华文细黑'
 }
 
+.chinese.normal {
+    font-size: 20px;
+}
+
 button.nav {
     background-color: transparent;
     color: #454545;
@@ -45,9 +49,6 @@ button.nav {
     background-color: #eeeeee;
     border-color: #eeeeee;
     text-decoration: none;
-    line-height: 40px;
-    height: 40px;
-    padding: 0 40px;
     margin: 0;
     width: 100%;
     display: block;
@@ -59,6 +60,12 @@ button.nav {
     transition-property: all;
     -webkit-transition-duration: .3s;
     transition-duration: .3s;
+    height: 35px;
+}
+
+hr {
+    padding: 1px;
+    margin: 1px;
 }
 
 .button:visited {

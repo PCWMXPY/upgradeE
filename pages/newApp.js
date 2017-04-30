@@ -2,6 +2,7 @@
     'use strict';
 }());
 var ipcRenderer = require('electron').ipcRenderer;
+var shell = require("electron").shell;
 var pref = require('../../src/preference.js');
 var nav = new Vue({
     el: '#nav',
@@ -22,17 +23,32 @@ var nav = new Vue({
         },
         navbar: [{
                 icon: "fa fa-cog",
-                text: "测试",
-                role: 'nav-side',
+                text: "设置",
+                style: '',
                 fun: function () {
                     nav.navbar[0].text = '更高之后';
                 }
             }, {
                 icon: "fa fa-question",
-                text: "测试2",
-                role: 'nav-side',
-                fun: this.test
-            }]
+                text: "帮助",
+                style: '',
+                fun: null
+            }, {
+                icon: "fa fa-github",
+                text: "源码",
+                style: '',
+                fun: function () {
+                    shell.openExternal('https://github.com/PCWMXPY/upgradeE');
+                }
+            }, {
+                icon: "fa fa-bug",
+                text: "反馈",
+                style: '',
+                fun: function () {
+                    shell.openExternal('https://github.com/PCWMXPY/upgradeE/issues/new');
+                }
+            }],
+        extranavbar: []
     },
     methods: {
         test: function () {
@@ -91,7 +107,7 @@ var main = new Vue({
         },
         switchtoWait: function (title) {
             this.display.title = title;
-            nav.navbar.unshift({
+            nav.extranavbar.push({
                 icon: "fa fa-question",
                 text: "测试2",
                 role: 'nav-main',
