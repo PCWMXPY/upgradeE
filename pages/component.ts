@@ -5,9 +5,11 @@
  * @author WMXPY
  * @contect wm@wmpcxpy.com
  */
+var ipcComp = require('electron').ipcRenderer;
+declare var drag: any;
 Vue.component('nav-bar', {
-    props: ['navbar', 'extranavbar'],
-    template: '<div><span v-if="extranavbar.length>0"><hr></span><div v-for="bar in extranavbar"><button v-on:click="bar.fun" class="nav button" v-bind:style="bar.style"><span class="chinese normal"><i v-bind:class="bar.icon" class="fa-fw"></i>&nbsp;<span style="text-align:center;" v-text="bar.text"></span></span></button></div><hr><div v-for="bar in navbar"><button v-on:click="bar.fun" class="nav button" v-bind:style="bar.style"><span class="chinese normal"><i v-bind:class="bar.icon" class="fa-fw"></i>&nbsp;<span style="text-align:center;" v-text="bar.text"></span></span></button></div></div>'
+    props: ['navbar', 'extranavbar', 'drag'],
+    template: '<div v-bind:class="drag"><span v-if="extranavbar.length>0"><hr></span><div v-for="bar in extranavbar"><button v-on:click="bar.fun" class="nav button" v-bind:style="bar.style"><span class="chinese normal"><i v-bind:class="bar.icon" class="fa-fw"></i>&nbsp;<span style="text-align:center;" v-text="bar.text"></span></span></button></div><hr><div v-for="bar in navbar"><button v-on:click="bar.fun" class="nav button" v-bind:style="bar.style"><span class="chinese normal"><i v-bind:class="bar.icon" class="fa-fw"></i>&nbsp;<span style="text-align:center;" v-text="bar.text"></span></span></button></div></div>'
 });
 Vue.component('uge-title', {
     props: ['size', 'secondtitle', 'title'],
@@ -120,4 +122,12 @@ Vue.component('version', {
 })
 Vue.component('re-credit', {
     template: '<div><p style="color:#565656"><i class="fa fa-code"></i> Review.md with <i class="fa fa-heart"></i> by WMXPY@<a href="http://mengw.io">mengw.io</a> 2016</p></div>'
+});
+Vue.component('x-close', {
+    methods: {
+        closethis: () => {
+            ipcComp.send('close-all', 'mainpage');
+        }
+    },
+    template: '<div class="x-close"><button class="button square" v-on:click="closethis"><i class="fa fa-close"></i></button></div>'
 });

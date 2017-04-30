@@ -107,12 +107,17 @@ var main = new Vue({
         },
         switchtoWait: function (title) {
             this.display.title = title;
-            nav.extranavbar.push({
-                icon: "fa fa-question",
-                text: "测试2",
-                role: 'nav-main',
-                fun: this.test
-            });
+            nav.extranavbar = [{
+                    icon: "fa fa-video-camera",
+                    text: "开始游戏",
+                    style: '',
+                    fun: this.test
+                }, {
+                    icon: "fa fa-reply-all",
+                    text: "重新搜索",
+                    style: '',
+                    fun: this.test
+                }];
             this.page = 'waiting';
         },
         backtoMain: function () {

@@ -44,6 +44,22 @@ button.nav {
     font-weight: 800;
 }
 
+.dragable {
+    -webkit-app-region: drag;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.x-close {
+    float: right;
+    position: fixed;
+    right: 1%;
+    top: 1%;
+    z-index: 10000;
+    _position: absolute;
+}
+
 .button {
     color: #666666;
     background-color: #eeeeee;
@@ -61,6 +77,11 @@ button.nav {
     -webkit-transition-duration: .3s;
     transition-duration: .3s;
     height: 35px;
+}
+
+.button.square {
+    width: 25px;
+    height: 25px;
 }
 
 hr {

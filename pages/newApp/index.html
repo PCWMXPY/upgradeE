@@ -17,11 +17,12 @@
     <div class="container-fluid fill">
         <div class="row fill">
             <div id="nav" class="col-xs-3 left-panel fill">
-                <uge-title size="45"></uge-title>
+                <uge-title class="dragable" size="45"></uge-title>
                 <version v-bind:version="onscreen.version" v-bind:realversion="offscreen.version"></version>
                 <nav-bar v-bind:navbar="navbar" v-bind:extranavbar="extranavbar"></nav-bar>
             </div>
             <div id="main" class="col-xs-offset-3 col-xs-9 right-panel fill">
+                <x-close></x-close>
                 <login v-if="page=='login'"></login>
                 <waiting v-else-if="page=='waiting'" v-bind:title="display.title" v-bind:name="user.name"></waiting>
                 <current v-else-if="page=='current'" v-bind:transfer="transfer_current" v-bind:tips="tips" v-bind:period="gameperiod"></current>
