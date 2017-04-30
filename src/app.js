@@ -76,7 +76,7 @@ function createWindow() {
         height: 700,
         icon: icons.favicon,
         frame: false,
-        backgroundColor: '#80FFFF45'
+        // backgroundColor: '#80FFFF45'
     });
     var menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);

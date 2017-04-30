@@ -23,26 +23,26 @@ var nav = new Vue({
         },
         navbar: [{
                 icon: "fa fa-cog",
-                text: "设置",
+                text: "偏好设置",
                 style: '',
                 fun: function () {
                     nav.navbar[0].text = '更高之后';
                 }
             }, {
                 icon: "fa fa-question",
-                text: "帮助",
+                text: "获取帮助",
                 style: '',
                 fun: null
             }, {
                 icon: "fa fa-github",
-                text: "源码",
+                text: "访问 Github",
                 style: '',
                 fun: function () {
                     shell.openExternal('https://github.com/PCWMXPY/upgradeE');
                 }
             }, {
                 icon: "fa fa-bug",
-                text: "反馈",
+                text: "反馈 Bug",
                 style: '',
                 fun: function () {
                     shell.openExternal('https://github.com/PCWMXPY/upgradeE/issues/new');
