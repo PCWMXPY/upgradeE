@@ -20,7 +20,8 @@ Vue.component('uge-title', {
             return 'font-size:' + this.size + 'px';
         },
         titles: function () {
-            let title = '<span>' + this.title.substring(0, this.title.length - 4) + '</span>';
+            let title = '<span>' + this.title.substring(0, 1).toUpperCase() + '</span>';
+            title += '<span>' + this.title.substring(1, this.title.length - 4) + '</span>';
             title += '<span style="color:#790000">' + this.title.substring(this.title.length - 4, this.title.length - 3) + '</span>';
             title += '<span style="color:#b90000">' + this.title.substring(this.title.length - 3, this.title.length - 2) + '</span>';
             title += '<span style="color:red">' + this.title.substring(this.title.length - 2, this.title.length - 1) + this.title.substring(this.title.length - 1, this.title.length).toUpperCase() + '</span>'
