@@ -95,10 +95,13 @@ Vue.component('version', {
     props: ['version', 'realversion'],
     data: function () {
         return {
-            style: 'color: #454545'
+            color: '454545'
         }
     },
     computed: {
+        style: function () {
+            return 'color: #' + this.color;
+        },
         versions: function () {
             if (this.realversion.int > this.version.int) {
                 return this.version.str + '->' + this.realversion.str;
@@ -108,10 +111,10 @@ Vue.component('version', {
         displays: function () {
             if (this.realversion.int > this.version.int) {
                 if (this.realversion.emer > this.version.int) {
-                    this.style = 'color: #c60000;';
+                    this.color = 'c60000;';
                     return '需要立即更新';
                 } else {
-                    this.style = 'color: #4635ed;';
+                    this.color = '4635ed;';
                     return '推荐更新' + this.realversion.str + '版本';
                 }
             } else {

@@ -15,7 +15,8 @@ Vue.component('uge-title', {
             return 'font-size:' + this.size + 'px';
         },
         titles: function () {
-            var title = '<span>' + this.title.substring(0, this.title.length - 4) + '</span>';
+            var title = '<span>' + this.title.substring(0, 1).toUpperCase() + '</span>';
+            title += '<span>' + this.title.substring(1, this.title.length - 4) + '</span>';
             title += '<span style="color:#790000">' + this.title.substring(this.title.length - 4, this.title.length - 3) + '</span>';
             title += '<span style="color:#b90000">' + this.title.substring(this.title.length - 3, this.title.length - 2) + '</span>';
             title += '<span style="color:red">' + this.title.substring(this.title.length - 2, this.title.length - 1) + this.title.substring(this.title.length - 1, this.title.length).toUpperCase() + '</span>';
@@ -91,10 +92,13 @@ Vue.component('version', {
     props: ['version', 'realversion'],
     data: function () {
         return {
-            style: 'color: #454545'
+            color: '454545'
         };
     },
     computed: {
+        style: function () {
+            return 'color: #' + this.color;
+        },
         versions: function () {
             if (this.realversion.int > this.version.int) {
                 return this.version.str + '->' + this.realversion.str;
@@ -104,11 +108,11 @@ Vue.component('version', {
         displays: function () {
             if (this.realversion.int > this.version.int) {
                 if (this.realversion.emer > this.version.int) {
-                    this.style = 'color: #c60000;';
+                    this.color = 'c60000;';
                     return '需要立即更新';
                 }
                 else {
-                    this.style = 'color: #4635ed;';
+                    this.color = '4635ed;';
                     return '推荐更新' + this.realversion.str + '版本';
                 }
             }
