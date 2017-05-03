@@ -11,6 +11,7 @@ declare function require(name: string);
 function test() {
     console.log('test');
 }
+//test
 const storage = require('electron-json-storage');
 const { remote } = require('electron');
 const nfun = require('../../src/upgradee.js')
