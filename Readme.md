@@ -2,6 +2,9 @@
 
 Best choice for League player (hope so)
 
+Source Code is V2.0 version and up  
+relase have usable version
+
 ## Changelog
 
 -   Update
